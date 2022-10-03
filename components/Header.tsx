@@ -31,19 +31,19 @@ const Header = () => {
           </ul>
           <ul>
             <li>
-              <Link href={'#'}>
+              <button>
                 <Icon name="search" />
-              </Link>
+              </button>
             </li>
             <li>
-              <Link href={'#'}>
+              <button>
                 <Icon name="search" />
-              </Link>
+              </button>
             </li>
             <li>
-              <Link href={'#'}>
+              <button>
                 <Icon name="search" />
-              </Link>
+              </button>
             </li>
           </ul>
         </nav>
