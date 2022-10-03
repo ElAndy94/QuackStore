@@ -1,3 +1,12 @@
 {
-  "extends": "next/core-web-vitals"
+  "plugins": ["jest", "jsx-a11y", "tailwindcss", "eslint-plugin-prettier"],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:jsx-a11y/recommended",
+    "eslint-config-prettier"
+  ],
+  "ignorePatterns": [".eslintrc.json", "*.config.js", "index.d.ts"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
 }
