@@ -4,29 +4,56 @@
 
 @layer base {
   @font-face {
-    font-family: 'Poppins';
+    font-family: 'WorkSans';
+    font-family: 200;
+    src: url('/assets/fonts/WorkSans-ExtraLight.ttf');
+  }
+  @font-face {
+    font-family: 'WorkSans';
     font-family: 300;
-    src: url('/assets/fonts/Poppins-Light.ttf');
+    src: url('/assets/fonts/WorkSans-Light.ttf');
   }
   @font-face {
-    font-family: 'Poppins';
+    font-family: 'WorkSans';
     font-family: 400;
-    src: url('/assets/fonts/Poppins-Regular.ttf');
+    src: url('/assets/fonts/WorkSans-Regular.ttf');
   }
   @font-face {
-    font-family: 'Poppins';
+    font-family: 'WorkSans';
     font-weight: 500;
-    src: url('/assets/fonts/Poppins-Medium.ttf');
+    src: url('/assets/fonts/WorkSans-Medium.ttf');
   }
   @font-face {
-    font-family: 'Poppins';
+    font-family: 'WorkSans';
     font-weight: 600;
-    src: url('/assets/fonts/Poppins-SemiBold.ttf');
+    src: url('/assets/fonts/WorkSans-SemiBold.ttf');
   }
   @font-face {
-    font-family: 'Poppins';
+    font-family: 'WorkSans';
     font-weight: 700;
-    src: url('/assets/fonts/Poppins-Bold.ttf');
+    src: url('/assets/fonts/WorkSans-Bold.ttf');
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+  h2 {
+    @apply text-3xl;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+  h4 {
+    @apply text-xl;
+  }
+  h5 {
+    @apply text-lg;
+  }
+  p {
+    @apply text-base;
+  }
+  .heroTitle {
+    @apply text-5xl;
   }
 }
 
@@ -35,7 +62,7 @@ body {
   font-size: 16px;
   padding: 0;
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'WorkSans', sans-serif;
 }
 
 a {
