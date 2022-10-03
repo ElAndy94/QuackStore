@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import useScrollDirection from '../utils/helpers/UseScrollDirection';
+import Icon from './UI/Icon';
 
 const Header = () => {
   const scrollDirection = useScrollDirection();
@@ -8,18 +10,48 @@ const Header = () => {
         scrollDirection === 'down' ? '-top-24' : 'top-0 bg-slate-100 shadow-md'
       }`}
     >
-      <div className="flex flex-row justify-between items-center w-full max-w-[1200px] my-0 mx-auto px-4 lg:px-0">
-        <p className="md:text-lg">QuackStore</p>
-        <button
-          className="md:text-lg border-2 border-black rounded-3xl px-4 shadow-md hover:shadow-lg hover:brightness-125 transition-all duration-200"
-          onClick={() => {
-            document.querySelector('#form')!.scrollIntoView({
-              behavior: 'smooth',
-            });
-          }}
-        >
-          Contact
-        </button>
+      <div className="wrapper flex-row justify-between items-center w-full my-0 mx-auto px-4 lg:px-0">
+        <nav className="w-full flex justify-between">
+          <ul>
+            <li>
+              <Link href={'#'}>
+                <p className="md:text-lg font-bold">QuackStore</p>
+              </Link>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
+              <Link href={'#'}>Footware</Link>
+            </li>
+            <li>
+              <Link href={'#'}>About us</Link>
+            </li>
+            <li>
+              <Link href={'#'}>Products</Link>
+            </li>
+            <li>
+              <Link href={'#'}>Sale</Link>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <Link href={'#'}>
+                <Icon name="search" />
+              </Link>
+            </li>
+            <li>
+              <Link href={'#'}>
+                <Icon name="search" />
+              </Link>
+            </li>
+            <li>
+              <Link href={'#'}>
+                <Icon name="search" />
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
   );
