@@ -29,10 +29,7 @@ export default function Layout({ children, seo }: Props): JSX.Element {
           <meta property="og:image" content={seo.image || meta.image} />
           <link rel="canonical" href={seo.canonicalUrl} />
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-          />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         </Head>
       )}
       <div className="flex flex-col min-h-screen">
