@@ -23,6 +23,7 @@ module.exports = {
       'ultra-marine-blue': '#315BFF',
       'forest-green': '#02BE83',
       'granite-gray': '#6C6B6B',
+      'text-error': '#FF3C79',
     },
     fontFamily: {
       poppins: ['Poppins', ...defaultTheme.fontFamily.sans],
@@ -46,7 +47,7 @@ module.exports = {
       sm: '640px',
       md: '768px',
       lg: '1024px',
-      xl: '1344px',
+      xl: '1440px',
       '2xl': '1536px',
     },
     fontSize: {
