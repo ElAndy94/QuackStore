@@ -1,47 +1,24 @@
 import clsx from 'clsx';
 import { ReactSVG } from 'react-svg';
-import BackArrowIcon from '/assets/icons/back-arrow.svg';
-import BottomChevronIcon from '/assets/icons/bottom-chevron.svg';
-import BrandIcon from '/assets/icons/brand.svg';
-import ChevronIcon from '/assets/icons/chevron.svg';
-import ClosedEyeIcon from '/assets/icons/closed-eye.svg';
-import CopyIcon from '/assets/icons/copy.svg';
-import CrossIcon from '/assets/icons/cross.svg';
-import DateIcon from '/assets/icons/date.svg';
-import DefaultImageIcon from '/assets/icons/default-image.svg';
-import ErrorExclamationIcon from '/assets/icons/error-exclamation.svg';
-import ImageErrorIcon from '/assets/icons/image-error.svg';
-import NoOffersIcon from '/assets/icons/no-offers.svg';
-import OffersIcon from '/assets/icons/offers.svg';
-import OpenEyeIcon from '/assets/icons/open-eye.svg';
-import RadioIcon from '/assets/icons/radio-button.svg';
-import RocketIcon from '/assets/icons/rocket.svg';
-import SearchIcon from '/assets/icons/search.svg';
-import checkboxTick from '/assets/icons/tick.svg';
-import TimeIcon from '/assets/icons/time.svg';
-import UploadIcon from '/assets/icons/upload.svg';
 
 const ICONS = {
-  tick: checkboxTick,
-  cross: CrossIcon,
-  search: SearchIcon,
-  chevron: ChevronIcon,
-  brand: BrandIcon,
-  upload: UploadIcon,
-  offers: OffersIcon,
-  copy: CopyIcon,
-  rocket: RocketIcon,
-  time: TimeIcon,
-  date: DateIcon,
-  'open-eye': OpenEyeIcon,
-  'closed-eye': ClosedEyeIcon,
-  'back-arrow': BackArrowIcon,
-  'error-exclamation': ErrorExclamationIcon,
-  'default-image': DefaultImageIcon,
-  'image-error': ImageErrorIcon,
-  'bottom-chevron': BottomChevronIcon,
-  'no-offers': NoOffersIcon,
-  radio: RadioIcon,
+  tick: '/assets/icons/tick.svg',
+  cross: '/assets/icons/cross.svg',
+  search: '/assets/icons/search.svg',
+  chevron: '/assets/icons/cross.svg',
+  upload: '/assets/icons/upload.svg',
+  copy: '/assets/icons/copy.svg',
+  rocket: '/assets/icons/rocket.svg',
+  time: '/assets/icons/time.svg',
+  date: '/assets/icons/date.svg',
+  'open-eye': '/assets/icons/open-eye.svg',
+  'closed-eye': '/assets/icons/closed-eye.svg',
+  'back-arrow': '/assets/icons/back-arrow.svg',
+  'error-exclamation': '/assets/icons/error-exclamation.svg',
+  'default-image': '/assets/icons/default-image.svg',
+  'image-error': '/assets/icons/image-error.svg',
+  'bottom-chevron': '/assets/icons/bottom-chevron.svg',
+  radio: '/assets/icons/radio-button.svg',
 };
 
 export type IconNames = keyof typeof ICONS;
