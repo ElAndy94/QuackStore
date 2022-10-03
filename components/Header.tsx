@@ -12,14 +12,9 @@ const Header = () => {
     >
       <div className="wrapper flex-row justify-between items-center w-full my-0 mx-auto px-4 lg:px-0">
         <nav className="w-full flex justify-between">
-          <ul>
-            <li>
-              <Link href={'#'}>
-                <p className="md:text-lg font-bold">QuackStore</p>
-              </Link>
-            </li>
-          </ul>
-
+          <Link href="/">
+            <p className="md:text-lg font-bold">QuackStore</p>
+          </Link>
           <ul>
             <li>
               <Link href={'#'}>Footware</Link>
