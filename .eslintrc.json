@@ -1,12 +1,17 @@
 {
-  "plugins": ["jest", "jsx-a11y", "tailwindcss", "eslint-plugin-prettier"],
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:jsx-a11y/recommended",
-    "eslint-config-prettier"
-  ],
+  "plugins": ["jsx-a11y", "tailwindcss", "prettier"],
+  "extends": ["next/core-web-vitals", "plugin:jsx-a11y/recommended", "prettier"],
   "ignorePatterns": [".eslintrc.json", "*.config.js", "index.d.ts"],
   "parserOptions": {
     "project": "./tsconfig.json"
+  },
+  "rules": {
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to"]
+      }
+    ]
   }
 }

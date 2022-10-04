@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { ReactSVG } from 'react-svg';
 
 const ICONS = {
+  user: '/assets/icons/user.svg',
   tick: '/assets/icons/tick.svg',
   cross: '/assets/icons/cross.svg',
   search: '/assets/icons/search.svg',
@@ -11,6 +12,8 @@ const ICONS = {
   rocket: '/assets/icons/rocket.svg',
   time: '/assets/icons/time.svg',
   date: '/assets/icons/date.svg',
+  radio: '/assets/icons/radio-button.svg',
+  'shopping-bag': '/assets/icons/shopping-bag.svg',
   'open-eye': '/assets/icons/open-eye.svg',
   'closed-eye': '/assets/icons/closed-eye.svg',
   'back-arrow': '/assets/icons/back-arrow.svg',
@@ -18,7 +21,6 @@ const ICONS = {
   'default-image': '/assets/icons/default-image.svg',
   'image-error': '/assets/icons/image-error.svg',
   'bottom-chevron': '/assets/icons/bottom-chevron.svg',
-  radio: '/assets/icons/radio-button.svg',
 };
 
 export type IconNames = keyof typeof ICONS;

@@ -20,32 +20,26 @@ const Header = () => {
     >
       <div className="wrapper flex-row justify-between items-center w-full my-0 mx-auto px-4 lg:px-0">
         <nav className="w-full flex justify-between items-center">
-          <Link href="/">
-            <a className="md:text-lg font-bold p-2">QuackStore</a>
+          <Link href="/" passHref>
+            <a href="replace" className="md:text-lg font-bold p-2">
+              QuackStore
+            </a>
           </Link>
-          <ul className="flex flex-row gap-4 font-semibold">
+          <ul className="flex flex-row gap-4 font-semibold transition-all duration-75">
             <li>
-              <Link href="/">
-                <a className={clsx('p-2', router.pathname === '/' && 'text-magenta')}>
+              <Link href="/" passHref>
+                <a
+                  href="replace"
+                  className={clsx('p-2', router.pathname === '/' && 'text-magenta')}
+                >
                   Footware
                 </a>
               </Link>
             </li>
             <li>
-              <Link href="/about-us">
+              <Link href="/products" passHref>
                 <a
-                  className={clsx(
-                    'p-2',
-                    router.pathname === '/about-us' && 'text-magenta'
-                  )}
-                >
-                  About us
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/products">
-                <a
+                  href="replace"
                   className={clsx(
                     'p-2',
                     router.pathname === '/products' && 'text-magenta'
@@ -55,15 +49,32 @@ const Header = () => {
                 </a>
               </Link>
             </li>
+
             <li>
-              <Link href="/sale">
-                <a className={clsx('p-2', router.pathname === '/sale' && 'text-magenta')}>
+              <Link href="/sale" passHref>
+                <a
+                  href="replace"
+                  className={clsx('p-2', router.pathname === '/sale' && 'text-magenta')}
+                >
                   Sale
                 </a>
               </Link>
             </li>
+            <li>
+              <Link href="/about-us" passHref>
+                <a
+                  href="replace"
+                  className={clsx(
+                    'p-2',
+                    router.pathname === '/about-us' && 'text-magenta'
+                  )}
+                >
+                  About us
+                </a>
+              </Link>
+            </li>
           </ul>
-          <ul className="flex flex-row gap-4">
+          <ul className="flex flex-row gap-6">
             <li>
               <button aria-label="search">
                 <Icon name="search" />
@@ -71,12 +82,12 @@ const Header = () => {
             </li>
             <li>
               <button aria-label="profile">
-                <Icon name="search" />
+                <Icon name="user" />
               </button>
             </li>
             <li>
               <button aria-label="basket">
-                <Icon name="search" />
+                <Icon name="shopping-bag" />
               </button>
             </li>
           </ul>
