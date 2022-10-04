@@ -1,12 +1,34 @@
-import React, { useState } from 'react';
+import { NextPage } from 'next';
+import React, { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import Icon from '../../components/UI/Icon';
 import Image from 'next/image';
 import clsx from 'clsx';
 import Popover from '../../components/UI/Popover';
 
-const Search = () => {
+const Search: NextPage = () => {
   const [searchProducts, setSearchProducts] = useState('');
+  const [products, setProducts] = useState(mockProducts);
+  const [sortBy, setSortBy] = useState<string>('What`s new');
+
+  useEffect(() => {
+    const sortedProducts = [...products].sort((a, b) => {
+      if (sortBy === 'What`s new') {
+        return b.releaseDate.localeCompare(a.releaseDate);
+      }
+      if (sortBy === 'Price: low to high') {
+        return +a.price - +b.price;
+      }
+      if (sortBy === 'Price: high to low') {
+        return +b.price - +a.price;
+      }
+      if (sortBy === 'Most popular') {
+        return +b.numberOfSales - +a.numberOfSales;
+      }
+      return 0;
+    });
+    setProducts(sortedProducts);
+  }, [products, sortBy]);
 
   return (
     <Layout
@@ -26,7 +48,7 @@ const Search = () => {
               value={searchProducts}
               onChange={e => setSearchProducts(e.target.value)}
             />
-            <button type="button">
+            <button type="button" onClick={() => setSearchProducts('')}>
               <Icon name="cross" width="40px" />
             </button>
           </div>
@@ -40,7 +62,7 @@ const Search = () => {
                   <Popover
                     buttonTitle={
                       <div className="bg-grey-100 w-full px-4 py-2 rounded-md flex justify-between">
-                        <p>What&apos;s new</p>
+                        <p>{sortBy}</p>
                         <Icon name="bottom-chevron" width="24px" />
                       </div>
                     }
@@ -50,20 +72,32 @@ const Search = () => {
                       <button
                         type="button"
                         className="rounded-md hover:bg-grey-100 px-2 py-1 text-left"
+                        onClick={() => {
+                          setSortBy('What`s new');
+                        }}
                       >
                         What&apos;s new
                       </button>
                       <button
                         type="button"
                         className="rounded-md hover:bg-grey-100 px-2 py-1 text-left"
+                        onClick={() => setSortBy('Price: low to high')}
                       >
-                        What&apos;s new
+                        Price: low to high
                       </button>
                       <button
                         type="button"
                         className="rounded-md hover:bg-grey-100 px-2 py-1 text-left"
+                        onClick={() => setSortBy('Price: high to low')}
                       >
-                        What&apos;s new
+                        Price: high to low
+                      </button>
+                      <button
+                        type="button"
+                        className="rounded-md hover:bg-grey-100 px-2 py-1 text-left"
+                        onClick={() => setSortBy('Most popular')}
+                      >
+                        Most popular
                       </button>
                     </div>
                   </Popover>
@@ -76,7 +110,6 @@ const Search = () => {
                 .filter(product =>
                   product.title.toLowerCase().includes(searchProducts.toLowerCase())
                 )
-                .sort((a, b) => a.title.localeCompare(b.title))
                 .map(product => {
                   return (
                     <li className="w-full border p-4" key={product.id}>
@@ -122,7 +155,7 @@ const Search = () => {
                         >
                           {product.inStock ? 'In stock' : 'Out of Stock'}
                         </p>
-                        <p className="text-lg font-semibold">{product.price}</p>
+                        <p className="text-lg font-semibold">£{product.price}</p>
                       </div>
                     </li>
                   );
@@ -137,77 +170,93 @@ const Search = () => {
 
 export default Search;
 
-const products = [
+const mockProducts = [
   {
     id: 7564,
     title: 'Adidas',
     description: 'Running Footwear',
     image: '/assets/shoesTransparent.png',
-    price: 850,
+    price: '999',
     inStock: true,
     colors: ['magenta', 'forest-green'],
+    releaseDate: '2018-01-01',
+    numberOfSales: '23',
   },
   {
     id: 7914,
     title: 'Nike',
     description: 'Running Footwear',
     image: '/assets/shoesTransparent.png',
-    price: 850,
+    price: '778',
     inStock: true,
     colors: ['magenta', 'ultra-marine-blue'],
+    releaseDate: '2020-01-01',
+    numberOfSales: '42',
   },
   {
     id: 7834,
     title: 'Puma',
     description: 'Stylish Footwear',
     image: '/assets/shoesTransparent.png',
-    price: 850,
+    price: '847',
     inStock: true,
     colors: ['magenta', 'orange'],
+    releaseDate: '2019-01-01',
+    numberOfSales: '12',
   },
   {
     id: 7724,
     title: 'Fila',
     description: 'Men Footwear',
     image: '/assets/shoesTransparent.png',
-    price: 850,
+    price: '90',
     inStock: true,
     colors: ['primary', 'orange'],
+    releaseDate: '2022-02-01',
+    numberOfSales: '10',
   },
   {
     id: 7624,
     title: 'Asics',
     description: 'Kids Footwear',
     image: '/assets/shoesTransparent.png',
-    price: 850,
+    price: '1400',
     inStock: true,
     colors: [],
+    releaseDate: '2022-01-01',
+    numberOfSales: '22',
   },
   {
     id: 7524,
     title: 'New Balance',
     description: 'Running Footwear',
     image: '/assets/shoesTransparent.png',
-    price: 850,
+    price: '10',
     inStock: true,
     colors: ['magenta', 'orange'],
+    releaseDate: '2021-01-01',
+    numberOfSales: '75',
   },
   {
     id: 7424,
     title: 'Reebok',
     description: 'Running Footwear',
     image: '/assets/shoesTransparent.png',
-    price: 850,
+    price: '150',
     inStock: true,
     colors: ['magenta', 'orange'],
+    releaseDate: '2021-01-01',
+    numberOfSales: '75',
   },
   {
     id: 7324,
     title: 'Fendi',
     description: 'Running Footwear',
     image: '/assets/shoesTransparent.png',
-    price: 850,
+    price: '65',
     inStock: true,
     colors: ['granite-gray', 'orange'],
+    releaseDate: '2021-01-01',
+    numberOfSales: '555',
   },
 ];

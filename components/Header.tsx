@@ -5,6 +5,7 @@ import useScrollDirection from '../utils/helpers/UseScrollDirection';
 import Icon from './UI/Icon';
 import Popover from './UI/Popover';
 import Image from 'next/image';
+import { useState } from 'react';
 
 const Header = () => {
   const scrollDirection = useScrollDirection();
