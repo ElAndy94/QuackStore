@@ -1,29 +1,26 @@
 import clsx from 'clsx';
 import { ReactSVG } from 'react-svg';
-import * as icons from '/assets/icons';
 
 const ICONS = {
-  tick: icons.checkboxTick,
-  cross: icons.CrossIcon,
-  search: icons.SearchIcon,
-  chevron: icons.ChevronIcon,
-  brand: icons.BrandIcon,
-  ad: icons.AdsIcon,
-  upload: icons.UploadIcon,
-  offers: icons.OffersIcon,
-  copy: icons.CopyIcon,
-  rocket: icons.RocketIcon,
-  time: icons.TimeIcon,
-  date: icons.DateIcon,
-  'open-eye': icons.OpenEyeIcon,
-  'closed-eye': icons.ClosedEyeIcon,
-  'back-arrow': icons.BackArrowIcon,
-  'error-exclamation': icons.ErrorExclamationIcon,
-  'default-image': icons.DefaultImageIcon,
-  'image-error': icons.ImageErrorIcon,
-  'bottom-chevron': icons.BottomChevronIcon,
-  'no-offers': icons.NoOffersIcon,
-  radio: icons.RadioIcon,
+  user: '/assets/icons/user.svg',
+  tick: '/assets/icons/tick.svg',
+  cross: '/assets/icons/cross.svg',
+  search: '/assets/icons/search.svg',
+  chevron: '/assets/icons/cross.svg',
+  upload: '/assets/icons/upload.svg',
+  copy: '/assets/icons/copy.svg',
+  rocket: '/assets/icons/rocket.svg',
+  time: '/assets/icons/time.svg',
+  date: '/assets/icons/date.svg',
+  radio: '/assets/icons/radio-button.svg',
+  'shopping-bag': '/assets/icons/shopping-bag.svg',
+  'open-eye': '/assets/icons/open-eye.svg',
+  'closed-eye': '/assets/icons/closed-eye.svg',
+  'back-arrow': '/assets/icons/back-arrow.svg',
+  'error-exclamation': '/assets/icons/error-exclamation.svg',
+  'default-image': '/assets/icons/default-image.svg',
+  'image-error': '/assets/icons/image-error.svg',
+  'bottom-chevron': '/assets/icons/bottom-chevron.svg',
 };
 
 export type IconNames = keyof typeof ICONS;

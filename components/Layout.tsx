@@ -25,9 +25,13 @@ export default function Layout({ children, seo }: Props): JSX.Element {
           <meta content={seo.description || meta.description} name="description" />
           <meta property="og:title" content={seo.title || `${meta.title} | QuackStore`} />
           <meta property="og:description" content={seo.description || meta.description} />
-          <meta property="og:url" content={seo.canonicalUrl} />
+          {seo.canonicalUrl && (
+            <>
+              <meta property="og:url" content={seo.canonicalUrl} />
+              <link rel="canonical" href={seo.canonicalUrl} />
+            </>
+          )}
           <meta property="og:image" content={seo.image || meta.image} />
-          <link rel="canonical" href={seo.canonicalUrl} />
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         </Head>

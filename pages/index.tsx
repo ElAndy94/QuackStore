@@ -5,13 +5,12 @@ const Home: NextPage = () => {
   return (
     <Layout
       seo={{
-        title: 'QuackStore',
-        description: 'QuackStore HomePage',
+        title: 'Footware | QuackStore',
+        description: 'Footware Stock | QuackStore',
+        canonicalUrl: 'https://quackstore.com/footware',
       }}
     >
-      <section>
-        <p>hello</p>
-      </section>
+      Footware
     </Layout>
   );
 };
