@@ -58,7 +58,7 @@
 }
 @layer components {
   .wrapper {
-    @apply flex max-w-[1178px];
+    @apply flex flex-col max-w-[1178px];
   }
 }
 html,

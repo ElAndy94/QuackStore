@@ -32,7 +32,7 @@ const Header = () => {
                   href="replace"
                   className={clsx('p-2', router.pathname === '/' && 'text-magenta')}
                 >
-                  Footware
+                  Footwear
                 </a>
               </Link>
             </li>

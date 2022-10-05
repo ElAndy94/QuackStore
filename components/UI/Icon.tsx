@@ -6,13 +6,17 @@ const ICONS = {
   tick: '/assets/icons/tick.svg',
   cross: '/assets/icons/cross.svg',
   search: '/assets/icons/search.svg',
-  chevron: '/assets/icons/cross.svg',
+  chevron: '/assets/icons/chevron.svg',
   upload: '/assets/icons/upload.svg',
   copy: '/assets/icons/copy.svg',
   rocket: '/assets/icons/rocket.svg',
   time: '/assets/icons/time.svg',
   date: '/assets/icons/date.svg',
   radio: '/assets/icons/radio-button.svg',
+  menu: '/assets/icons/menu.svg',
+  'star-filled': '/assets/icons/star-filled.svg',
+  'star-empty': '/assets/icons/star-empty.svg',
+  'chevron-magenta': '/assets/icons/chevron-magenta.svg',
   'shopping-bag': '/assets/icons/shopping-bag.svg',
   'open-eye': '/assets/icons/open-eye.svg',
   'closed-eye': '/assets/icons/closed-eye.svg',
@@ -21,6 +25,7 @@ const ICONS = {
   'default-image': '/assets/icons/default-image.svg',
   'image-error': '/assets/icons/image-error.svg',
   'bottom-chevron': '/assets/icons/bottom-chevron.svg',
+  'green-tick': '/assets/icons/green-tick.svg',
 };
 
 export type IconNames = keyof typeof ICONS;
