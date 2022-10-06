@@ -4,13 +4,11 @@ import { useRouter } from 'next/router';
 import useScrollDirection from '../utils/helpers/UseScrollDirection';
 import Icon from './UI/Icon';
 import Popover from './UI/Popover';
-import Image from 'next/image';
-import { useState } from 'react';
+import SmallCard from './UI/SmallCard';
 
 const Header = () => {
   const scrollDirection = useScrollDirection();
   const router = useRouter();
-
   return (
     <header
       className={clsx(
@@ -88,7 +86,7 @@ const Header = () => {
             <li>
               <Popover
                 buttonTitle={<Icon name="user" />}
-                className="rounded-md font-light w-32 border p-2"
+                className="rounded-md font-light w-32 border p-2 bg-white"
               >
                 <div className="flex flex-col">
                   <Link href="/">
@@ -105,87 +103,22 @@ const Header = () => {
             <li>
               <Popover
                 buttonTitle={<Icon name="shopping-bag" />}
-                className="rounded-md font-light w-[400px] border p-2 right-0 flex flex-col gap-1"
+                className="rounded-md font-light w-[400px] border p-2 right-0 flex flex-col gap-1 bg-white"
               >
                 <ul>
-                  <li className="flex flex-col gap-2">
-                    <button type="button">
-                      <div className="flex gap-2 rounded-md hover:bg-grey-100 px-3 py-2 w-full">
-                        <Image
-                          src="/assets/shoes.jpeg"
-                          width="80px"
-                          height="80px"
-                          alt="shoes"
+                  {basket.map((item, index) => {
+                    return [
+                      <li className="flex flex-col gap-2" key={`basketItem${index}`}>
+                        <SmallCard
+                          image={item.image}
+                          title={item.title}
+                          description={item.description}
+                          price={item.price}
+                          quantity={item.quantity}
                         />
-                        <div className="flex justify-between w-full text-left">
-                          <div>
-                            <p className="font-normal text-sm text-grey-500">
-                              Men Running
-                            </p>
-                            <p className="text-md">Nike Competition Shoes</p>
-                            <p className="text-magenta">£300</p>
-                          </div>
-                          <div className="flex items-end">
-                            <p className="font-normal text-sm text-grey-500">
-                              quantity: 5
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </button>
-                  </li>
-                  <li className="flex flex-col gap-2">
-                    <button type="button">
-                      <div className="flex gap-2 rounded-md hover:bg-grey-100 px-3 py-2 w-full">
-                        <Image
-                          src="/assets/shoes.jpeg"
-                          width="80px"
-                          height="80px"
-                          alt="shoes"
-                        />
-                        <div className="flex justify-between w-full text-left">
-                          <div>
-                            <p className="font-normal text-sm text-grey-500">
-                              Men Running
-                            </p>
-                            <p className="text-md">Nike Competition Shoes</p>
-                            <p className="text-magenta">£300</p>
-                          </div>
-                          <div className="flex items-end">
-                            <p className="font-normal text-sm text-grey-500">
-                              quantity: 5
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </button>
-                  </li>
-                  <li className="flex flex-col gap-2">
-                    <button type="button">
-                      <div className="flex gap-2 rounded-md hover:bg-grey-100 px-3 py-2 w-full">
-                        <Image
-                          src="/assets/shoes.jpeg"
-                          width="80px"
-                          height="80px"
-                          alt="shoes"
-                        />
-                        <div className="flex justify-between w-full text-left">
-                          <div>
-                            <p className="font-normal text-sm text-grey-500">
-                              Men Running
-                            </p>
-                            <p className="text-md">Nike Competition Shoes</p>
-                            <p className="text-magenta">£300</p>
-                          </div>
-                          <div className="flex items-end">
-                            <p className="font-normal text-sm text-grey-500">
-                              quantity: 5
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </button>
-                  </li>
+                      </li>,
+                    ];
+                  })}
                   <li>
                     <button
                       type="button"
@@ -205,3 +138,27 @@ const Header = () => {
 };
 
 export default Header;
+
+const basket = [
+  {
+    image: '/assets/shoes.jpeg',
+    title: 'Men Running',
+    description: 'Nike Competition Shoes',
+    price: '300',
+    quantity: '5',
+  },
+  {
+    image: '/assets/shoes.jpeg',
+    title: 'Men Running',
+    description: 'Nike Competition Shoes',
+    price: '300',
+    quantity: '5',
+  },
+  {
+    image: '/assets/shoes.jpeg',
+    title: 'Men Running',
+    description: 'Nike Competition Shoes',
+    price: '300',
+    quantity: '5',
+  },
+];

@@ -1,84 +1,57 @@
-import { type } from 'os';
-import React, { FC, useEffect } from 'react';
-import Button from './Buttons';
-import Icon from './Icon';
-import Popover from './Popover';
+import React, { FC, useEffect, useState } from 'react';
+import Listbox from './Listbox';
+import { ListboxOption } from './Listbox';
 
 interface Props {
   products: Product[];
-  sortBy: string;
-  setSortBy: (value: string) => void;
   setProducts: (value: Product[]) => void;
-  filterBy: string;
-  setFilterBy: (value: string) => void;
+  filterBy: ListboxOption | undefined;
+  setFilterBy: (value: ListboxOption) => void;
   categories: Category[];
 }
 
 const FiltersSidebar: FC<Props> = ({
-  sortBy,
-  setSortBy,
   products,
   setProducts,
   filterBy,
   setFilterBy,
   categories,
 }) => {
+  const [sortBy, setSortBy] = useState<ListboxOption>(SortOptions[0]);
+
   useEffect(() => {
     const sortedProducts = [...products].sort((a, b) => {
-      if (sortBy === 'What`s new') {
+      if (sortBy.value === 'what-s-new') {
         return b.releaseDate.localeCompare(a.releaseDate);
       }
-      if (sortBy === 'Price: low to high') {
+      if (sortBy.value === 'low-to-high') {
         return +a.price - +b.price;
       }
-      if (sortBy === 'Price: high to low') {
+      if (sortBy.value === 'high-to-low') {
         return +b.price - +a.price;
       }
-      if (sortBy === 'Most popular') {
+      if (sortBy.value === 'most-popular') {
         return +b.numberOfSales - +a.numberOfSales;
       }
       return 0;
     });
     setProducts(sortedProducts);
-  }, [products, setProducts, sortBy]);
+  }, [setProducts, sortBy]);
 
   return (
     <div className="border flex flex-col ">
       <ul className="w-full p-6 mb-10">
-        <li className="w-full flex flex-col gap-6">
-          <label htmlFor="sort" className="text-primary font-semibold text-lg">
-            Sort
-          </label>
-          <Popover
-            buttonTitle={
-              <div className="bg-grey-100 w-full px-4 py-3 rounded-md flex justify-between">
-                <p>{sortBy}</p>
-                <Icon name="bottom-chevron" width="24px" />
-              </div>
-            }
-            className="rounded-md font-light w-full border p-4 bg-white"
-          >
-            <div className="flex flex-col">
-              <Button
-                type="transparent"
-                onClick={() => {
-                  setSortBy('What`s new');
-                }}
-              >
-                What&apos;s new
-              </Button>
-              <Button type="transparent" onClick={() => setSortBy('Price: low to high')}>
-                Price: low to high
-              </Button>
-              <Button type="transparent" onClick={() => setSortBy('Price: high to low')}>
-                Price: high to low
-              </Button>
-              <Button type="transparent" onClick={() => setSortBy('Most popular')}>
-                Most popular
-              </Button>
-            </div>
-          </Popover>
-        </li>
+        <label htmlFor="sort" className="text-primary font-semibold text-lg">
+          Sort
+        </label>
+        <Listbox
+          id={`sort1`}
+          name={sortBy.title}
+          options={SortOptions}
+          value={sortBy}
+          onChange={value => setSortBy(value)}
+          buttonClassName="bg-grey-100 mt-5"
+        />
       </ul>
       {categories.map(category => {
         return (
@@ -89,39 +62,15 @@ const FiltersSidebar: FC<Props> = ({
               </label>
               {category.type.map(item => {
                 return (
-                  <li key={`${category.id}${item.title}`}>
-                    <Popover
-                      buttonTitle={
-                        <div className="bg-white w-full px-4 py-4 rounded-md flex justify-between">
-                          {filterBy !== '' ? (
-                            <p>{filterBy}</p>
-                          ) : (
-                            <p className="text-granite-gray">{item.title}</p>
-                          )}
-                          <Icon name="bottom-chevron" width="24px" />
-                        </div>
-                      }
-                      className="rounded-md font-light w-full border p-4 bg-white"
-                    >
-                      {item.options.map(option => {
-                        return (
-                          <div
-                            className="flex flex-col"
-                            key={`${category.id}${item.title}${option.value}`}
-                          >
-                            <Button
-                              type="transparent"
-                              onClick={() => {
-                                setFilterBy(option.value);
-                              }}
-                            >
-                              {option.title}
-                            </Button>
-                          </div>
-                        );
-                      })}
-                    </Popover>
-                  </li>
+                  <Listbox
+                    key={`${category.id}${item.title}`}
+                    id={`${category.id}${item.title}`}
+                    name={item.title}
+                    options={item.options}
+                    value={filterBy}
+                    onChange={value => setFilterBy(value)}
+                    buttonClassName="bg-white"
+                  />
                 );
               })}
             </>
@@ -134,15 +83,40 @@ const FiltersSidebar: FC<Props> = ({
 
 export default FiltersSidebar;
 
+const SortOptions: ListboxOption[] = [
+  {
+    id: '120',
+    title: 'What`s new',
+    value: 'what-s-new',
+  },
+  {
+    id: '201',
+    title: 'Price: low to high',
+    value: 'low-to-high',
+  },
+  {
+    id: '173',
+    title: 'Price: high to low',
+    value: 'high-to-low',
+  },
+  {
+    id: '42',
+    title: 'Price: low to high',
+    value: 'low-to-high',
+  },
+  {
+    id: '229',
+    title: 'Most popular',
+    value: 'most-popular',
+  },
+];
+
 type Category = {
   id: number;
   name: string;
   type: {
     title: string;
-    options: {
-      title: string;
-      value: string;
-    }[];
+    options: ListboxOption[];
   }[];
 };
 type Product = {
