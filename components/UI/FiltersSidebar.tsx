@@ -4,18 +4,18 @@ import { ListboxOption } from './Listbox';
 
 interface Props {
   products: Product[];
-  setProducts: (value: Product[]) => void;
   filterBy: ListboxOption | undefined;
-  setFilterBy: (value: ListboxOption) => void;
   categories: Category[];
+  setFilterBy: (value: ListboxOption) => void;
+  setProducts: (value: Product[]) => void;
 }
 
 const FiltersSidebar: FC<Props> = ({
   products,
-  setProducts,
   filterBy,
-  setFilterBy,
   categories,
+  setFilterBy,
+  setProducts,
 }) => {
   const [sortBy, setSortBy] = useState<ListboxOption>(SortOptions[0]);
 
@@ -40,41 +40,37 @@ const FiltersSidebar: FC<Props> = ({
 
   return (
     <div className="border flex flex-col ">
-      <ul className="w-full p-6 mb-10">
+      <div className="w-full p-6 mb-10">
         <label htmlFor="sort" className="text-primary font-semibold text-lg">
           Sort
         </label>
         <Listbox
-          id={`sort1`}
           name={sortBy.title}
           options={SortOptions}
           value={sortBy}
           onChange={value => setSortBy(value)}
           buttonClassName="bg-grey-100 mt-5"
         />
-      </ul>
+      </div>
       {categories.map(category => {
         return (
-          <ul className="flex flex-col gap-5 w-full bg-grey-100 p-6" key={category.id}>
-            <>
-              <label htmlFor="sort" className="text-primary font-semibold text-lg">
-                {category.name}
-              </label>
-              {category.type.map(item => {
-                return (
-                  <Listbox
-                    key={`${category.id}${item.title}`}
-                    id={`${category.id}${item.title}`}
-                    name={item.title}
-                    options={item.options}
-                    value={filterBy}
-                    onChange={value => setFilterBy(value)}
-                    buttonClassName="bg-white"
-                  />
-                );
-              })}
-            </>
-          </ul>
+          <div className="flex flex-col gap-5 w-full bg-grey-100 p-6" key={category.id}>
+            <label htmlFor="sort" className="text-primary font-semibold text-lg">
+              {category.name}
+            </label>
+            {category.type.map(item => {
+              return (
+                <Listbox
+                  key={`${category.id} ${item.title}`}
+                  name={item.title}
+                  options={item.options}
+                  value={filterBy}
+                  onChange={value => setFilterBy(value)}
+                  buttonClassName="bg-white"
+                />
+              );
+            })}
+          </div>
         );
       })}
     </div>

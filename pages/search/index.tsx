@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Layout from '../../components/Layout';
 import Icon from '../../components/UI/Icon';
 import Image from 'next/image';
@@ -42,7 +42,11 @@ const Search: NextPage = () => {
               value={searchProducts}
               onChange={e => setSearchProducts(e.target.value)}
             />
-            <button type="button" onClick={() => setSearchProducts('')}>
+            <button
+              type="button"
+              onClick={() => setSearchProducts('')}
+              aria-label="clear search"
+            >
               <Icon name="cross" width="40px" />
             </button>
           </div>
@@ -71,7 +75,7 @@ const Search: NextPage = () => {
                         </div>
                         <button
                           type="button"
-                          className="rounded-full h-6 w-6 bg-magenta flex items-cetner justify-center text-white"
+                          className="rounded-full h-6 w-6 bg-magenta flex items-center justify-center text-white"
                         >
                           +
                         </button>
@@ -92,6 +96,7 @@ const Search: NextPage = () => {
                                 key={`${product.id}${color}${index}`}
                                 type="button"
                                 className={clsx('rounded-full h-5 w-5', `bg-${color}`)}
+                                aria-label="item color"
                               />
                             );
                           })}

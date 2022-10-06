@@ -65,6 +65,7 @@ const Header = () => {
               <Link href="/about-us" passHref>
                 <a
                   href="replace"
+                  aria-label="about us"
                   className={clsx(
                     'p-2',
                     router.pathname === '/about-us' && 'text-magenta'
@@ -77,8 +78,8 @@ const Header = () => {
           </ul>
           <ul className="flex flex-row gap-6">
             <li>
-              <Link aria-label="search" href="/search" passHref>
-                <a href="replace">
+              <Link href="/search" passHref>
+                <a href="replace" aria-label="search">
                   <Icon name="search" />
                 </a>
               </Link>

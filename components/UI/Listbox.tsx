@@ -1,44 +1,27 @@
 import { Listbox as HeadlessListbox, Transition } from '@headlessui/react';
 import clsx from 'clsx';
-import { Fragment, useRef, useState } from 'react';
+import { Fragment } from 'react';
 import Button from './Buttons';
 import Icon from './Icon';
 
-// TODO: This component should have a loading state for when results are being fetched.
-// We do not currently have a design for this.
-
 export type ListboxOption = {
-  /** ID of the option */
   id: string;
-  /** Display name */
   title: string;
-  /** Disabled */
   value: string;
   disabled?: boolean;
 };
 
 export type ListboxProps = {
-  /** ID of the input field. Used to match with label */
-  id: string;
-  /** Name of the field. Used to track within formik  */
   name: string;
-  /** The options available in the listbox */
   options: ListboxOption[];
-  /** The current value. Must match one of the options. Can be undefined */
   value: ListboxOption | undefined;
-  /** The event which will trigger when an option is selected */
   onChange: (option: ListboxOption) => void;
-
-  /** The event which will trigger when the listbox is blurred */
   onBlur?: () => void;
-  /** Disabled state */
   disabled?: boolean;
-
   buttonClassName?: string;
 };
 
 const Listbox = ({
-  id,
   name,
   options,
   value,
@@ -53,12 +36,11 @@ const Listbox = ({
         <div className="relative w-full">
           <HeadlessListbox.Button as={Fragment}>
             <button
-              data-testid={id}
-              type="button"
               className={clsx(
-                ' w-full px-4 py-4 rounded-md flex justify-between',
+                'w-full px-4 py-4 rounded-md flex justify-between',
                 buttonClassName
               )}
+              aria-label="listbox-button"
             >
               <>
                 {value ? value.title : name}
@@ -81,7 +63,6 @@ const Listbox = ({
             leaveTo="opacity-0"
           >
             <HeadlessListbox.Options
-              data-testid={`${id}-options`}
               className="max-h-96 overflow-x-auto rounded-md font-light w-full border p-2 bg-white absolute z-10 flex flex-col gap-2 items-center"
               onBlur={onBlur}
             >
