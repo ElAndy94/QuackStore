@@ -5,7 +5,15 @@ import Loader from './Loader';
 
 type Props = {
   children: React.ReactNode;
-  type?: 'primary' | 'secondary' | 'cancel' | 'outline' | 'green' | 'text' | 'remove';
+  type?:
+    | 'primary'
+    | 'secondary'
+    | 'cancel'
+    | 'outline'
+    | 'green'
+    | 'text'
+    | 'remove'
+    | 'transparent';
   size?: 'normal' | 'small' | 'full';
   disabled?: boolean;
   loading?: boolean;
@@ -54,6 +62,8 @@ const Button = forwardRef<HTMLButtonElement, Props>(
           type === 'outline' &&
             'bg-grey-400 text-primary border-primary border-2 font-semibold',
           type === 'remove' && 'text-primary font-semibold hover:shadow-none',
+          type === 'transparent' &&
+            'bg-none rounded-md hover:bg-grey-100 hover:shadow-none px-6 py-3 text-left text-primary',
           (disabled || loading) && 'opacity-25 hover:brightness-100 hover:shadow-none',
           className
         )}

@@ -24,8 +24,8 @@ const Popover = ({ buttonTitle, children, className }: PopoverProps) => {
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 translate-y-1"
       >
-        <HeadlessPopover.Panel className={clsx('absolute z-10 bg-white', className)}>
-          <HeadlessPopover.Button>{children}</HeadlessPopover.Button>
+        <HeadlessPopover.Panel className={clsx('absolute z-10 ', className)}>
+          {children}
         </HeadlessPopover.Panel>
       </Transition>
     </HeadlessPopover>

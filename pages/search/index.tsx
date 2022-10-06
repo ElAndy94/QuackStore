@@ -4,12 +4,25 @@ import Layout from '../../components/Layout';
 import Icon from '../../components/UI/Icon';
 import Image from 'next/image';
 import clsx from 'clsx';
-import Popover from '../../components/UI/Popover';
+import FiltersSidebar from '../../components/UI/FiltersSidebar';
+
+type Product = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  price: string;
+  inStock: boolean;
+  colors: string[];
+  releaseDate: string;
+  numberOfSales: string;
+};
 
 const Search: NextPage = () => {
   const [searchProducts, setSearchProducts] = useState('');
-  const [products, setProducts] = useState(mockProducts);
+  const [products, setProducts] = useState<Product[]>(mockProducts);
   const [sortBy, setSortBy] = useState<string>('What`s new');
+  const [filterBy, setFilterBy] = useState<string>('');
 
   useEffect(() => {
     const sortedProducts = [...products].sort((a, b) => {
@@ -53,57 +66,16 @@ const Search: NextPage = () => {
             </button>
           </div>
           <div className="w-full flex">
-            <div className="w-1/3 border ">
-              <ul className="p-10">
-                <li className="w-full">
-                  <label htmlFor="sort" className="font-semibold text-lg mb-8">
-                    Sort
-                  </label>
-                  <Popover
-                    buttonTitle={
-                      <div className="bg-grey-100 w-full px-4 py-2 rounded-md flex justify-between">
-                        <p>{sortBy}</p>
-                        <Icon name="bottom-chevron" width="24px" />
-                      </div>
-                    }
-                    className="rounded-md font-light w-full border p-2 "
-                  >
-                    <div className="flex flex-col">
-                      <button
-                        type="button"
-                        className="rounded-md hover:bg-grey-100 px-2 py-1 text-left"
-                        onClick={() => {
-                          setSortBy('What`s new');
-                        }}
-                      >
-                        What&apos;s new
-                      </button>
-                      <button
-                        type="button"
-                        className="rounded-md hover:bg-grey-100 px-2 py-1 text-left"
-                        onClick={() => setSortBy('Price: low to high')}
-                      >
-                        Price: low to high
-                      </button>
-                      <button
-                        type="button"
-                        className="rounded-md hover:bg-grey-100 px-2 py-1 text-left"
-                        onClick={() => setSortBy('Price: high to low')}
-                      >
-                        Price: high to low
-                      </button>
-                      <button
-                        type="button"
-                        className="rounded-md hover:bg-grey-100 px-2 py-1 text-left"
-                        onClick={() => setSortBy('Most popular')}
-                      >
-                        Most popular
-                      </button>
-                    </div>
-                  </Popover>
-                </li>
-                <li></li>
-              </ul>
+            <div className="w-1/3">
+              <FiltersSidebar
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+                products={products}
+                setProducts={setProducts}
+                filterBy={filterBy}
+                setFilterBy={setFilterBy}
+                categories={categories}
+              />
             </div>
             <ul className="grid grid-cols-3 grid-flow-row auto-rows-max w-full h-full">
               {products
@@ -135,10 +107,10 @@ const Search: NextPage = () => {
                           />
                         </div>
                         <div className="flex items-center gap-2">
-                          {product.colors.map(color => {
+                          {product.colors.map((color, index) => {
                             return (
                               <button
-                                key="color"
+                                key={`${product.id}${color}${index}`}
                                 type="button"
                                 className={clsx('rounded-full h-5 w-5', `bg-${color}`)}
                               />
@@ -170,7 +142,331 @@ const Search: NextPage = () => {
 
 export default Search;
 
-const mockProducts = [
+type Category = {
+  id: number;
+  name: string;
+  type: {
+    title: string;
+    options: {
+      title: string;
+      value: string;
+    }[];
+  }[];
+};
+
+const categories: Category[] = [
+  {
+    id: 1,
+    name: 'Filter',
+    type: [
+      {
+        title: 'Technology',
+        options: [
+          {
+            title: 'Breathable',
+            value: 'breathable',
+          },
+          {
+            title: 'Bounce',
+            value: 'bounce',
+          },
+          {
+            title: 'Primeknit',
+            value: 'primeknit',
+          },
+          {
+            title: 'Stealth',
+            value: 'stealth',
+          },
+        ],
+      },
+      {
+        title: 'Size',
+        options: [
+          {
+            title: '6',
+            value: '6',
+          },
+
+          {
+            title: '6.5',
+            value: '6.5',
+          },
+          {
+            title: '7',
+            value: '7',
+          },
+          {
+            title: '7.5',
+            value: '7.5',
+          },
+          {
+            title: '8',
+
+            value: '8',
+          },
+          {
+            title: '8.5',
+            value: '8.5',
+          },
+          {
+            title: '9',
+            value: '9',
+          },
+          {
+            title: '9.5',
+            value: '9.5',
+          },
+          {
+            title: '10',
+            value: '10',
+          },
+          {
+            title: '10.5',
+            value: '10.5',
+          },
+          {
+            title: '11',
+            value: '11',
+          },
+          {
+            title: '11.5',
+            value: '11.5',
+          },
+          {
+            title: '12',
+            value: '12',
+          },
+          {
+            title: '12.5',
+            value: '12.5',
+          },
+          {
+            title: '13',
+            value: '13',
+          },
+          {
+            title: '13.5',
+            value: '13.5',
+          },
+          {
+            title: '14',
+            value: '14',
+          },
+        ],
+      },
+      {
+        title: 'Brand',
+        options: [
+          {
+            title: 'Adidas',
+            value: 'adidas',
+          },
+          {
+            title: 'Nike',
+            value: 'nike',
+          },
+          {
+            title: 'Puma',
+            value: 'puma',
+          },
+          {
+            title: 'Reebok',
+            value: 'reebok',
+          },
+          {
+            title: 'New Balance',
+            value: 'new-balance',
+          },
+          {
+            title: 'Vans',
+            value: 'vans',
+          },
+          {
+            title: 'Converse',
+
+            value: 'converse',
+          },
+          {
+            title: 'Asics',
+            value: 'asics',
+          },
+          {
+            title: 'Jordan',
+            value: 'jordan',
+          },
+          {
+            title: 'Under Armour',
+            value: 'under-armour',
+          },
+          {
+            title: 'Fila',
+            value: 'fila',
+          },
+          {
+            title: 'Saucony',
+            value: 'saucony',
+          },
+          {
+            title: 'Diadora',
+            value: 'diadora',
+          },
+          {
+            title: 'Onitsuka Tiger',
+            value: 'onitsuka-tiger',
+          },
+          {
+            title: 'Hoka One One',
+            value: 'hoka-one-one',
+          },
+          {
+            title: 'Brooks',
+            value: 'brooks',
+          },
+          {
+            title: 'Salomon',
+            value: 'salomon',
+          },
+          {
+            title: 'Skechers',
+            value: 'skechers',
+          },
+          {
+            title: 'Mizuno',
+            value: 'mizuno',
+          },
+          {
+            title: 'Merrell',
+            value: 'merrell',
+          },
+          {
+            title: 'The North Face',
+            value: 'the-north-face',
+          },
+          {
+            title: 'Timberland',
+            value: 'timberland',
+          },
+          {
+            title: 'New Balance',
+            value: 'new-balance',
+          },
+          {
+            title: 'Helly Hansen',
+            value: 'helly-hansen',
+          },
+          {
+            title: 'Columbia',
+            value: 'columbia',
+          },
+          {
+            title: 'K-Swiss',
+
+            value: 'k-swiss',
+          },
+          {
+            title: 'Ecco',
+            value: 'ecco',
+          },
+          {
+            title: 'Asolo',
+            value: 'asolo',
+          },
+        ],
+      },
+      {
+        title: 'Price range',
+        options: [
+          {
+            title: '0 - 100',
+            value: '0-100',
+          },
+          {
+            title: '100 - 200',
+            value: '100-200',
+          },
+          {
+            title: '200 - 300',
+            value: '200-300',
+          },
+          {
+            title: '300 - 400',
+            value: '300-400',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Activity',
+    type: [
+      {
+        title: 'Outdoor',
+        options: [
+          {
+            title: 'Hiking',
+            value: 'hiking',
+          },
+          {
+            title: 'Running',
+            value: 'running',
+          },
+          {
+            title: 'Trail',
+            value: 'trail',
+          },
+          {
+            title: 'Walking',
+            value: 'walking',
+          },
+          {
+            title: 'Climbing',
+            value: 'climbing',
+          },
+          {
+            title: 'Cycling',
+            value: 'cycling',
+          },
+        ],
+      },
+      {
+        title: 'Indoor',
+        options: [
+          {
+            title: 'Gym',
+            value: 'gym',
+          },
+          {
+            title: 'Training',
+            value: 'training',
+          },
+          {
+            title: 'Basketball',
+            value: 'basketball',
+          },
+          {
+            title: 'Soccer',
+            value: 'soccer',
+          },
+          {
+            title: 'Tennis',
+            value: 'tennis',
+          },
+          {
+            title: 'Volleyball',
+            value: 'volleyball',
+          },
+          {
+            title: 'Yoga',
+            value: 'yoga',
+          },
+        ],
+      },
+    ],
+  },
+];
+const mockProducts: Product[] = [
   {
     id: 7564,
     title: 'Adidas',

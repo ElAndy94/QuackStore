@@ -79,7 +79,7 @@ const Header = () => {
           </ul>
           <ul className="flex flex-row gap-6">
             <li>
-              <Link aria-label="search" href="/search">
+              <Link aria-label="search" href="/search" passHref>
                 <a href="replace">
                   <Icon name="search" />
                 </a>
