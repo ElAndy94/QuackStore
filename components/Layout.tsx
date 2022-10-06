@@ -36,7 +36,7 @@ export default function Layout({ children, seo }: Props): JSX.Element {
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         </Head>
       )}
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen ">
         <Header />
         <main className="flex-grow">{children}</main>
       </div>
