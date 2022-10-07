@@ -4,8 +4,11 @@ import Button from '../components/UI/Buttons';
 import Image from 'next/image';
 import Icon from '../components/UI/Icon';
 import Featured from '../components/ProductsView/Featured';
+import { useTranslation } from 'react-i18next';
 
 const Home: NextPage = () => {
+  const { t } = useTranslation('common');
+
   return (
     <Layout
       seo={{
@@ -17,7 +20,7 @@ const Home: NextPage = () => {
       <section className=" flex items-center px-44 justify-center bg-grey-200">
         <article className="flex flex-col gap-4 ">
           <h1 className="heroTitle text-primary font-bold leading-[80px] tracking-tighter">
-            Get your awesome sneakers.
+            {t('heroTitle')}
           </h1>
           <p className="text-grey-500 max-w-tablet-container">
             We offer the best deals in our shop. Check them out now. We have awesome stuff
