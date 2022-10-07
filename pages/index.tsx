@@ -5,8 +5,20 @@ import Image from 'next/image';
 import Icon from '../components/UI/Icon';
 import Featured from '../components/ProductsView/Featured';
 import { useTranslation } from 'react-i18next';
+import ContentfulApi from '../utils/ContentfulApi';
 
-const Footwear: NextPage = () => {
+export async function getStaticProps() {
+  const res = await ContentfulApi.getAllShoes();
+
+  return {
+    props: {
+      shoes: res,
+    },
+    revalidate: 1,
+  };
+}
+
+const Footwear: NextPage = ({ shoes }: any) => {
   const { t } = useTranslation('common');
 
   return (
@@ -43,7 +55,7 @@ const Footwear: NextPage = () => {
         </figure>
       </section>
       <section className="mt-32">
-        <Featured title="Featured products" products={mockProducts} />
+        <Featured title="Featured products" products={shoes} />
       </section>
     </Layout>
   );
