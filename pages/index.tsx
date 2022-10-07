@@ -6,15 +6,15 @@ import Icon from '../components/UI/Icon';
 import Featured from '../components/ProductsView/Featured';
 import { useTranslation } from 'react-i18next';
 
-const Home: NextPage = () => {
+const Footwear: NextPage = () => {
   const { t } = useTranslation('common');
 
   return (
     <Layout
       seo={{
-        title: 'Home | QuackStore',
-        description: 'Home | QuackStore',
-        canonicalUrl: 'https://quackstore.com/Home',
+        title: 'Footwear | QuackStore',
+        description: 'Footwear  | QuackStore',
+        canonicalUrl: 'https://quackstore.com/footwear ',
       }}
     >
       <section className=" flex items-center px-44 justify-center bg-grey-200">
@@ -49,7 +49,7 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Footwear;
 
 type Products = {
   id: number;

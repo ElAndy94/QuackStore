@@ -23,8 +23,6 @@ interface Props {
 }
 
 const Featured: FC<Props> = ({ products, title }) => {
-  console.log(products[0].colors[0]);
-
   return (
     <section className="wrapper flex-col">
       <article className="flex w-full justify-between">
@@ -37,10 +35,10 @@ const Featured: FC<Props> = ({ products, title }) => {
           </a>
         </Link>
       </article>
-      <section className="flex mt-20 overflow-y-auto w-full">
+      <ul className="flex mt-20 overflow-y-auto w-full">
         {products.map(product => {
           return (
-            <section className="flex" key={product.id}>
+            <li className="flex" key={product.id}>
               <article className="flex flex-col w-[300px] p-4">
                 <div className="flex flex-col items-center justify-center relative">
                   <div
@@ -68,10 +66,10 @@ const Featured: FC<Props> = ({ products, title }) => {
                   </div>
                 </div>
               </article>
-            </section>
+            </li>
           );
         })}
-      </section>
+      </ul>
     </section>
   );
 };

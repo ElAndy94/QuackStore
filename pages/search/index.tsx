@@ -42,7 +42,11 @@ const Search: NextPage = () => {
                   product.title.toLowerCase().includes(searchProducts.toLowerCase())
                 )
                 .map(product => {
-                  return <ProductBox product={product} key={product.id} />;
+                  return (
+                    <li className="w-full border p-4" key={product.id}>
+                      <ProductBox product={product} />
+                    </li>
+                  );
                 })}
             </ul>
           </div>

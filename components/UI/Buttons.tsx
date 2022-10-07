@@ -48,23 +48,25 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         disabled={disabled || loading}
         onClick={click}
         className={clsx(
-          'rounded-md hover:shadow-md text-white',
+          'rounded-md hover:shadow-md ',
           size === 'full' && 'w-full h-[52px]',
           size === 'normal' && 'w-[200px] h-[52px]',
           size === 'small' && 'w-[90px] h-[40px]',
 
-          type === 'primary' && 'bg-ultra-marine-blue hover:brightness-[95%]',
-          type === 'secondary' && 'bg-magenta hover:brightness-[95%] font-semibold ',
+          type === 'primary' && 'bg-ultra-marine-blue hover:brightness-[95%] text-white',
+          type === 'secondary' &&
+            'bg-magenta hover:brightness-[95%] font-semibold text-white',
           type === 'cancel' &&
-            'bg-orange text-error border-errorText border-2 hover:brightness-[95%]',
+            'bg-orange text-error border-errorText border-2 hover:brightness-[95%] text-white',
           type === 'green' &&
-            'bg-forest-green text-error border-errorText border-2 hover:brightness-[95%]',
+            'bg-forest-green text-error border-errorText border-2 hover:brightness-[95%] text-white',
           type === 'outline' &&
             'bg-grey-400 text-primary border-primary border-2 font-semibold',
           type === 'remove' && 'text-primary font-semibold hover:shadow-none',
           type === 'transparent' &&
-            'bg-none rounded-md hover:bg-grey-100 hover:shadow-none px-6 py-3 text-left !text-primary',
-          (disabled || loading) && 'opacity-25 hover:brightness-100 hover:shadow-none',
+            'text-primary bg-none rounded-md hover:bg-grey-100 hover:shadow-none px-6 py-3 text-left',
+          (disabled || loading) &&
+            'text-primary opacity-25 hover:brightness-100 hover:shadow-none',
           className
         )}
         data-testid="button"

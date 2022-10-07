@@ -20,7 +20,7 @@ interface Props {
 
 const ProductBox: FC<Props> = ({ product }) => {
   return (
-    <li className="w-full border p-4" >
+    <article>
       <div className="flex justify-between">
         <div>
           <h5 className="font-bold">{product.title}</h5>
@@ -66,7 +66,7 @@ const ProductBox: FC<Props> = ({ product }) => {
         </p>
         <p className="text-lg font-semibold">£{product.price}</p>
       </div>
-    </li>
+    </article>
   );
 };
 
