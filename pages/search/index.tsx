@@ -1,23 +1,11 @@
 import { NextPage } from 'next';
 import { useState } from 'react';
 import Layout from '../../components/Layout';
-import Icon from '../../components/UI/Icon';
-import Image from 'next/image';
-import clsx from 'clsx';
+
 import FiltersSidebar from '../../components/UI/FiltersSidebar';
 import { ListboxOption } from '../../components/UI/Listbox';
-
-type Product = {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  price: string;
-  inStock: boolean;
-  colors: string[];
-  releaseDate: string;
-  numberOfSales: string;
-};
+import ProductBox from '../../components/ProductsView/ProductBox';
+import SearchBar from '../../components/UI/SearchBar';
 
 const Search: NextPage = () => {
   const [searchProducts, setSearchProducts] = useState('');
@@ -34,22 +22,10 @@ const Search: NextPage = () => {
     >
       <div className="wrapper">
         <div className="flex flex-col w-full">
-          <div className="flex w-full px-16 h-40">
-            <input
-              type="text"
-              className="w-full text-2xl font-normal  outline-none"
-              placeholder="Type to search"
-              value={searchProducts}
-              onChange={e => setSearchProducts(e.target.value)}
-            />
-            <button
-              type="button"
-              onClick={() => setSearchProducts('')}
-              aria-label="clear search"
-            >
-              <Icon name="cross" width="40px" />
-            </button>
-          </div>
+          <SearchBar
+            searchProducts={searchProducts}
+            setSearchProducts={setSearchProducts}
+          />
           <div className="w-full flex">
             <div className="w-1/3">
               <FiltersSidebar
@@ -66,55 +42,7 @@ const Search: NextPage = () => {
                   product.title.toLowerCase().includes(searchProducts.toLowerCase())
                 )
                 .map(product => {
-                  return (
-                    <li className="w-full border p-4" key={product.id}>
-                      <div className="flex justify-between">
-                        <div>
-                          <h5 className="font-bold">{product.title}</h5>
-                          <p className="text-grey-500">{product.description}</p>
-                        </div>
-                        <button
-                          type="button"
-                          className="rounded-full h-6 w-6 bg-magenta flex items-center justify-center text-white"
-                        >
-                          +
-                        </button>
-                      </div>
-                      <div className="flex w-full justify-between">
-                        <div className="w-60 h-36">
-                          <Image
-                            src={product.image}
-                            alt={product.description}
-                            width="250px"
-                            height="160px"
-                          />
-                        </div>
-                        <div className="flex items-center gap-2">
-                          {product.colors.map((color, index) => {
-                            return (
-                              <button
-                                key={`${product.id}${color}${index}`}
-                                type="button"
-                                className={clsx('rounded-full h-5 w-5', `bg-${color}`)}
-                                aria-label="item color"
-                              />
-                            );
-                          })}
-                        </div>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <p
-                          className={clsx(
-                            'font-medium',
-                            product.inStock ? 'text-forest-green' : 'text-grey-400'
-                          )}
-                        >
-                          {product.inStock ? 'In stock' : 'Out of Stock'}
-                        </p>
-                        <p className="text-lg font-semibold">£{product.price}</p>
-                      </div>
-                    </li>
-                  );
+                  return <ProductBox product={product} key={product.id} />;
                 })}
             </ul>
           </div>
@@ -125,6 +53,18 @@ const Search: NextPage = () => {
 };
 
 export default Search;
+
+type Product = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  price: string;
+  inStock: boolean;
+  colors: string[];
+  releaseDate: string;
+  numberOfSales: string;
+};
 
 type Category = {
   id: number;

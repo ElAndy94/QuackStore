@@ -39,7 +39,9 @@ const Home: NextPage = () => {
           <Image src="/assets/heroImage.svg" alt="hero shoes" width={1000} height={990} />
         </figure>
       </section>
-      <Featured title="Featured products" products={mockProducts} />
+      <section className="mt-32">
+        <Featured title="Featured products" products={mockProducts} />
+      </section>
     </Layout>
   );
 };

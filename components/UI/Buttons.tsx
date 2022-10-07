@@ -54,7 +54,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
           size === 'small' && 'w-[90px] h-[40px]',
 
           type === 'primary' && 'bg-ultra-marine-blue hover:brightness-[95%]',
-          type === 'secondary' && 'bg-magenta hover:brightness-[95%] font-semibold',
+          type === 'secondary' && 'bg-magenta hover:brightness-[95%] font-semibold ',
           type === 'cancel' &&
             'bg-orange text-error border-errorText border-2 hover:brightness-[95%]',
           type === 'green' &&
@@ -63,7 +63,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
             'bg-grey-400 text-primary border-primary border-2 font-semibold',
           type === 'remove' && 'text-primary font-semibold hover:shadow-none',
           type === 'transparent' &&
-            'bg-none rounded-md hover:bg-grey-100 hover:shadow-none px-6 py-3 text-left text-primary',
+            'bg-none rounded-md hover:bg-grey-100 hover:shadow-none px-6 py-3 text-left !text-primary',
           (disabled || loading) && 'opacity-25 hover:brightness-100 hover:shadow-none',
           className
         )}

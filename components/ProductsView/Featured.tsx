@@ -26,7 +26,7 @@ const Featured: FC<Props> = ({ products, title }) => {
   console.log(products[0].colors[0]);
 
   return (
-    <section className="wrapper mx-auto mt-32">
+    <section className="wrapper flex-col">
       <article className="flex w-full justify-between">
         <h2 className="text-primary font-bold leading-[80px] tracking-tighter">
           {title}
@@ -62,8 +62,10 @@ const Featured: FC<Props> = ({ products, title }) => {
                 </div>
                 <div className="flex flex-col w-full mt-10">
                   <Rating rating={+product.rating} />
-                  <p className="mt-8 text-base ">{product.title}</p>
-                  <p className="mt-4 font-bold text-lg">£{product.price}</p>
+                  <div className="flex flex-col justify-between">
+                    <p className="mt-8 text-base">{product.title}</p>
+                    <p className="mt-4 font-bold text-lg">£{product.price}</p>
+                  </div>
                 </div>
               </article>
             </section>

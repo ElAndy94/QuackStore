@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import useScrollDirection from '../utils/helpers/UseScrollDirection';
 import Icon from './UI/Icon';
 import Popover from './UI/Popover';
-import SmallCard from './UI/SmallCard';
+import SmallCard from './ProductsView/SmallCard';
 
 const Header = () => {
   const scrollDirection = useScrollDirection();
