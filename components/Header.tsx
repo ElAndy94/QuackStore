@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import useScrollDirection from '../utils/helpers/UseScrollDirection';
 import Icon from './UI/Icon';
 import Popover from './UI/Popover';
-import SmallCard from './UI/SmallCard';
+import SmallCard from './ProductsView/SmallCard';
 
 const Header = () => {
   const scrollDirection = useScrollDirection();
@@ -16,7 +16,8 @@ const Header = () => {
         scrollDirection === 'down' ? '-top-24' : 'top-0 bg-slate-100',
         router.pathname === '/' && 'bg-grey-200',
         router.pathname === '/about-us' && 'bg-primary text-white',
-        router.pathname !== '/' && router.pathname !== '/about-us' && 'bg-transparent'
+        router.pathname !== '/' && router.pathname !== '/about-us' && 'bg-transparent',
+        router.pathname === '/men' && 'bg-orange text-white'
       )}
     >
       <div className="wrapper flex-row justify-between items-center w-full my-0 mx-auto px-4 lg:px-0">
@@ -33,7 +34,17 @@ const Header = () => {
                   href="replace"
                   className={clsx('p-2', router.pathname === '/' && 'text-magenta')}
                 >
-                  Footware
+                  Footwear
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/men" passHref>
+                <a
+                  href="replace"
+                  className={clsx('p-2', router.pathname === '/men' && 'text-primary')}
+                >
+                  men
                 </a>
               </Link>
             </li>

@@ -1,13 +1,11 @@
-import { NextPage } from 'next';
-import { useState } from 'react';
-import Layout from '../../components/Layout';
+import React, { useState } from 'react';
+import Layout from '../../../components/Layout';
+import FiltersSidebar from '../../../components/UI/FiltersSidebar';
+import SearchBar from '../../../components/UI/SearchBar';
+import ProductBox from '../../../components/ProductsView/ProductBox';
+import { ListboxOption } from '../../../components/UI/Listbox';
 
-import FiltersSidebar from '../../components/UI/FiltersSidebar';
-import { ListboxOption } from '../../components/UI/Listbox';
-import ProductBox from '../../components/ProductsView/ProductBox';
-import SearchBar from '../../components/UI/SearchBar';
-
-const Search: NextPage = () => {
+const Men = () => {
   const [searchProducts, setSearchProducts] = useState('');
   const [products, setProducts] = useState<Product[]>(mockProducts);
   const [filterBy, setFilterBy] = useState<ListboxOption | undefined>();
@@ -15,9 +13,9 @@ const Search: NextPage = () => {
   return (
     <Layout
       seo={{
-        title: 'Search | QuackStore',
-        description: 'Search for products | QuackStore',
-        canonicalUrl: 'https://quackstore.com/search',
+        title: 'Mens Footwear | QuackStore',
+        description: 'Mens footwear products | QuackStore',
+        canonicalUrl: 'https://quackstore.com/mens-footwear',
       }}
     >
       <div className="wrapper">
@@ -56,7 +54,7 @@ const Search: NextPage = () => {
   );
 };
 
-export default Search;
+export default Men;
 
 type Product = {
   id: number;

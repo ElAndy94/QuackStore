@@ -1,7 +1,10 @@
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { appWithTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import i18n from '../i18n';
 
 // Determines if we are running on server or in client.
 const isServerSideRendered = () => {
@@ -21,7 +24,13 @@ if (process.env.NODE_ENV !== 'production' && !isServerSideRendered()) {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  useEffect(() => {
+    if (router.locale) {
+      i18n.changeLanguage(router.locale);
+    }
+  }, [router.locale]);
   return <Component {...pageProps} />;
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp);

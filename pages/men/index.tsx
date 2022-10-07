@@ -1,55 +1,48 @@
-import type { NextPage } from 'next';
-import Layout from '../components/Layout';
-import Button from '../components/UI/Buttons';
+import React from 'react';
+import Layout from '../../components/Layout';
 import Image from 'next/image';
-import Icon from '../components/UI/Icon';
-import Featured from '../components/ProductsView/Featured';
-import { useTranslation } from 'react-i18next';
+import Button from '../../components/UI/Buttons';
+import Rating from '../../components/UI/Rating';
+import Featured from '../../components/ProductsView/Featured';
 
-const Footwear: NextPage = () => {
-  const { t } = useTranslation('common');
-
+const Men = () => {
   return (
     <Layout
       seo={{
-        title: 'Footwear | QuackStore',
-        description: 'Footwear  | QuackStore',
-        canonicalUrl: 'https://quackstore.com/footwear ',
+        title: 'Search | QuackStore',
+        description: 'Search for products | QuackStore',
+        canonicalUrl: 'https://quackstore.com/search',
       }}
     >
-      <section className=" flex items-center px-44 justify-center bg-grey-200">
-        <article className="flex flex-col gap-4 ">
-          <h1 className="heroTitle text-primary font-bold leading-[80px] tracking-tighter">
-            {t('heroTitle')}
-          </h1>
-          <p className="text-grey-500 max-w-tablet-container">
-            We offer the best deals in our shop. Check them out now. We have awesome stuff
-            on sale for you.
-          </p>
-          <Button type="secondary">Shop Now</Button>
-          <div className="flex gap-10 mt-20">
-            <div className="flex gap-3 items-center">
-              <Icon name="green-tick" width="28px" height="28px" />
-              <p className="text-grey-500">Free shipping</p>
-            </div>
-            <div className="flex gap-3 items-center">
-              <Icon name="green-tick" width="28px" height="28px" />
-              <p className="text-grey-500">Free return</p>
-            </div>
+      <section className="w-full h-[600px] bg-gradient-to-t from-white to-orange flex justify-start items-center p-16">
+        <div className="flex flex-col w-full items-end text-left">
+          <div>
+            <h2 className="text-primary font-bold leading-[80px] tracking-tighter text-left">
+              Best seller this week
+            </h2>
+            <Rating rating={5} />
+            <p className="text-lg text-primary mt-3">
+              Adidas Falcon Shoes for women - 2021 Edition
+            </p>
+            <p className="text-base text-granite-gray">Men Footware</p>
+            <p className="mt-4 text-primary font-bold text-lg">£200</p>
+            <Button type="primary" className="mt-10">
+              Shop Now
+            </Button>
           </div>
-        </article>
-        <figure>
-          <Image src="/assets/heroImage.svg" alt="hero shoes" width={1000} height={990} />
+        </div>
+        <figure className="w-full">
+          <Image src="/assets/shoe3.svg" alt="shoe banner" width="930px" height="575px" />
         </figure>
       </section>
-      <section className="mt-32">
-        <Featured title="Featured products" products={mockProducts} />
+      <section>
+        <Featured title="Featured men products" products={mockProducts} />
       </section>
     </Layout>
   );
 };
 
-export default Footwear;
+export default Men;
 
 type Products = {
   id: number;

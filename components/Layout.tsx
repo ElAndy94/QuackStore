@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import meta from './../meta.config';
+import Footer from './Footer';
 import Header from './Header';
 
 interface Props {
@@ -39,6 +40,7 @@ export default function Layout({ children, seo }: Props): JSX.Element {
       <div className="flex flex-col min-h-screen ">
         <Header />
         <main className="flex-grow">{children}</main>
+        <Footer />
       </div>
     </>
   );
