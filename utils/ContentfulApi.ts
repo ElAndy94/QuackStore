@@ -35,6 +35,7 @@ export default class ContentfulApi {
             description {
               json
             }
+            department
             releaseDate
             brand
             style
@@ -72,9 +73,10 @@ export default class ContentfulApi {
               id
             }
             name
-            description {
+            description{
               json
             }
+            department
             releaseDate
             brand
             style
@@ -103,5 +105,47 @@ export default class ContentfulApi {
     });
 
     return productCollection.items[0] as Product;
+  }
+  static async getProductByDepartment(department: 'Mens' | 'Womans' | 'Kids') {
+    const query = gql`
+      query getProductByDepartment($department: String) {
+        productCollection(where: { department: $department }, preview: false) {
+          items {
+            sys {
+              id
+            }
+            name
+            description {
+              json
+            }
+            department
+            releaseDate
+            brand
+            style
+            price
+            inStock
+            size
+            numberOfSales
+            activity
+            colors
+            slug
+            imagesCollection {
+              items {
+                url
+                width
+                height
+                title
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const { productCollection } = await this.callContentful(query, {
+      department,
+    });
+
+    return productCollection.items as Product[];
   }
 }

@@ -29,22 +29,32 @@ const Header = () => {
           </Link>
           <ul className="flex flex-row gap-4 font-semibold transition-all duration-75">
             <li>
-              <Link href="/" passHref>
-                <a
-                  href="replace"
-                  className={clsx('p-2', router.pathname === '/' && 'text-magenta')}
-                >
-                  Footwear
-                </a>
-              </Link>
-            </li>
-            <li>
               <Link href="/men" passHref>
                 <a
                   href="replace"
                   className={clsx('p-2', router.pathname === '/men' && 'text-primary')}
                 >
-                  men
+                  Men
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/women" passHref>
+                <a
+                  href="replace"
+                  className={clsx('p-2', router.pathname === '/women' && 'text-primary')}
+                >
+                  Women
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/kids" passHref>
+                <a
+                  href="replace"
+                  className={clsx('p-2', router.pathname === '/kids' && 'text-primary')}
+                >
+                  Kids
                 </a>
               </Link>
             </li>
