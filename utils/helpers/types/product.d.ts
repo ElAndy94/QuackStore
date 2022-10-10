@@ -6,6 +6,8 @@ export interface Product extends IProductFields {
   };
   imagesCollection: {
     items: {
+      height: string | number | undefined;
+      width: string | number | undefined;
       url: string;
       title: string;
     }[];

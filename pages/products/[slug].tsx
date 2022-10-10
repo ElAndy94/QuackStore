@@ -71,8 +71,8 @@ const Page = ({ product }: { product: Product }) => {
             <Image
               src={imagesCollection.items[0].url}
               layout="responsive"
-              width="100%"
-              height="100%"
+              width={imagesCollection.items[0].width}
+              height={imagesCollection.items[0].height}
               alt={imagesCollection.items[0].title}
             />
           </figure>

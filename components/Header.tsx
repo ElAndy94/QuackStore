@@ -17,7 +17,9 @@ const Header = () => {
         router.pathname === '/' && 'bg-grey-200',
         router.pathname === '/about-us' && 'bg-primary text-white',
         router.pathname !== '/' && router.pathname !== '/about-us' && 'bg-transparent',
-        router.pathname === '/men' && 'bg-orange text-white'
+        router.pathname === '/men' && 'bg-orange text-white',
+        router.pathname === '/women' && 'bg-magenta text-white',
+        router.pathname === '/kids' && 'bg-forest-green text-white'
       )}
     >
       <div className="wrapper flex-row justify-between items-center w-full my-0 mx-auto px-4 lg:px-0">
