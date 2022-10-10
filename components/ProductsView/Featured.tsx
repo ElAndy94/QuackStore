@@ -24,7 +24,6 @@ const Featured: FC<Props> = ({ products, title }) => {
       </article>
       <ul className="overflow-x-scroll mt-10 h-[340px] flex gap-4">
         {products.map(product => {
-          console.log(product.slug);
           return (
             <li key={product.sys.id}>
               <Link href={`/products${product.slug}`}>

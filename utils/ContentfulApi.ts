@@ -73,9 +73,10 @@ export default class ContentfulApi {
               id
             }
             name
-            description{
+            description {
               json
             }
+            rating
             department
             releaseDate
             brand
