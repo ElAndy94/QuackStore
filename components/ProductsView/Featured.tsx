@@ -1,25 +1,12 @@
 import Link from 'next/link';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import Icon from '../UI/Icon';
 import Image from 'next/image';
 import Rating from '../UI/Rating';
-import clsx from 'clsx';
-
-type Products = {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  price: string;
-  inStock: boolean;
-  colors: string[];
-  releaseDate: string;
-  numberOfSales: string;
-  rating: string;
-};
+import { Product } from '../../utils/helpers/types/product';
 interface Props {
-  products: Products[];
   title: string;
+  products: Product[];
 }
 
 const Featured: FC<Props> = ({ products, title }) => {
@@ -35,37 +22,33 @@ const Featured: FC<Props> = ({ products, title }) => {
           </a>
         </Link>
       </article>
-      <ul className="flex mt-20 overflow-y-auto w-full">
+      <ul className="overflow-x-scroll mt-10 h-[340px] flex gap-4">
         {products.map(product => {
+          console.log(product.slug);
           return (
-            <li className="flex" key={product.id}>
-              <article className="flex flex-col w-[300px] p-4">
-                <div className="flex flex-col items-center justify-center relative">
-                  <div
-                    className={clsx(
-                      'w-40 h-40 bg-gradient-to-r from-white rounded-full',
-                      product.colors.length > 0
-                        ? `to-${product.colors[0]}`
-                        : 'to-granite-grey'
-                    )}
-                  />
-                  <figure className="absolute top-8">
+            <li key={product.sys.id}>
+              <Link href={`/products${product.slug}`}>
+                <article className="flex flex-col justify-between w-[300px] h-full cursor-pointer">
+                  <figure>
                     <Image
-                      src={product.image}
-                      width="293.27px"
+                      src={
+                        product.imagesCollection.items &&
+                        product.imagesCollection.items[0].url
+                      }
+                      width="300px"
                       height="180.82px"
                       alt="shoe1"
                     />
                   </figure>
-                </div>
-                <div className="flex flex-col w-full mt-10">
-                  <Rating rating={+product.rating} />
-                  <div className="flex flex-col justify-between">
-                    <p className="mt-8 text-base">{product.title}</p>
-                    <p className="mt-4 font-bold text-lg">£{product.price}</p>
+                  <div className="flex flex-col justify-between h-full w-full py-4">
+                    <Rating rating={product.rating} />
+                    <div className="flex flex-col justify-between">
+                      <p className="text-base">{product.name}</p>
+                      <p className="font-bold text-lg">£{product.price}</p>
+                    </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </Link>
             </li>
           );
         })}
