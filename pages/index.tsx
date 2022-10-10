@@ -8,17 +8,23 @@ import { useTranslation } from 'react-i18next';
 import ContentfulApi from '../utils/ContentfulApi';
 
 export async function getStaticProps() {
-  const res = await ContentfulApi.getAllShoes();
-
-  return {
-    props: {
-      shoes: res,
-    },
-    revalidate: 1,
-  };
+  try {
+    const products = await ContentfulApi.getAllShoes();
+    return {
+      props: {
+        products,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        products: [],
+      },
+    };
+  }
 }
 
-const Footwear: NextPage = ({ shoes }: any) => {
+const Footwear: NextPage = ({ products }: any) => {
   const { t } = useTranslation('common');
 
   return (
@@ -55,7 +61,7 @@ const Footwear: NextPage = ({ shoes }: any) => {
         </figure>
       </section>
       <section className="mt-32">
-        <Featured title="Featured products" products={shoes} />
+        <Featured title="Featured products" products={products} />
       </section>
     </Layout>
   );

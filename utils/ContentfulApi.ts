@@ -51,6 +51,7 @@ export default class ContentfulApi {
                 title
               }
             }
+          }
         }
       }
     `;

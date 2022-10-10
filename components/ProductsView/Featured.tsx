@@ -1,25 +1,69 @@
 import Link from 'next/link';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import Icon from '../UI/Icon';
 import Image from 'next/image';
 import Rating from '../UI/Rating';
-import clsx from 'clsx';
 
 type Products = {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
+  sys: {
+    id: string;
+  };
+  rating: number;
+  /** Name */
+  name: string;
+  /** Description */
+  description: Document;
+  /** Price */
   price: string;
-  inStock: boolean;
-  colors: string[];
+  /** Size */
+  size: ('3' | '4' | '5' | '6' | '7' | '8' | '9' | '10')[];
+  /** ReleaseDate */
   releaseDate: string;
-  numberOfSales: string;
-  rating: string;
+  /** Brand */
+  brand:
+    | 'Nike'
+    | 'Adidas'
+    | 'Adidas Originals'
+    | 'Asics'
+    | 'B Malone'
+    | 'BOSS'
+    | 'EA7'
+    | 'Emporio Armani EA7'
+    | 'Lacoste'
+    | 'McKenzie'
+    | 'New Balance'
+    | 'On Running'
+    | 'Puma'
+    | 'Reebok';
+  /** Style */
+  style:
+    | 'Trainers Classic'
+    | 'Trainers'
+    | 'Canvas & Plimsolls'
+    | 'Hi-Tops'
+    | 'Modern Trainers'
+    | 'Running Shoes'
+    | 'Football Boots'
+    | 'Training Footwear'
+    | 'Trail Footwear'
+    | 'Flip Flops & Slides'
+    | 'Boots & Shoes';
+  /** NumberOfSales */
+  numberOfSales: number;
+  /** InStock */
+  inStock: boolean;
+  /** images */
+  imagesCollection: any;
+  /** Department */
+  department: 'Mens' | 'Womans' | 'Kids';
+  /** Colors */
+  colors: 'White' | 'Black' | 'Blue' | 'Green' | 'Yellow' | 'Pink';
+  /** Activity */
+  activity: 'Indoor' | 'Outdoor';
 };
 interface Props {
-  products: Products[];
   title: string;
+  products: Products[];
 }
 
 const Featured: FC<Props> = ({ products, title }) => {
@@ -35,37 +79,30 @@ const Featured: FC<Props> = ({ products, title }) => {
           </a>
         </Link>
       </article>
-      <ul className="flex mt-20 overflow-y-auto w-full">
+      <ul className="overflow-x-scroll mt-10 h-[340px] flex gap-4">
         {products.map(product => {
+          const productImages = product.imagesCollection.items;
           return (
-            <li className="flex" key={product.id}>
-              <article className="flex flex-col w-[300px] p-4">
-                <div className="flex flex-col items-center justify-center relative">
-                  <div
-                    className={clsx(
-                      'w-40 h-40 bg-gradient-to-r from-white rounded-full',
-                      product.colors.length > 0
-                        ? `to-${product.colors[0]}`
-                        : 'to-granite-grey'
-                    )}
-                  />
-                  <figure className="absolute top-8">
+            <li key={product.sys.id}>
+              <Link href={`/products`}>
+                <article className="flex flex-col justify-between w-[300px] h-full cursor-pointer">
+                  <figure>
                     <Image
-                      src={product.image}
-                      width="293.27px"
+                      src={productImages && (productImages[0].url as string)}
+                      width="300px"
                       height="180.82px"
                       alt="shoe1"
                     />
                   </figure>
-                </div>
-                <div className="flex flex-col w-full mt-10">
-                  <Rating rating={+product.rating} />
-                  <div className="flex flex-col justify-between">
-                    <p className="mt-8 text-base">{product.title}</p>
-                    <p className="mt-4 font-bold text-lg">£{product.price}</p>
+                  <div className="flex flex-col justify-between h-full w-full py-4">
+                    <Rating rating={product.rating} />
+                    <div className="flex flex-col justify-between">
+                      <p className="text-base">{product.name}</p>
+                      <p className="font-bold text-lg">£{product.price}</p>
+                    </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </Link>
             </li>
           );
         })}
