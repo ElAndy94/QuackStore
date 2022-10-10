@@ -101,6 +101,12 @@ export interface IProductFields {
 
   /** Activity */
   activity: 'Indoor' | 'Outdoor';
+
+  /** rating */
+  rating: number;
+
+  /** Slug */
+  slug: string;
 }
 
 /** Store product */

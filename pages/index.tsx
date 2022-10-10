@@ -9,7 +9,7 @@ import ContentfulApi from '../utils/ContentfulApi';
 
 export async function getStaticProps() {
   try {
-    const products = await ContentfulApi.getAllShoes();
+    const products = await ContentfulApi.getAllProducts();
     return {
       props: {
         products,
@@ -32,7 +32,7 @@ const Footwear: NextPage = ({ products }: any) => {
       seo={{
         title: 'Footwear | QuackStore',
         description: 'Footwear  | QuackStore',
-        canonicalUrl: 'https://quackstore.com/footwear ',
+        canonicalUrl: 'https://quackstore.com/footwear',
       }}
     >
       <section className=" flex items-center px-44 justify-center bg-grey-200">
@@ -68,124 +68,3 @@ const Footwear: NextPage = ({ products }: any) => {
 };
 
 export default Footwear;
-
-type Products = {
-  id: number;
-  brand: string;
-  title: string;
-  description: string;
-  image: string;
-  price: string;
-  inStock: boolean;
-  colors: string[];
-  releaseDate: string;
-  numberOfSales: string;
-  rating: string;
-};
-
-const mockProducts: Products[] = [
-  {
-    id: 7564,
-    brand: 'Adidas',
-    title: 'Adidas Originals',
-    description: 'Running Footwear',
-    image: '/assets/shoe4.svg',
-    price: '999',
-    inStock: true,
-    colors: ['forest-green', 'magenta'],
-    releaseDate: '2018-01-01',
-    numberOfSales: '23',
-    rating: '1',
-  },
-  {
-    id: 7914,
-    brand: 'Nike',
-    title: 'Nike Air Max 270',
-    description: 'Running Footwear',
-    image: '/assets/shoe2.svg',
-    price: '778',
-    inStock: true,
-    colors: ['magenta', 'ultra-marine-blue'],
-    releaseDate: '2020-01-01',
-    numberOfSales: '42',
-    rating: '4',
-  },
-  {
-    id: 7834,
-    brand: 'Puma',
-    title: 'Puma RS-X',
-    description: 'Stylish Footwear',
-    image: '/assets/shoe3.svg',
-    price: '847',
-    inStock: true,
-    colors: ['magenta', 'orange'],
-    releaseDate: '2019-04-01',
-    numberOfSales: '12',
-    rating: '5',
-  },
-  {
-    id: 7724,
-    brand: 'Fila',
-    title: 'Fila Disruptor',
-    description: 'Men Footwear',
-    image: '/assets/shoe2.svg',
-    price: '90',
-    inStock: true,
-    colors: ['primary', 'orange'],
-    releaseDate: '2022-02-01',
-    numberOfSales: '10',
-    rating: '3',
-  },
-  {
-    id: 7624,
-    brand: 'Asics',
-    title: 'Asics Gel-Lyte',
-    description: 'Kids Footwear',
-    image: '/assets/shoe2.svg',
-    price: '1400',
-    inStock: true,
-    colors: [],
-    releaseDate: '2022-01-01',
-    numberOfSales: '22',
-    rating: '4',
-  },
-  {
-    id: 7524,
-    brand: 'New Balance',
-    title: 'New Balance 574',
-    description: 'Running Footwear',
-    image: '/assets/shoe3.svg',
-    price: '10',
-    inStock: true,
-    colors: ['orange', 'magenta'],
-    releaseDate: '2021-01-01',
-    numberOfSales: '75',
-    rating: '2',
-  },
-  {
-    id: 7424,
-    brand: 'Reebok',
-    title: 'Reebok Classic',
-    description: 'Running Footwear',
-    image: '/assets/shoe4.svg',
-    price: '150',
-    inStock: true,
-    colors: ['magenta', 'orange'],
-    releaseDate: '2021-01-01',
-    numberOfSales: '75',
-    rating: '1',
-  },
-  {
-    id: 7324,
-    brand: 'Fendi',
-    title: 'Fendi Falcon Shoes for men - 2021 Edition',
-    description: 'Running Footwear',
-    image: '/assets/shoe2.svg',
-    price: '65',
-    inStock: true,
-    colors: ['granite-gray', 'orange'],
-    releaseDate: '2021-01-01',
-    numberOfSales: '555',
-    rating: '1',
-  },
-];

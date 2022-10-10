@@ -1,5 +1,6 @@
 import { gql, GraphQLClient } from 'graphql-request';
 import compress from 'graphql-query-compress';
+import { Product } from './helpers/types/product';
 
 export default class ContentfulApi {
   static async callContentful(query: string, variables = {}, preview = false) {
@@ -22,7 +23,7 @@ export default class ContentfulApi {
     }
   }
 
-  static async getAllShoes() {
+  static async getAllProducts() {
     const query = gql`
       query {
         productCollection(preview: false) {
@@ -43,6 +44,7 @@ export default class ContentfulApi {
             numberOfSales
             activity
             colors
+            slug
             imagesCollection {
               items {
                 url
@@ -59,5 +61,47 @@ export default class ContentfulApi {
     const { productCollection } = await this.callContentful(query);
 
     return productCollection.items;
+  }
+
+  static async getProductBySlug(slug: string) {
+    const query = gql`
+      query getProductBySlug($slug: String) {
+        productCollection(where: { slug: $slug }, preview: false) {
+          items {
+            sys {
+              id
+            }
+            name
+            description {
+              json
+            }
+            releaseDate
+            brand
+            style
+            price
+            inStock
+            size
+            numberOfSales
+            activity
+            colors
+            slug
+            imagesCollection {
+              items {
+                url
+                width
+                height
+                title
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const { productCollection } = await this.callContentful(query, {
+      slug,
+    });
+
+    return productCollection.items[0] as Product;
   }
 }
