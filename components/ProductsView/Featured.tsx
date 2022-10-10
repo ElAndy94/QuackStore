@@ -8,9 +8,10 @@ import clsx from 'clsx';
 interface Props {
   title: string;
   products: Product[];
+  department?: 'mens' | 'womens' | 'kids' | undefined;
 }
 
-const Featured: FC<Props> = ({ products, title }) => {
+const Featured: FC<Props> = ({ products, title, department }) => {
   return (
     <section className="wrapper flex-col">
       <article className="flex w-full justify-between">
@@ -31,7 +32,7 @@ const Featured: FC<Props> = ({ products, title }) => {
         {products.map(product => {
           return (
             <li key={product.sys.id}>
-              <Link href={`/products${product.slug}`}>
+              <Link href={`/${department ? department : 'products'}${product.slug}`}>
                 <article className="flex flex-col justify-between w-[300px] h-full cursor-pointer">
                   <figure>
                     <Image

@@ -94,7 +94,7 @@ export interface IProductFields {
   images: Asset[];
 
   /** Department */
-  department: 'Mens' | 'Womans' | 'Kids';
+  department: 'men' | 'women' | 'kids';
 
   /** Colors */
   colors: 'White' | 'Black' | 'Blue' | 'Green' | 'Yellow' | 'Pink';

@@ -57,7 +57,7 @@ const Kids = ({ products }: any) => {
         </figure>
       </section>
       <section>
-        <Featured title="Featured men products" products={products} />
+        <Featured title="Featured men products" products={products} department="kids" />
       </section>
     </Layout>
   );
