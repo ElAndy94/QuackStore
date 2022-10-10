@@ -63,6 +63,7 @@ const Page = ({ product }: { product: Product }) => {
         title: `${name} | QuackStore`,
         description: `| QuackStore`,
         canonicalUrl: `https://quackstore.com/products`,
+        image: imagesCollection.items[0].url,
       }}
     >
       <section className="wrapper mt-32">

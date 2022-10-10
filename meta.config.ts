@@ -3,7 +3,7 @@ export default {
   url: 'https://quackstore.com',
   title: 'QuackStore',
   description: 'QuackStore Ecommerce',
-  image: '/assets/images/quackstore.png',
+  image: '/assets/images/demo.png',
   openGraph: {
     type: 'website',
     locale: 'en_GB',
