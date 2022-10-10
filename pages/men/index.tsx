@@ -27,9 +27,9 @@ const Men = ({ products }: any) => {
   return (
     <Layout
       seo={{
-        title: 'Search | QuackStore',
-        description: 'Search for products | QuackStore',
-        canonicalUrl: 'https://quackstore.com/search',
+        title: 'Men | QuackStore',
+        description: 'Men products | QuackStore',
+        canonicalUrl: 'https://quackstore.com/men',
       }}
     >
       <section className="w-full h-[600px] bg-gradient-to-t from-white to-orange flex justify-start items-center p-16">

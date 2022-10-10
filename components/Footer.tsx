@@ -60,7 +60,7 @@ const Footer = () => {
           </Link>
         </article>
       </div>
-      <p>© 2021 QuackStore.</p>
+      <p>© 2022 QuackStore.</p>
     </section>
   );
 };
