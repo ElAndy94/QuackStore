@@ -15,7 +15,7 @@ interface IParams extends ParsedUrlQuery {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const products = await ContentfulApi.getAllProducts();
+  const products = await ContentfulApi.getProductsByDepartment('kids');
   const paths = products.map((product: Product) => {
     return {
       params: { slug: product.slug },
@@ -61,8 +61,8 @@ const Page = ({ product }: { product: Product }) => {
     <Layout
       seo={{
         title: `${name} | QuackStore`,
-        description: `| QuackStore`,
-        canonicalUrl: `https://quackstore.com/products`,
+        description: `Kids | QuackStore`,
+        canonicalUrl: `https://quackstore.com/kids`,
       }}
     >
       <section className="wrapper mt-32">

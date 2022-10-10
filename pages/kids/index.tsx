@@ -8,7 +8,7 @@ import ContentfulApi from '../../utils/ContentfulApi';
 
 export async function getStaticProps() {
   try {
-    const products = await ContentfulApi.getProductByDepartment('Kids');
+    const products = await ContentfulApi.getProductsByDepartment('kids');
     return {
       props: {
         products,

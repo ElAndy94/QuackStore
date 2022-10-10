@@ -8,7 +8,7 @@ import clsx from 'clsx';
 interface Props {
   title: string;
   products: Product[];
-  department?: 'mens' | 'womens' | 'kids' | undefined;
+  department?: 'men' | 'women' | 'kids' | undefined;
 }
 
 const Featured: FC<Props> = ({ products, title, department }) => {

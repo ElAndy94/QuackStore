@@ -108,9 +108,9 @@ export default class ContentfulApi {
 
     return productCollection.items[0] as Product;
   }
-  static async getProductByDepartment(department: 'Mens' | 'Womans' | 'Kids') {
+  static async getProductsByDepartment(department: 'men' | 'women' | 'kids') {
     const query = gql`
-      query getProductByDepartment($department: String) {
+      query getProductsByDepartment($department: String) {
         productCollection(where: { department: $department }, preview: false) {
           items {
             sys {

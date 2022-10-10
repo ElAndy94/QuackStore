@@ -8,7 +8,7 @@ import ContentfulApi from '../../utils/ContentfulApi';
 
 export async function getStaticProps() {
   try {
-    const products = await ContentfulApi.getProductByDepartment('Womans');
+    const products = await ContentfulApi.getProductsByDepartment('women');
     return {
       props: {
         products,
@@ -59,7 +59,7 @@ const Women = ({ products }: any) => {
         </figure>
       </section>
       <section>
-        <Featured title="Featured men products" products={products} department="womens" />
+        <Featured title="Featured men products" products={products} department="women" />
       </section>
     </Layout>
   );
