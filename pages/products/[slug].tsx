@@ -62,7 +62,7 @@ const Page = ({ product }: { product: Product }) => {
       seo={{
         title: `${product.name} | QuackStore`,
         description: `| QuackStore`,
-        canonicalUrl: `https://quackstore.com/${product.slug}`,
+        canonicalUrl: `https://quackstore.com/products`,
       }}
     >
       <section className="wrapper mt-32">
