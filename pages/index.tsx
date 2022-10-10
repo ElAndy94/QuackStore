@@ -57,7 +57,12 @@ const Footwear: NextPage = ({ products }: any) => {
           </div>
         </article>
         <figure>
-          <Image src="/assets/heroImage.svg" alt="hero shoes" width={1000} height={990} />
+          <Image
+            src="/assets/images/heroImage.svg"
+            alt="hero shoes"
+            width={1000}
+            height={990}
+          />
         </figure>
       </section>
       <section className="mt-32">

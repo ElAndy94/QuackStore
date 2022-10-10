@@ -17,7 +17,9 @@ const Header = () => {
         router.pathname === '/' && 'bg-grey-200',
         router.pathname === '/about-us' && 'bg-primary text-white',
         router.pathname !== '/' && router.pathname !== '/about-us' && 'bg-transparent',
-        router.pathname === '/men' && 'bg-orange text-white'
+        router.pathname === '/men' && 'bg-orange text-white',
+        router.pathname === '/women' && 'bg-magenta text-white',
+        router.pathname === '/kids' && 'bg-forest-green text-white'
       )}
     >
       <div className="wrapper flex-row justify-between items-center w-full my-0 mx-auto px-4 lg:px-0">
@@ -29,22 +31,32 @@ const Header = () => {
           </Link>
           <ul className="flex flex-row gap-4 font-semibold transition-all duration-75">
             <li>
-              <Link href="/" passHref>
-                <a
-                  href="replace"
-                  className={clsx('p-2', router.pathname === '/' && 'text-magenta')}
-                >
-                  Footwear
-                </a>
-              </Link>
-            </li>
-            <li>
               <Link href="/men" passHref>
                 <a
                   href="replace"
                   className={clsx('p-2', router.pathname === '/men' && 'text-primary')}
                 >
-                  men
+                  Men
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/women" passHref>
+                <a
+                  href="replace"
+                  className={clsx('p-2', router.pathname === '/women' && 'text-primary')}
+                >
+                  Women
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/kids" passHref>
+                <a
+                  href="replace"
+                  className={clsx('p-2', router.pathname === '/kids' && 'text-primary')}
+                >
+                  Kids
                 </a>
               </Link>
             </li>

@@ -61,7 +61,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
           type === 'green' &&
             'bg-forest-green text-error border-errorText border-2 hover:brightness-[95%] text-white',
           type === 'outline' &&
-            'bg-grey-400 text-primary border-primary border-2 font-semibold',
+            'bg-white text-primary rounded-none border-primary border font-semibold',
           type === 'remove' && 'text-primary font-semibold hover:shadow-none',
           type === 'transparent' &&
             'text-primary bg-none rounded-md hover:bg-grey-100 hover:shadow-none px-6 py-3 text-left',

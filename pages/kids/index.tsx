@@ -8,7 +8,7 @@ import ContentfulApi from '../../utils/ContentfulApi';
 
 export async function getStaticProps() {
   try {
-    const products = await ContentfulApi.getProductByDepartment('Mens');
+    const products = await ContentfulApi.getProductByDepartment('Kids');
     return {
       props: {
         products,
@@ -23,27 +23,25 @@ export async function getStaticProps() {
   }
 }
 
-const Men = ({ products }: any) => {
+const Kids = ({ products }: any) => {
   return (
     <Layout
       seo={{
-        title: 'Search | QuackStore',
-        description: 'Search for products | QuackStore',
-        canonicalUrl: 'https://quackstore.com/search',
+        title: 'Kids | QuackStore',
+        description: 'Kids products | QuackStore',
+        canonicalUrl: 'https://quackstore.com/kids',
       }}
     >
-      <section className="w-full h-[600px] bg-gradient-to-t from-white to-orange flex justify-start items-center p-16">
+      <section className="w-full h-[600px] bg-gradient-to-t from-white to-forest-green flex justify-start items-center p-16">
         <div className="flex flex-col w-full items-end text-left">
           <div>
             <h2 className="text-primary font-bold leading-[80px] tracking-tighter text-left">
               Best seller this week
             </h2>
             <Rating rating={5} />
-            <p className="text-lg text-primary mt-3">
-              Adidas Falcon Shoes for women - 2021 Edition
-            </p>
+            <p className="text-lg text-primary mt-3">Vans Old Skool Infant</p>
             <p className="text-base text-granite-gray">Men Footware</p>
-            <p className="mt-4 text-primary font-bold text-lg">£200</p>
+            <p className="mt-4 text-primary font-bold text-lg">£35</p>
             <Button type="primary" className="mt-10">
               Shop Now
             </Button>
@@ -51,10 +49,10 @@ const Men = ({ products }: any) => {
         </div>
         <figure className="w-full">
           <Image
-            src="/assets/images/shoe3.svg"
+            src="/assets/images/kidsHeroImages.webp"
             alt="shoe banner"
-            width="930px"
-            height="575px"
+            width="1000px"
+            height="660px"
           />
         </figure>
       </section>
@@ -65,4 +63,4 @@ const Men = ({ products }: any) => {
   );
 };
 
-export default Men;
+export default Kids;

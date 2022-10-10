@@ -4,6 +4,7 @@ import Icon from '../UI/Icon';
 import Image from 'next/image';
 import Rating from '../UI/Rating';
 import { Product } from '../../utils/helpers/types/product';
+import clsx from 'clsx';
 interface Props {
   title: string;
   products: Product[];
@@ -22,9 +23,12 @@ const Featured: FC<Props> = ({ products, title }) => {
           </a>
         </Link>
       </article>
-      <ul className="overflow-x-scroll mt-10 h-[340px] flex gap-4">
+      <ul
+        className={clsx('mt-10 h-[340px] flex gap-4', {
+          'overflow-x-scroll': products.length > 3,
+        })}
+      >
         {products.map(product => {
-          console.log(product.slug);
           return (
             <li key={product.sys.id}>
               <Link href={`/products${product.slug}`}>
@@ -35,8 +39,8 @@ const Featured: FC<Props> = ({ products, title }) => {
                         product.imagesCollection.items &&
                         product.imagesCollection.items[0].url
                       }
-                      width="300px"
-                      height="180.82px"
+                      width="290px"
+                      height="210px"
                       alt="shoe1"
                     />
                   </figure>
