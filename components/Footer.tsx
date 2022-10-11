@@ -4,7 +4,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <section className="wrapper flex-col my-20">
-      <section className="border-b flex gap-20 py-20">
+      <div className="border-b flex gap-20 py-20">
         <article className="flex flex-col gap-8 w-full">
           <h3>QuackStore</h3>
           <p className="text-granite-gray">
@@ -59,8 +59,8 @@ const Footer = () => {
             <a href="replace">Requests</a>
           </Link>
         </article>
-      </section>
-      <p>© 2021 QuackStore.</p>
+      </div>
+      <p>© 2022 QuackStore.</p>
     </section>
   );
 };
