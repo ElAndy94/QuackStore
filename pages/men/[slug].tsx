@@ -8,8 +8,9 @@ import Button from '../../components/UI/Buttons';
 import RadioSelect from '../../components/UI/RadioSelect';
 import Rating from '../../components/UI/Rating';
 import ContentfulApi from '../../utils/ContentfulApi';
-import { Product } from '../../utils/helpers/types/product';
+import { BasketProduct, Product } from '../../utils/helpers/types/product';
 import Image from 'next/image';
+import useBasket from '../../store/basket';
 interface IParams extends ParsedUrlQuery {
   slug: string;
 }
@@ -44,6 +45,25 @@ export const getStaticProps = async ({ params }: { params: IParams }) => {
 const Page = ({ product }: { product: Product }) => {
   const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(0);
+
+  const { basketContent } = useBasket();
+
+  // const addToBasket = useBasket(state => state.addToBasket);
+  // @ts-ignore
+  // const updateBasket = useBasket(state => state.updateBasket);
+  // const myBasket = useBasket(state => state.BasketContent);
+  // const addProduct = (product: Product) => {
+  //   const productToAdd = myBasket.findIndex(
+  //     (item: Product) => item.sys.id === product.sys.id
+  //   );
+  //   if (productToAdd !== -1) {
+  //     myBasket[productToAdd].quantity++;
+  //     updateBasket({ productToAdd, myBasket });
+  //   } else {
+  //     addToBasket(productToAdd);
+  //   }
+  // };
+  console.log(basketContent);
   if (!product) return <>Loading...</>;
 
   const {
@@ -132,7 +152,12 @@ const Page = ({ product }: { product: Product }) => {
                 +
               </button>
             </div>
-            <Button type="primary">Add to cart</Button>
+            <Button
+              type="primary"
+              // onClick={() => addProduct(product)}
+            >
+              Add to cart
+            </Button>
           </div>
           <div className="text-granite-gray mt-10">
             <p className="text-primary font-semibold text-lg">Product Info</p>

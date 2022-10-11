@@ -165,21 +165,21 @@ export default Header;
 
 const basket = [
   {
-    image: '/assets/shoes.jpeg',
+    image: '/assets/images/shoes.jpeg',
     title: 'Men Running',
     description: 'Nike Competition Shoes',
     price: '300',
     quantity: '5',
   },
   {
-    image: '/assets/shoes.jpeg',
+    image: '/assets/images/shoes.jpeg',
     title: 'Men Running',
     description: 'Nike Competition Shoes',
     price: '300',
     quantity: '5',
   },
   {
-    image: '/assets/shoes.jpeg',
+    image: '/assets/images/shoes.jpeg',
     title: 'Men Running',
     description: 'Nike Competition Shoes',
     price: '300',

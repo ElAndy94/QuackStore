@@ -28,7 +28,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-query": "^3.39.2",
-    "react-svg": "^15.1.9"
+    "react-svg": "^15.1.9",
+    "zustand": "^4.1.2"
   },
   "devDependencies": {
     "@types/jest-axe": "^3.5.5",
