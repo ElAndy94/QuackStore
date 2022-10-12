@@ -11,6 +11,8 @@ import ContentfulApi from '../../utils/ContentfulApi';
 import { Product } from '../../utils/helpers/types/product';
 import Image from 'next/image';
 import useBasket from '../../store/basket';
+import useHasHydrated from '../../components/UseHasHydrated';
+
 interface IParams extends ParsedUrlQuery {
   slug: string;
 }
@@ -45,6 +47,7 @@ export const getStaticProps = async ({ params }: { params: IParams }) => {
 const Page = ({ product }: { product: Product }) => {
   const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
+  const hasHydrated = useHasHydrated();
 
   const { addToBasket } = useBasket();
 
@@ -139,6 +142,7 @@ const Page = ({ product }: { product: Product }) => {
             <Button
               type="primary"
               onClick={() =>
+                hasHydrated &&
                 addToBasket({
                   ...product,
                   quantity: selectedQuantity,

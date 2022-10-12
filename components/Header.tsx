@@ -144,12 +144,14 @@ const Header = () => {
                     ];
                   })}
                   <li>
-                    <button
-                      type="button"
-                      className="px-4 py-2 bg-ultra-marine-blue text-white rounded-md w-full mt-4"
-                    >
-                      View basket
-                    </button>
+                    <Link href="/basket" passHref>
+                      <a
+                        className="px-4 py-2 bg-ultra-marine-blue text-white rounded-md w-full mt-4"
+                        href="replace"
+                      >
+                        View basket
+                      </a>
+                    </Link>
                   </li>
                 </ul>
               </Popover>

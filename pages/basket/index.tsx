@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import Layout from '../../components/Layout';
+import { useState } from 'react';
 import Image from 'next/image';
+import Layout from '../../components/Layout';
 import Button from '../../components/UI/Buttons';
 import useBasket from '../../store/basket';
 import LargeCard from '../../components/ProductsView/LargeCard';
+import useHasHydrated from '../../components/UseHasHydrated';
+import Dialog from '../../components/Dialog/Dialog';
+import Checkout from '../../components/Checkout/Checkout';
 
 const Basket = () => {
-  const {
-    addToBasket,
-    basketProducts,
-    totalPrice,
-    removeFromBasket,
-    updateProductQuantity,
-  } = useBasket();
+  const { basketProducts, totalPrice, removeFromBasket, updateProductQuantity } =
+    useBasket();
+  const hasHydrated = useHasHydrated();
+  const [open, setOpen] = useState(false);
 
   return (
     <Layout
@@ -31,18 +31,19 @@ const Basket = () => {
             </p>
           </div>
           <ul className="mt-10">
-            {basketProducts.map(product => {
-              return (
-                <li key={product.sys.id}>
-                  <LargeCard
-                    product={product}
-                    onRemove={() => removeFromBasket(product)}
-                    onIncrease={() => updateProductQuantity(product, '+')}
-                    onDecrease={() => updateProductQuantity(product, '-')}
-                  />
-                </li>
-              );
-            })}
+            {hasHydrated &&
+              basketProducts.map(product => {
+                return (
+                  <li key={product.sys.id}>
+                    <LargeCard
+                      product={product}
+                      onRemove={() => removeFromBasket(product)}
+                      onIncrease={() => updateProductQuantity(product, '+')}
+                      onDecrease={() => updateProductQuantity(product, '-')}
+                    />
+                  </li>
+                );
+              })}
           </ul>
         </section>
         <section className="border p-4">
@@ -80,11 +81,11 @@ const Basket = () => {
             </div>
             <div className="flex justify-between">
               <p>Total</p>
-              <p>£{totalPrice}</p>
+              <p>£{hasHydrated && totalPrice}</p>
             </div>
           </article>
           <article className="flex flex-col justify-between gap-5 p-6">
-            <Button type="dark" size="full">
+            <Button type="dark" size="full" onClick={() => setOpen(true)}>
               Proceed to Checkout
             </Button>
             <Button type="outline" size="full">
@@ -104,6 +105,9 @@ const Basket = () => {
           </article>
         </section>
       </div>
+      <Dialog open={open} onClose={() => setOpen(false)} title="Checkout">
+        <Checkout />
+      </Dialog>
     </Layout>
   );
 };
