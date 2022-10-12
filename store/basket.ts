@@ -8,6 +8,7 @@ type Basket = {
   addToBasket: (product: BasketProduct) => void;
   clearBasket: () => void;
   updateProductQuantity: (product: BasketProduct, operator: '-' | '+') => void;
+  removeFromBasket: (product: BasketProduct) => void;
 };
 
 const useBasket = create<Basket>()(
