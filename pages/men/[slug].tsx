@@ -44,26 +44,14 @@ export const getStaticProps = async ({ params }: { params: IParams }) => {
 
 const Page = ({ product }: { product: Product }) => {
   const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
-  const [selectedQuantity, setSelectedQuantity] = useState<number>(0);
+  const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
 
-  const { basketContent } = useBasket();
+  const { totalPrice, basketProducts, updateProductQuantity, addToBasket } = useBasket();
 
-  // const addToBasket = useBasket(state => state.addToBasket);
-  // @ts-ignore
-  // const updateBasket = useBasket(state => state.updateBasket);
-  // const myBasket = useBasket(state => state.BasketContent);
-  // const addProduct = (product: Product) => {
-  //   const productToAdd = myBasket.findIndex(
-  //     (item: Product) => item.sys.id === product.sys.id
-  //   );
-  //   if (productToAdd !== -1) {
-  //     myBasket[productToAdd].quantity++;
-  //     updateBasket({ productToAdd, myBasket });
-  //   } else {
-  //     addToBasket(productToAdd);
-  //   }
-  // };
-  console.log(basketContent);
+  console.log(
+    totalPrice,
+    basketProducts && basketProducts[0] && basketProducts[0].quantity
+  );
   if (!product) return <>Loading...</>;
 
   const {
@@ -134,7 +122,7 @@ const Page = ({ product }: { product: Product }) => {
                 type="button"
                 className="bg-grey-200 w-12 h-12 border-y border-l"
                 onClick={() => {
-                  selectedQuantity > 0 && setSelectedQuantity(selectedQuantity - 1);
+                  selectedQuantity > 1 && setSelectedQuantity(selectedQuantity - 1);
                 }}
               >
                 -
@@ -154,7 +142,13 @@ const Page = ({ product }: { product: Product }) => {
             </div>
             <Button
               type="primary"
-              // onClick={() => addProduct(product)}
+              onClick={() =>
+                addToBasket({
+                  ...product,
+                  quantity: selectedQuantity,
+                })
+              }
+              disabled={!selectedSize}
             >
               Add to cart
             </Button>
