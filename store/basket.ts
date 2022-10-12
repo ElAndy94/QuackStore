@@ -7,36 +7,55 @@ type Basket = {
   basketProducts: BasketProduct[];
   addToBasket: (product: BasketProduct) => void;
   clearBasket: () => void;
-  updateProductQuantity: (product: BasketProduct) => void;
+  updateProductQuantity: (product: BasketProduct, operator: '-' | '+') => void;
 };
-
-// const addProduct = (product: BasketProduct) => {
-//     const findProduct = basketProducts.find(item => product.sys.id === item.sys.id);
-//     if (findProduct) {
-//       updateProductQuantity(product);
-//     } else {
-//       addToBasket(product);
-//     }
-//   };
 
 const useBasket = create<Basket>(set => ({
   totalPrice: 0,
   basketProducts: [],
   addToBasket: (product: BasketProduct) => {
-    set((state: { totalPrice: number; basketProducts: BasketProduct[] }) => ({
-      totalPrice: state.totalPrice + parseFloat(product.price),
-      basketProducts: [...state.basketProducts, product],
-    }));
+    set((prev: { totalPrice: number; basketProducts: BasketProduct[] }) => {
+      if (prev.basketProducts.find(item => product.sys.id === item.sys.id)) {
+        let newTotalPrice = prev.totalPrice;
+        const currentBasket = prev.basketProducts.map(item => {
+          if (product.sys.id === item.sys.id) {
+            newTotalPrice += parseFloat(product.price) * product.quantity;
+            return {
+              ...product,
+              quantity: item.quantity + product.quantity,
+            };
+          } else {
+            return item;
+          }
+        });
+        return {
+          totalPrice: newTotalPrice,
+          basketProducts: currentBasket,
+        };
+      } else {
+        return {
+          totalPrice: prev.totalPrice + parseFloat(product.price),
+          basketProducts: [...prev.basketProducts, product],
+        };
+      }
+    });
   },
-  updateProductQuantity: (product: BasketProduct) => {
+  updateProductQuantity: (product: BasketProduct, operator: '-' | '+') => {
     set((prev: { totalPrice: number; basketProducts: BasketProduct[] }) => {
       let newTotalPrice = prev.totalPrice;
+      let newQuantity = product.quantity;
       const currentBasket = prev.basketProducts.map(item => {
         if (product.sys.id === item.sys.id) {
-          newTotalPrice += parseFloat(product.price) * product.quantity;
+          if (operator === '+') {
+            newTotalPrice += parseFloat(item.price);
+            newQuantity += 1;
+          } else {
+            newTotalPrice -= parseFloat(item.price);
+            newQuantity -= 1;
+          }
           return {
             ...product,
-            quantity: item.quantity + product.quantity,
+            quantity: newQuantity,
           };
         } else {
           return item;
@@ -48,7 +67,6 @@ const useBasket = create<Basket>(set => ({
       };
     });
   },
-  clearBasket: () => set({ totalPrice: 0, basketProducts: [] }),
   removeFromBasket: (product: BasketProduct) =>
     set((state: { totalPrice: number; basketProducts: BasketProduct[] }) => ({
       totalPrice: state.totalPrice - parseFloat(product.price) * product.quantity,
@@ -56,5 +74,6 @@ const useBasket = create<Basket>(set => ({
         (item: BasketProduct) => item.sys.id !== product.sys.id
       ),
     })),
+  clearBasket: () => set({ totalPrice: 0, basketProducts: [] }),
 }));
 export default useBasket;

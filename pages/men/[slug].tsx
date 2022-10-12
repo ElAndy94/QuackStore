@@ -46,12 +46,8 @@ const Page = ({ product }: { product: Product }) => {
   const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
 
-  const { totalPrice, basketProducts, updateProductQuantity, addToBasket } = useBasket();
+  const { addToBasket } = useBasket();
 
-  console.log(
-    totalPrice,
-    basketProducts && basketProducts[0] && basketProducts[0].quantity
-  );
   if (!product) return <>Loading...</>;
 
   const {
