@@ -5,10 +5,15 @@ import useScrollDirection from '../utils/helpers/UseScrollDirection';
 import Icon from './UI/Icon';
 import Popover from './UI/Popover';
 import SmallCard from './ProductsView/SmallCard';
+import useHasHydrated from './UseHasHydrated';
+import useBasket from '../store/basket';
 
 const Header = () => {
   const scrollDirection = useScrollDirection();
   const router = useRouter();
+  const hasHydrated = useHasHydrated();
+
+  const { basketProducts } = useBasket();
   return (
     <header
       className={clsx(
@@ -130,24 +135,24 @@ const Header = () => {
                 className="rounded-md font-light w-[400px] border p-2 right-0 flex flex-col gap-1 bg-white"
               >
                 <ul>
-                  {basket.map((item, index) => {
+                  {basketProducts.map((item, index) => {
                     return [
                       <li className="flex flex-col gap-2" key={`basketItem${index}`}>
                         <SmallCard
-                          image={item.image}
-                          title={item.title}
-                          description={item.description}
+                          image={item.imagesCollection.items[0].url}
+                          title={item.name}
+                          description={item.style}
                           price={item.price}
                           quantity={item.quantity}
                         />
                       </li>,
                     ];
                   })}
-                  <li>
+                  <li className=" bg-ultra-marine-blue text-white rounded-md w-full mt-4">
                     <Link href="/basket" passHref>
                       <a
-                        className="px-4 py-2 bg-ultra-marine-blue text-white rounded-md w-full mt-4"
                         href="replace"
+                        className="px-4 py-2 flex justify-center items-center w-full"
                       >
                         View basket
                       </a>

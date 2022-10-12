@@ -6,7 +6,7 @@ interface Props {
   title: string;
   description: string;
   price: string;
-  quantity: string;
+  quantity: number;
 }
 
 const SmallCard: FC<Props> = ({ image, title, description, price, quantity }) => {
