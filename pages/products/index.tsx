@@ -10,7 +10,9 @@ const Products = () => {
         canonicalUrl: 'https://quackstore.com/products',
       }}
     >
-      Products
+      <section>
+        
+      </section>
     </Layout>
   );
 };

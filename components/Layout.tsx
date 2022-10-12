@@ -41,6 +41,16 @@ export default function Layout({ children, seo }: Props): JSX.Element {
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
+
+        <button
+          type="button"
+          className="bg-granite-gray opacity-40 rounded-full fixed z-10 bottom-16 right-16 p-4 text-white w-10 h-10 flex items-center justify-center"
+          onClick={() => {
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+          }}
+        >
+          ^
+        </button>
       </div>
     </>
   );
