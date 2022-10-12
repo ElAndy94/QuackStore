@@ -8,7 +8,7 @@ import Button from '../../components/UI/Buttons';
 import RadioSelect from '../../components/UI/RadioSelect';
 import Rating from '../../components/UI/Rating';
 import ContentfulApi from '../../utils/ContentfulApi';
-import { BasketProduct, Product } from '../../utils/helpers/types/product';
+import { Product } from '../../utils/helpers/types/product';
 import Image from 'next/image';
 import useBasket from '../../store/basket';
 interface IParams extends ParsedUrlQuery {
