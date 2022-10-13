@@ -51,8 +51,8 @@ const RadioSelect = ({
             if (!option.includes(item)) {
               disabled = true;
             }
-            {
-              type === 'size' ? (
+            if (type === 'size') {
+              return (
                 <HeadlessRadioSelect.Option
                   key={item}
                   value={item}
@@ -71,7 +71,9 @@ const RadioSelect = ({
                     {item}
                   </HeadlessRadioSelect.Label>
                 </HeadlessRadioSelect.Option>
-              ) : (
+              );
+            } else {
+              return (
                 <HeadlessRadioSelect.Option key={item} value={item} disabled={disabled}>
                   gg
                 </HeadlessRadioSelect.Option>
