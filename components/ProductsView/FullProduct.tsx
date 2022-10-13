@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Product, Sku } from '../../utils/helpers/types/product';
 import Rating from '../UI/Rating';
@@ -15,6 +15,8 @@ interface Props {
 
 const FullProduct = ({ product, sku }: Props) => {
   const { name, description, price, sys, rating, imagesCollection, department } = product;
+  const [productPrice, setProductPrice] = useState<number>(price);
+  const [selectedColour, setSelectedColour] = useState<Sku | undefined>(undefined);
   const [selectedSize, setSelectedSize] = useState<Sku | undefined>(undefined);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
   const hasHydrated = useHasHydrated();
@@ -41,18 +43,19 @@ const FullProduct = ({ product, sku }: Props) => {
         <h1>{product.name}</h1>
         <div className="flex gap-5">
           <p>Available in:</p>
-          {sku?.map(item => {
-            return (
-              <button
-                key={`${sys.id}${item.colour}`}
-                type="button"
-                className={clsx('rounded-full h-5 w-5 border', `bg-${item.colour}`)}
-                aria-label="item color"
-              />
-            );
-          })}
+          <RadioSelect
+            id={'colour'}
+            name={'colour'}
+            value={selectedColour}
+            options={sku}
+            type={'colour'}
+            onChange={option => {
+              setSelectedColour(option);
+              setProductPrice(option.price);
+            }}
+          />
         </div>
-        <h2>£{price}</h2>
+        <h2>£{productPrice}</h2>
 
         <h3>Select size</h3>
         <div className="w-full">
@@ -62,7 +65,12 @@ const FullProduct = ({ product, sku }: Props) => {
             value={selectedSize}
             options={sku}
             type={'size'}
-            onChange={option => setSelectedSize(option)}
+            onChange={option => {
+              setSelectedSize(option);
+              setProductPrice(option.price);
+              console.log(option);
+            }}
+            disabled={false}
           />
         </div>
         <div className="flex justify-between mt-5">
