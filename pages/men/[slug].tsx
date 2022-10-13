@@ -107,6 +107,7 @@ const Page = ({ product }: { product: Product }) => {
               name={'Size'}
               value={selectedSize}
               options={sku}
+              type={'size'}
               onChange={option => setSelectedSize(option)}
             />
           </div>

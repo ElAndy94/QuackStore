@@ -11,49 +11,72 @@ export type RadioSelectProps = {
   onChange: (option: Sku) => void;
   onBlur?: () => void;
   disabled?: boolean;
+  range: string[];
+  type: 'colour' | 'size';
 };
 
 const RadioSelect = ({
-  id,
   name,
   options,
   value,
   onChange,
   onBlur,
   disabled,
+  range,
+  type,
 }: RadioSelectProps) => {
-  const [sizes] = useState<string[]>(options.map(option => option.size));
+  const [option] = useState<string[]>(() => {
+    if (type === 'size') {
+      return options.map(option => option.size);
+    }
+    return options.map(option => option.colour);
+  });
 
   return (
     <div className="w-full">
       <HeadlessRadioSelect
         name={name}
-        value={options.find(item => item.size === value?.size)}
+        value={() => {
+          if (type === 'size') {
+            return options.find(item => item.size === value?.size);
+          }
+          return options.find(item => item.colour === value?.colour);
+        }}
+        // @ts-ignore
         onChange={onChange}
         onBlur={onBlur}
       >
         <div className="grid grid-flow-row grid-cols-4 gap-2">
-          {['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'].map(size => {
-            if (!sizes.includes(size)) {
+          {range.map(item => {
+            if (!option.includes(item)) {
               disabled = true;
             }
-            return (
-              <HeadlessRadioSelect.Option
-                key={size}
-                value={size}
-                disabled={disabled}
-                className={clsx(
-                  'border transition-colors selector-base h-12 flex justify-center items-center',
-                  { 'opacity-40': disabled },
-                  { 'cursor-pointer': !disabled },
-                  { 'bg-primary text-white': value?.size === size && !disabled }
-                )}
-              >
-                <HeadlessRadioSelect.Label as="p" className={clsx('font-light truncate')}>
-                  {size}
-                </HeadlessRadioSelect.Label>
-              </HeadlessRadioSelect.Option>
-            );
+            {
+              type === 'size' ? (
+                <HeadlessRadioSelect.Option
+                  key={item}
+                  value={item}
+                  disabled={disabled}
+                  className={clsx(
+                    'border transition-colors selector-base h-12 flex justify-center items-center',
+                    { 'opacity-40': disabled },
+                    { 'cursor-pointer': !disabled },
+                    { 'bg-primary text-white': value?.size === item && !disabled }
+                  )}
+                >
+                  <HeadlessRadioSelect.Label
+                    as="p"
+                    className={clsx('font-light truncate')}
+                  >
+                    {item}
+                  </HeadlessRadioSelect.Label>
+                </HeadlessRadioSelect.Option>
+              ) : (
+                <HeadlessRadioSelect.Option key={item} value={item} disabled={disabled}>
+                  gg
+                </HeadlessRadioSelect.Option>
+              );
+            }
           })}
         </div>
       </HeadlessRadioSelect>

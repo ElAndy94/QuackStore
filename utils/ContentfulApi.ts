@@ -148,7 +148,7 @@ export default class ContentfulApi {
   static async getProductSkus(productId: string) {
     const query = gql`
       query getProductSkus($productId: String) {
-        productCollection(where: { sys: {id: "1ll5kYqxgMeQSBwkmKQ2hD"} }, preview: false) {
+        productCollection(where: { sys: { id: $productId } }, preview: false) {
           items {
             skuCollection {
               items {
