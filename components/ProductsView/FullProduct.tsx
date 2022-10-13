@@ -32,6 +32,7 @@ const FullProduct = ({ product, sku }: Props) => {
             width={imagesCollection.items[0].width}
             height={imagesCollection.items[0].height}
             alt={imagesCollection.items[0].title}
+            priority
           />
         </figure>
       </article>

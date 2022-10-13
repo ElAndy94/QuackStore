@@ -8,29 +8,27 @@ export type RadioSelectProps = {
   name: string;
   options: Sku[];
   value: Sku | undefined;
+  type: 'colour' | 'size';
   onChange: (option: Sku) => void;
   onBlur?: () => void;
-  disabled?: boolean;
-  type: 'colour' | 'size';
 };
 
 const RadioSelect = ({
   name,
   options,
   value,
-  disabled,
   type,
   onChange,
   onBlur,
 }: RadioSelectProps) => {
-  console.log(options);
+  const [selectedType, setSelectedType] = useState<'colour' | 'size'>('colour');
+  const [selectedValue, setSelectValue] = useState<string>();
   const [setOfOptions] = useState<string[]>(() => {
     if (type === 'size') {
       return options.map(option => option.size);
     }
     return Array.from(new Set(options.map(option => option.colour)));
   });
-
   const [range] = useState<string[]>(() => {
     if (type === 'size') {
       return [
@@ -63,64 +61,78 @@ const RadioSelect = ({
             { 'flex gap-4': type === 'colour' }
           )}
         >
-          {options
-            .sort((a, b) => parseFloat(a.size) - parseFloat(b.size))
-            .map(item => {
-              const {
-                colour,
-                size,
-                sys: { id },
-              } = item;
-              // if (type === 'size' && range.indexOf(size) === -1) {
-              //   disabled = true;
-              // } else if (type === 'colour' && range.indexOf(colour) === -1) {
-              //   disabled = true;
-              // }
+          {range.map((item, index) => {
+            let itemDisabled = true;
+            if (type === 'size' && setOfOptions.indexOf(item) !== -1) {
+              itemDisabled = false;
+            } else if (type === 'colour' && setOfOptions.indexOf(item) !== -1) {
+              itemDisabled = false;
+            }
 
-              if (type === 'size') {
-                return (
-                  <HeadlessRadioSelect.Option
-                    key={id}
-                    value={item}
-                    disabled={disabled}
-                    className={clsx(
-                      'border transition-colors selector-base h-12 flex justify-center items-center',
-                      { 'opacity-40': disabled },
-                      { 'cursor-pointer': !disabled },
-                      {
-                        'bg-primary text-white': value?.size === size && !disabled,
-                      }
-                    )}
+            if (selectedType === 'colour') {
+              options.map(option => {
+                if (option.colour === item) {
+                  // Brain dead.
+                }
+              });
+            }
+            // else {
+            //   options.map(option => {
+
+            //   });
+            // }
+
+            if (type === 'size') {
+              return (
+                <HeadlessRadioSelect.Option
+                  key={`${item}${index}`}
+                  value={options.find(product => product.size === item)}
+                  disabled={itemDisabled}
+                  className={clsx(
+                    'border-[2px] transition-colors h-12 flex justify-center items-center',
+                    { 'opacity-30': itemDisabled },
+                    { 'cursor-pointer': !itemDisabled },
+                    {
+                      'bg-primary text-white': value?.size === item && !itemDisabled,
+                    }
+                  )}
+                  onClick={() => {
+                    setSelectedType('size');
+                    setSelectValue(item);
+                  }}
+                >
+                  <HeadlessRadioSelect.Label
+                    as="p"
+                    className={clsx('font-light truncate')}
                   >
-                    <HeadlessRadioSelect.Label
-                      as="p"
-                      className={clsx('font-light truncate')}
-                    >
-                      {size}
-                    </HeadlessRadioSelect.Label>
-                  </HeadlessRadioSelect.Option>
-                );
-              } else {
-                return (
-                  <HeadlessRadioSelect.Option
-                    key={id}
-                    value={item}
-                    // value={options.find(item => item.colour === value?.colour)}
-                    disabled={disabled}
-                    className={clsx(
-                      'rounded-full h-5 w-5 border',
-                      `bg-${colour.toLowerCase()}`,
-                      { 'opacity-30': disabled },
-                      {
-                        'outline-primary text-white':
-                          value?.colour === colour && !disabled,
-                      }
-                    )}
-                    aria-label={colour}
-                  />
-                );
-              }
-            })}
+                    {item}
+                  </HeadlessRadioSelect.Label>
+                </HeadlessRadioSelect.Option>
+              );
+            } else {
+              return (
+                <HeadlessRadioSelect.Option
+                  key={`${item}${index}`}
+                  value={options.find(product => product.colour === item)}
+                  disabled={itemDisabled}
+                  className={clsx(
+                    'rounded-full h-5 w-5 border-[2px]',
+                    `bg-${item.toLowerCase()}`,
+                    { 'cursor-pointer': !itemDisabled },
+                    {
+                      'outline-primary text-white':
+                        value?.colour === item && !itemDisabled,
+                    }
+                  )}
+                  onClick={() => {
+                    setSelectedType('colour');
+                    setSelectValue(item);
+                  }}
+                  aria-label={`Product colour ${item}`}
+                />
+              );
+            }
+          })}
         </div>
       </HeadlessRadioSelect>
     </div>
