@@ -168,7 +168,7 @@ export default class ContentfulApi {
     const { productCollection } = await this.callContentful(query, {
       productId,
     });
-
-    return productCollection.items as Sku[];
+    
+    return productCollection.items[0].skuCollection.items as Sku[];
   }
 }

@@ -11,7 +11,6 @@ export type RadioSelectProps = {
   onChange: (option: Sku) => void;
   onBlur?: () => void;
   disabled?: boolean;
-  range: string[];
   type: 'colour' | 'size';
 };
 
@@ -22,7 +21,6 @@ const RadioSelect = ({
   onChange,
   onBlur,
   disabled,
-  range,
   type,
 }: RadioSelectProps) => {
   const [option] = useState<string[]>(() => {
@@ -32,6 +30,28 @@ const RadioSelect = ({
     return options.map(option => option.colour);
   });
 
+  const [range] = useState<string[]>(() => {
+    if (type === 'size') {
+      return [
+        '3',
+        '3.5',
+        '4.5',
+        '4',
+        '5',
+        '5.5',
+        '6',
+        '6.5',
+        '7',
+        '7.5',
+        '8',
+        '8.5',
+        '9',
+        '9.5',
+        '10',
+      ];
+    }
+    return ['Black', 'White', 'Blue', 'Green', 'Orange', 'Purple', 'Pink', 'Red'];
+  });
   return (
     <div className="w-full">
       <HeadlessRadioSelect
