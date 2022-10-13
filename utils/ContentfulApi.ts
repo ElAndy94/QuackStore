@@ -1,6 +1,6 @@
 import { gql, GraphQLClient } from 'graphql-request';
 import compress from 'graphql-query-compress';
-import { Product } from './helpers/types/product';
+import { Product, Sku } from './helpers/types/product';
 
 export default class ContentfulApi {
   static async callContentful(query: string, variables = {}, preview = false) {
@@ -84,13 +84,6 @@ export default class ContentfulApi {
             inStock
             activity
             slug
-            skuCollection {
-              items {
-                colour
-                size
-                price
-              }
-            }
             imagesCollection {
               items {
                 url
@@ -150,5 +143,32 @@ export default class ContentfulApi {
     });
 
     return productCollection.items as Product[];
+  }
+
+  static async getProductSkus(productId: string) {
+    const query = gql`
+      query getProductSkus($productId: String) {
+        productCollection(where: { sys: {id: "1ll5kYqxgMeQSBwkmKQ2hD"} }, preview: false) {
+          items {
+            skuCollection {
+              items {
+                sys {
+                  id
+                }
+                colour
+                size
+                price
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const { productCollection } = await this.callContentful(query, {
+      productId,
+    });
+
+    return productCollection.items as Sku[];
   }
 }

@@ -8,7 +8,7 @@ import Button from '../../components/UI/Buttons';
 import RadioSelect from '../../components/UI/RadioSelect';
 import Rating from '../../components/UI/Rating';
 import ContentfulApi from '../../utils/ContentfulApi';
-import { Product } from '../../utils/helpers/types/product';
+import { Product, Sku } from '../../utils/helpers/types/product';
 import Image from 'next/image';
 import useBasket from '../../store/basket';
 import useHasHydrated from '../../components/UseHasHydrated';
@@ -45,7 +45,7 @@ export const getStaticProps = async ({ params }: { params: IParams }) => {
 };
 
 const Page = ({ product }: { product: Product }) => {
-  const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
+  const [selectedSize, setSelectedSize] = useState<Sku | undefined>(undefined);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
   const hasHydrated = useHasHydrated();
 
@@ -53,17 +53,8 @@ const Page = ({ product }: { product: Product }) => {
 
   if (!product) return <>Loading...</>;
 
-  const {
-    name,
-    description,
-    colors,
-    price,
-    sys,
-    rating,
-    imagesCollection,
-    department,
-    size,
-  } = product;
+  const { name, description, price, sys, rating, imagesCollection, department, sku } =
+    product;
   return (
     <Layout
       seo={{
@@ -93,15 +84,19 @@ const Page = ({ product }: { product: Product }) => {
           <h1>{product.name}</h1>
           <div className="flex gap-5">
             <p>Available in:</p>
-            <button
-              key={`${sys.id}${colors}`}
-              type="button"
-              className={clsx(
-                'rounded-full h-5 w-5 border',
-                `bg-${colors.toLocaleLowerCase()}`
-              )}
-              aria-label="item color"
-            />
+            {sku?.map(item => {
+              return (
+                <button
+                  key={`${sys.id}${item.colour}`}
+                  type="button"
+                  className={clsx(
+                    'rounded-full h-5 w-5 border',
+                    `bg-${item.colour.toLocaleLowerCase()}`
+                  )}
+                  aria-label="item color"
+                />
+              );
+            })}
           </div>
           <h2>£{price}</h2>
 
@@ -111,7 +106,7 @@ const Page = ({ product }: { product: Product }) => {
               id={'size'}
               name={'Size'}
               value={selectedSize}
-              options={size}
+              options={sku}
               onChange={option => setSelectedSize(option)}
             />
           </div>

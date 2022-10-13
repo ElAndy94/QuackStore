@@ -1,12 +1,14 @@
 import { RadioGroup as HeadlessRadioSelect } from '@headlessui/react';
 import clsx from 'clsx';
+import { useState } from 'react';
+import { Sku } from '../../utils/helpers/types/product';
 
 export type RadioSelectProps = {
   id: string;
   name: string;
-  options: string[];
-  value: string | undefined;
-  onChange: (option: string) => void;
+  options: Sku[];
+  value: Sku | undefined;
+  onChange: (option: Sku) => void;
   onBlur?: () => void;
   disabled?: boolean;
 };
@@ -20,34 +22,35 @@ const RadioSelect = ({
   onBlur,
   disabled,
 }: RadioSelectProps) => {
+  const [sizes] = useState<string[]>(options.map(option => option.size));
+
   return (
     <div className="w-full">
       <HeadlessRadioSelect
-        data-testid={id}
         name={name}
-        value={options.find(o => o === value)}
+        value={options.find(item => item.size === value?.size)}
         onChange={onChange}
         onBlur={onBlur}
       >
         <div className="grid grid-flow-row grid-cols-4 gap-2">
-          {['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'].map(option => {
-            if (!options.includes(option)) {
+          {['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'].map(size => {
+            if (!sizes.includes(size)) {
               disabled = true;
             }
             return (
               <HeadlessRadioSelect.Option
-                key={option}
-                value={option}
+                key={size}
+                value={size}
                 disabled={disabled}
                 className={clsx(
                   'border transition-colors selector-base h-12 flex justify-center items-center',
                   { 'opacity-40': disabled },
                   { 'cursor-pointer': !disabled },
-                  { 'bg-primary text-white': value === option && !disabled }
+                  { 'bg-primary text-white': value?.size === size && !disabled }
                 )}
               >
                 <HeadlessRadioSelect.Label as="p" className={clsx('font-light truncate')}>
-                  {option}
+                  {size}
                 </HeadlessRadioSelect.Label>
               </HeadlessRadioSelect.Option>
             );

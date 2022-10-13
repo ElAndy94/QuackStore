@@ -12,6 +12,7 @@ export interface Product extends IProductFields {
       title: string;
     }[];
   };
+  sku: Sku[];
 }
 
 export interface BasketProduct extends Product {
@@ -27,4 +28,12 @@ export interface BasketProduct extends Product {
     }[];
   };
   quantity: number;
+}
+export interface Sku extends ISku {
+  sys: {
+    id: string;
+  };
+  colour: string;
+  size: string;
+  price: number;
 }
