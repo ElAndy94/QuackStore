@@ -7,6 +7,7 @@ import Popover from './UI/Popover';
 import SmallCard from './ProductsView/SmallCard';
 import useHasHydrated from './UseHasHydrated';
 import useBasket from '../store/basket';
+import Image from 'next/image';
 
 const Header = () => {
   const scrollDirection = useScrollDirection();
@@ -134,31 +135,54 @@ const Header = () => {
                 buttonTitle={<Icon name="shopping-bag" />}
                 className="rounded-md font-light w-[400px] border p-2 right-0 flex flex-col gap-1 bg-white"
               >
-                <ul>
-                  {basketProducts.map((item, index) => {
-                    return [
-                      <li className="flex flex-col gap-2" key={`basketItem${index}`}>
-                        <SmallCard
-                          image={item.imagesCollection.items[0].url}
-                          title={item.name}
-                          description={item.style}
-                          price={item.price}
-                          quantity={item.quantity}
-                        />
-                      </li>,
-                    ];
-                  })}
-                  <li className=" bg-ultra-marine-blue text-white rounded-md w-full mt-4">
-                    <Link href="/basket" passHref>
-                      <a
-                        href="replace"
-                        className="px-4 py-2 flex justify-center items-center w-full"
-                      >
-                        View basket
-                      </a>
-                    </Link>
-                  </li>
-                </ul>
+                {basketProducts.length > 0 ? (
+                  <ul>
+                    {basketProducts.map((item, index) => {
+                      return [
+                        <li className="flex flex-col gap-2" key={`basketItem${index}`}>
+                          <SmallCard
+                            image={item.imagesCollection.items[0].url}
+                            title={item.name}
+                            description={item.style}
+                            price={item.price}
+                            quantity={item.quantity}
+                          />
+                        </li>,
+                      ];
+                    })}
+                    <li className=" bg-ultra-marine-blue text-white rounded-md w-full mt-4">
+                      <Link href="/basket" passHref>
+                        <a
+                          href="replace"
+                          className="px-4 py-2 flex justify-center items-center w-full"
+                        >
+                          View basket
+                        </a>
+                      </Link>
+                    </li>
+                  </ul>
+                ) : (
+                  <div>
+                    <figure className="opacity-40">
+                      <Image
+                        src="/assets/images/empty-cart.png"
+                        alt="empty cart"
+                        width="400"
+                        height="300"
+                      />
+                    </figure>
+                    <div className=" bg-ultra-marine-blue text-white rounded-md w-full mt-4">
+                      <Link href="/basket" passHref>
+                        <a
+                          href="replace"
+                          className="px-4 py-2 flex justify-center items-center w-full"
+                        >
+                          View basket
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                )}
               </Popover>
             </li>
           </ul>
@@ -169,27 +193,3 @@ const Header = () => {
 };
 
 export default Header;
-
-const basket = [
-  {
-    image: '/assets/images/shoes.jpeg',
-    title: 'Men Running',
-    description: 'Nike Competition Shoes',
-    price: '300',
-    quantity: '5',
-  },
-  {
-    image: '/assets/images/shoes.jpeg',
-    title: 'Men Running',
-    description: 'Nike Competition Shoes',
-    price: '300',
-    quantity: '5',
-  },
-  {
-    image: '/assets/images/shoes.jpeg',
-    title: 'Men Running',
-    description: 'Nike Competition Shoes',
-    price: '300',
-    quantity: '5',
-  },
-];

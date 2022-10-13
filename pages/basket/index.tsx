@@ -7,12 +7,45 @@ import LargeCard from '../../components/ProductsView/LargeCard';
 import useHasHydrated from '../../components/UseHasHydrated';
 import Dialog from '../../components/Dialog/Dialog';
 import Checkout from '../../components/Checkout/Checkout';
+import clsx from 'clsx';
+
+type PromoCode = {
+  code: string;
+  discount: number;
+};
+
+const promoCodes: PromoCode[] = [
+  {
+    code: 'QUACK10',
+    discount: 10,
+  },
+  {
+    code: 'QUACK20',
+    discount: 20,
+  },
+  {
+    code: 'QUACK30',
+    discount: 30,
+  },
+];
 
 const Basket = () => {
   const { basketProducts, totalPrice, removeFromBasket, updateProductQuantity } =
     useBasket();
   const hasHydrated = useHasHydrated();
   const [open, setOpen] = useState(false);
+  const [total, setTotal] = useState(totalPrice);
+  const [appliedPromo, setAppliedPromo] = useState<number>(0);
+  const [promo, setPromo] = useState<string>('');
+  const shippingCost = 5;
+
+  const handleDiscount = (code: string) => {
+    const item = promoCodes.find(promo => promo.code === code);
+    if (item) {
+      setAppliedPromo(totalPrice * (item.discount / 100));
+      setTotal(totalPrice * (item.discount / 100) - totalPrice);
+    }
+  };
 
   return (
     <Layout
@@ -27,24 +60,37 @@ const Basket = () => {
           <div>
             <h1 className="font-bold text-primary tracking-tight">Shopping cart</h1>
             <p className="text-granite-gray">
-              Total: <span className="text-primary font-medium">{5}</span> items
+              Total:{' '}
+              <span className="text-primary font-medium">{basketProducts.length}</span>{' '}
+              items
             </p>
           </div>
-          <ul className="mt-10">
-            {hasHydrated &&
-              basketProducts.map(product => {
-                return (
-                  <li key={product.sys.id}>
-                    <LargeCard
-                      product={product}
-                      onRemove={() => removeFromBasket(product)}
-                      onIncrease={() => updateProductQuantity(product, '+')}
-                      onDecrease={() => updateProductQuantity(product, '-')}
-                    />
-                  </li>
-                );
-              })}
-          </ul>
+          {basketProducts.length > 0 ? (
+            <ul className="mt-10">
+              {hasHydrated &&
+                basketProducts.map(product => {
+                  return (
+                    <li key={product.sys.id}>
+                      <LargeCard
+                        product={product}
+                        onRemove={() => removeFromBasket(product)}
+                        onIncrease={() => updateProductQuantity(product, '+')}
+                        onDecrease={() => updateProductQuantity(product, '-')}
+                      />
+                    </li>
+                  );
+                })}
+            </ul>
+          ) : (
+            <figure className="opacity-40">
+              <Image
+                src="/assets/images/empty-cart.png"
+                alt="empty cart"
+                width="800"
+                height="600"
+              />
+            </figure>
+          )}
         </section>
         <section className="border p-4">
           <article className="flex flex-col gap-5 p-6 text-primary border-b">
@@ -53,22 +99,34 @@ const Basket = () => {
             </h5>
             <div className="flex justify-between">
               <p>Total products</p>
-              <p>£{100}</p>
+              <p>£{totalPrice}</p>
             </div>
             <div className="flex justify-between">
               <p>Shipping costs</p>
-              <p>£{25}</p>
+              <p>£{shippingCost}</p>
             </div>
             <div className="mt-5 flex justify-center w-full">
               <input
                 type="text"
                 placeholder="Promo Code"
+                value={promo}
+                onChange={e => setPromo(e.target.value)}
                 className="border focus:outline-none rounded-l px-5 py-2 w-2/3"
               />
-              <Button type="dark" className="rounded-r focus:rounded-l-none">
+
+              <Button
+                type="dark"
+                className="rounded-r focus:rounded-l-none"
+                onClick={() => handleDiscount(promo)}
+              >
                 Apply
               </Button>
             </div>
+            {!promoCodes.find(item => item.code === promo) && (
+              <p className="-m-3 text-md text-magenta ml-1">
+                Please enter valid promo code!
+              </p>
+            )}
           </article>
           <article className="flex flex-col mt-14 gap-5 p-6 text-primary">
             <div className="flex justify-between">
@@ -77,11 +135,11 @@ const Basket = () => {
             </div>
             <div className="flex justify-between">
               <p>Applied promo code</p>
-              <p className="text-magenta">-£{15}</p>
+              <p className={clsx('text-magenta')}>-£{appliedPromo}</p>
             </div>
             <div className="flex justify-between">
               <p>Total</p>
-              <p>£{hasHydrated && totalPrice}</p>
+              <p>£{total}</p>
             </div>
           </article>
           <article className="flex flex-col justify-between gap-5 p-6">
