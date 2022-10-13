@@ -18,11 +18,12 @@ const RadioSelect = ({
   name,
   options,
   value,
-  onChange,
-  onBlur,
   disabled,
   type,
+  onChange,
+  onBlur,
 }: RadioSelectProps) => {
+  console.log(options);
   const [setOfOptions] = useState<string[]>(() => {
     if (type === 'size') {
       return options.map(option => option.size);
@@ -62,54 +63,64 @@ const RadioSelect = ({
             { 'flex gap-4': type === 'colour' }
           )}
         >
-          {range.map(item => {
-            if (setOfOptions.includes(item)) {
-              disabled = false;
-            } else {
-              disabled = true;
-            }
+          {options
+            .sort((a, b) => parseFloat(a.size) - parseFloat(b.size))
+            .map(item => {
+              const {
+                colour,
+                size,
+                sys: { id },
+              } = item;
+              // if (type === 'size' && range.indexOf(size) === -1) {
+              //   disabled = true;
+              // } else if (type === 'colour' && range.indexOf(colour) === -1) {
+              //   disabled = true;
+              // }
 
-            if (type === 'size') {
-              return (
-                <HeadlessRadioSelect.Option
-                  key={item}
-                  value={options.find(item => item.size === value?.size)}
-                  disabled={disabled}
-                  className={clsx(
-                    'border transition-colors selector-base h-12 flex justify-center items-center',
-                    { 'opacity-40': disabled },
-                    { 'cursor-pointer': !disabled },
-                    {
-                      'bg-primary text-white':
-                        (value as unknown as string) === item && !disabled,
-                    }
-                  )}
-                >
-                  <HeadlessRadioSelect.Label
-                    as="p"
-                    className={clsx('font-light truncate')}
+              if (type === 'size') {
+                return (
+                  <HeadlessRadioSelect.Option
+                    key={id}
+                    value={item}
+                    disabled={disabled}
+                    className={clsx(
+                      'border transition-colors selector-base h-12 flex justify-center items-center',
+                      { 'opacity-40': disabled },
+                      { 'cursor-pointer': !disabled },
+                      {
+                        'bg-primary text-white': value?.size === size && !disabled,
+                      }
+                    )}
                   >
-                    {item}
-                  </HeadlessRadioSelect.Label>
-                </HeadlessRadioSelect.Option>
-              );
-            } else {
-              return (
-                <HeadlessRadioSelect.Option
-                  key={item}
-                  value={options.find(item => item.colour === value?.colour)}
-                  disabled={disabled}
-                  className={clsx(
-                    'rounded-full h-5 w-5 border',
-                    `bg-${item.toLowerCase()}`,
-                    { 'opacity-30': disabled },
-                    { 'outline-primary text-white': value?.size === item && !disabled }
-                  )}
-                  aria-label={item}
-                />
-              );
-            }
-          })}
+                    <HeadlessRadioSelect.Label
+                      as="p"
+                      className={clsx('font-light truncate')}
+                    >
+                      {size}
+                    </HeadlessRadioSelect.Label>
+                  </HeadlessRadioSelect.Option>
+                );
+              } else {
+                return (
+                  <HeadlessRadioSelect.Option
+                    key={id}
+                    value={item}
+                    // value={options.find(item => item.colour === value?.colour)}
+                    disabled={disabled}
+                    className={clsx(
+                      'rounded-full h-5 w-5 border',
+                      `bg-${colour.toLowerCase()}`,
+                      { 'opacity-30': disabled },
+                      {
+                        'outline-primary text-white':
+                          value?.colour === colour && !disabled,
+                      }
+                    )}
+                    aria-label={colour}
+                  />
+                );
+              }
+            })}
         </div>
       </HeadlessRadioSelect>
     </div>

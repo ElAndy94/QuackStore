@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { Product, Sku } from '../../utils/helpers/types/product';
 import Rating from '../UI/Rating';
@@ -68,9 +68,7 @@ const FullProduct = ({ product, sku }: Props) => {
             onChange={option => {
               setSelectedSize(option);
               setProductPrice(option.price);
-              console.log(option);
             }}
-            disabled={false}
           />
         </div>
         <div className="flex justify-between mt-5">
