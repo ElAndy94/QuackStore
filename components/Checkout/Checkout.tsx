@@ -36,7 +36,7 @@ export default function Checkout() {
 
   //   4242 4242 4242 4242
   return (
-    <div className="App">
+    <div>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise} key={clientSecret}>
           <CheckoutForm />
@@ -112,18 +112,22 @@ export function CheckoutForm() {
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
+    <form
+      id="payment-form"
+      className="w-full min-w-[500px] p-10 rounded-md shadow-md self-center"
+      onSubmit={handleSubmit}
+    >
       <PaymentElement id="payment-element" />
       <button
         disabled={isLoading || !stripe || !elements}
         id="submit"
-        className="w-full bg-primary text-white p-2 rounded-md mt-6"
+        className="w-full h-12 text-white rounded-md mt-6 shadow-lg bg-[#5469d4] hover:contrast-[115] disabled:opacity-50 disabled:cursor-none"
       >
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : 'Pay now'}
         </span>
       </button>
-      {message && <div id="payment-message">{message}</div>}
+      {message && <div className="mt-4">{message}</div>}
     </form>
   );
 }

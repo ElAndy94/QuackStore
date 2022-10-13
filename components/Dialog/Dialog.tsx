@@ -1,5 +1,6 @@
 import { Dialog as HeadlessDialog, Transition } from '@headlessui/react';
 import { Fragment, ReactNode } from 'react';
+import Icon from '../UI/Icon';
 
 type DialogModalProps = {
   title: string;
@@ -37,12 +38,12 @@ const Dialog = ({ title, children, open, onClose }: DialogModalProps) => {
             >
               <HeadlessDialog.Panel className="relative p-6 w-full max-w-tablet-container align-middle bg-white rounded-lg transition-all sm:p-8 lg:max-w-desktop-container">
                 <div className="absolute top-4 right-4 md:top-6 md:right-6">
-                  <button type="button" onClick={onClose}>
-                    x
+                  <button type="button" onClick={onClose} aria-label="Close dialog">
+                    <Icon name="cross" height="44px" width="20px" />
                   </button>
                 </div>
 
-                <HeadlessDialog.Title className="pb-6 font-raleway text-lg leading-7 text-center text-popup-title">
+                <HeadlessDialog.Title className="text-lg leading-7 text-center">
                   {title}
                 </HeadlessDialog.Title>
                 <div className="text-center">{children}</div>
