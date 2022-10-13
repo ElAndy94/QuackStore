@@ -42,10 +42,8 @@ export default class ContentfulApi {
             style
             price
             inStock
-            size
             numberOfSales
             activity
-            colors
             slug
             imagesCollection {
               items {
@@ -64,7 +62,7 @@ export default class ContentfulApi {
 
     return productCollection.items;
   }
-
+  // "/Air-Force-1"
   static async getProductBySlug(slug: string) {
     const query = gql`
       query getProductBySlug($slug: String) {
@@ -84,11 +82,15 @@ export default class ContentfulApi {
             style
             price
             inStock
-            size
-            numberOfSales
             activity
-            colors
             slug
+            skuCollection {
+              items {
+                colour
+                size
+                price
+              }
+            }
             imagesCollection {
               items {
                 url
@@ -127,10 +129,8 @@ export default class ContentfulApi {
             style
             price
             inStock
-            size
             numberOfSales
             activity
-            colors
             slug
             imagesCollection {
               items {

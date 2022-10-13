@@ -27,8 +27,6 @@ export async function getStaticProps() {
 const Footwear: NextPage = ({ products }: any) => {
   const { t } = useTranslation('common');
 
-
-  
   return (
     <Layout
       seo={{

@@ -44,12 +44,6 @@ export interface IProductFields {
   /** Description */
   description: Document;
 
-  /** Price */
-  price: string;
-
-  /** Size */
-  size: ('3' | '4' | '5' | '6' | '7' | '8' | '9' | '10')[];
-
   /** ReleaseDate */
   releaseDate: string;
 
@@ -90,23 +84,26 @@ export interface IProductFields {
   /** InStock */
   inStock: boolean;
 
-  /** images */
+  /** Images */
   images: Asset[];
 
   /** Department */
   department: 'men' | 'women' | 'kids';
 
-  /** Colors */
-  colors: 'White' | 'Black' | 'Blue' | 'Green' | 'Yellow' | 'Pink';
-
   /** Activity */
   activity: 'Indoor' | 'Outdoor';
 
-  /** rating */
+  /** Rating */
   rating: number;
 
   /** Slug */
   slug: string;
+
+  /** SKU */
+  sku: ISku[];
+
+  /** Price */
+  price: number;
 }
 
 /** Store product */
@@ -156,7 +153,55 @@ export interface ISeo extends Entry<ISeoFields> {
   };
 }
 
-export type CONTENT_TYPE = 'page' | 'product' | 'seo';
+export interface ISkuFields {
+  /** Size */
+  size:
+    | '3'
+    | '3.5'
+    | '4'
+    | '4.5'
+    | '5'
+    | '5.5'
+    | '6'
+    | '6.5'
+    | '7'
+    | '7.5'
+    | '8'
+    | '8.5'
+    | '9'
+    | '9.5'
+    | '10';
+
+  /** Price */
+  price: number;
+
+  /** Colour */
+  colour: 'Black' | 'White' | 'Blue' | 'Green' | 'Orange' | 'Purple' | 'Pink' | 'Red';
+
+  /** Stock */
+  stock: number;
+}
+
+/** Individual Product Identifier */
+
+export interface ISku extends Entry<ISkuFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'sku';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export type CONTENT_TYPE = 'page' | 'product' | 'seo' | 'sku';
 
 export type LOCALE_CODE = 'en-GB' | 'es-ES';
 
