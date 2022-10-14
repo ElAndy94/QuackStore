@@ -1,12 +1,13 @@
 import { RadioGroup as HeadlessRadioSelect } from '@headlessui/react';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Sku } from '../../utils/helpers/types/product';
 
 export type RadioSelectProps = {
   id: string;
   name: string;
   options: Sku[];
+  filteredOptions: Sku[];
   value: Sku | undefined;
   type: 'colour' | 'size';
   onChange: (option: Sku) => void;
@@ -16,19 +17,18 @@ export type RadioSelectProps = {
 const RadioSelect = ({
   name,
   options,
+  filteredOptions,
   value,
   type,
   onChange,
   onBlur,
 }: RadioSelectProps) => {
-  const [selectedType, setSelectedType] = useState<'colour' | 'size'>();
-  const [setOfOptions] = useState<string[]>(() => {
+  const [setOfOptions, setSetOfOptions] = useState<string[]>(() => {
     if (type === 'size') {
       return options.map(option => option.size);
     }
-    return Array.from(new Set(options.map(option => option.colour)));
+    return options.map(option => option.colour);
   });
-  const [selectedValue, setSelectValue] = useState<string>();
   const [range] = useState<string[]>(() => {
     if (type === 'size') {
       return [
@@ -61,6 +61,15 @@ const RadioSelect = ({
     'bg-pink',
     'bg-red',
   ];
+
+  useEffect(() => {
+    if (type === 'size') {
+      setSetOfOptions(filteredOptions.map(option => option.size));
+    } else {
+      setSetOfOptions(options.map(option => option.colour));
+    }
+  }, [filteredOptions, options, type]);
+
   return (
     <div className="w-full">
       <HeadlessRadioSelect name={name} value={value} onChange={onChange} onBlur={onBlur}>
@@ -78,19 +87,6 @@ const RadioSelect = ({
               itemDisabled = false;
             }
 
-            if (selectedType === 'colour') {
-              options.map(option => {
-                if (option.colour === item) {
-                  // Brain dead.
-                }
-              });
-            }
-            // else {
-            //   options.map(option => {
-
-            //   });
-            // }
-
             if (type === 'size') {
               return (
                 <HeadlessRadioSelect.Option
@@ -105,10 +101,6 @@ const RadioSelect = ({
                       'bg-primary text-white': value?.size === item && !itemDisabled,
                     }
                   )}
-                  onClick={() => {
-                    setSelectedType('size');
-                    setSelectValue(item);
-                  }}
                 >
                   <HeadlessRadioSelect.Label
                     as="p"
@@ -124,10 +116,6 @@ const RadioSelect = ({
                   key={`${item}${index}`}
                   value={options.find(product => product.colour === item)}
                   disabled={itemDisabled}
-                  onClick={() => {
-                    setSelectedType('colour');
-                    setSelectValue(item);
-                  }}
                 >
                   {({ checked }) => (
                     <div

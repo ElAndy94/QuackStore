@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { Product, Sku } from '../../utils/helpers/types/product';
 import Rating from '../UI/Rating';
-import clsx from 'clsx';
 import RadioSelect from '../UI/RadioSelect';
 import useHasHydrated from '../UseHasHydrated';
 import Button from '../UI/Buttons';
@@ -15,13 +14,13 @@ interface Props {
 }
 
 const FullProduct = ({ product, sku }: Props) => {
-  const { name, description, price, sys, rating, imagesCollection, department } = product;
+  const { name, description, price, rating, imagesCollection, department } = product;
   const [productPrice, setProductPrice] = useState<number>(price);
   const [selectedColour, setSelectedColour] = useState<Sku | undefined>(undefined);
   const [selectedSize, setSelectedSize] = useState<Sku | undefined>(undefined);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
   const [skuOptions, setSkuOptions] = useState<Sku[]>(sku);
-  const [selectedSku, setselectedSku] = useState<Sku[]>();
+  const [selectedSku, setSelectedSku] = useState<Sku>();
   const hasHydrated = useHasHydrated();
   const { addToBasket } = useBasket();
 
@@ -31,6 +30,7 @@ const FullProduct = ({ product, sku }: Props) => {
       quantity: selectedQuantity,
     });
   };
+
   return (
     <section className="wrapper mt-32">
       <article className="w-1/2 px-4">
@@ -50,23 +50,25 @@ const FullProduct = ({ product, sku }: Props) => {
           <p>{department}</p>
           <Rating rating={rating} />
         </div>
-        <h1>{product.name}</h1>
+        <h1>{name}</h1>
         <div className="flex gap-5">
           <p>Available in:</p>
           <RadioSelect
             id={'colour'}
             name={'colour'}
             value={selectedColour}
-            options={skuOptions}
+            options={sku}
+            filteredOptions={skuOptions}
             type={'colour'}
             onChange={option => {
               setSelectedColour(option);
               setProductPrice(option.price);
-              setSkuOptions(skuOptions.filter(sku => sku.colour === option.colour));
+              setSkuOptions(sku.filter(sku => sku.colour === option.colour));
+              setSelectedSku(sku.find(sku => sku.size === option.size && sku.colour === selectedColour?.colour));
             }}
           />
         </div>
-        <h2>£{productPrice}</h2>
+        <h2>£{selectedSku ? selectedSku.price : productPrice}</h2>
 
         <h3>Select size</h3>
         <div className="w-full">
@@ -74,16 +76,13 @@ const FullProduct = ({ product, sku }: Props) => {
             id={'size'}
             name={'Size'}
             value={selectedSize}
-            options={skuOptions}
+            options={sku}
+            filteredOptions={skuOptions}
             type={'size'}
             onChange={option => {
               setSelectedSize(option);
               setProductPrice(option.price);
-              setselectedSku(
-                skuOptions.filter(
-                  sku => sku.size === option.size && sku.colour === selectedColour?.colour
-                )
-              );
+              setSelectedSku(sku.find(sku => sku.size === option.size && sku.colour === selectedColour?.colour));
             }}
           />
         </div>
