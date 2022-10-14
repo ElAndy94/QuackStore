@@ -21,14 +21,14 @@ const RadioSelect = ({
   onChange,
   onBlur,
 }: RadioSelectProps) => {
-  const [selectedType, setSelectedType] = useState<'colour' | 'size'>('colour');
-  const [selectedValue, setSelectValue] = useState<string>();
+  const [selectedType, setSelectedType] = useState<'colour' | 'size'>();
   const [setOfOptions] = useState<string[]>(() => {
     if (type === 'size') {
       return options.map(option => option.size);
     }
     return Array.from(new Set(options.map(option => option.colour)));
   });
+  const [selectedValue, setSelectValue] = useState<string>();
   const [range] = useState<string[]>(() => {
     if (type === 'size') {
       return [
@@ -51,7 +51,16 @@ const RadioSelect = ({
     }
     return ['Black', 'White', 'Blue', 'Green', 'Orange', 'Purple', 'Pink', 'Red'];
   });
-
+  const cssColours = [
+    'bg-black',
+    'bg-white',
+    'bg-blue',
+    'bg-green',
+    'bg-orange',
+    'bg-purple',
+    'bg-pink',
+    'bg-red',
+  ];
   return (
     <div className="w-full">
       <HeadlessRadioSelect name={name} value={value} onChange={onChange} onBlur={onBlur}>
@@ -115,21 +124,26 @@ const RadioSelect = ({
                   key={`${item}${index}`}
                   value={options.find(product => product.colour === item)}
                   disabled={itemDisabled}
-                  className={clsx(
-                    'rounded-full h-5 w-5 border-[2px]',
-                    `bg-${item.toLowerCase()}`,
-                    { 'cursor-pointer': !itemDisabled },
-                    {
-                      'outline-primary text-white':
-                        value?.colour === item && !itemDisabled,
-                    }
-                  )}
                   onClick={() => {
                     setSelectedType('colour');
                     setSelectValue(item);
                   }}
-                  aria-label={`Product colour ${item}`}
-                />
+                >
+                  {({ checked }) => (
+                    <div
+                      className={clsx(
+                        'rounded-full h-5 w-5 border-[2px] ',
+                        `${cssColours[index]}`,
+                        { 'cursor-pointer': !itemDisabled },
+                        { 'opacity-20': itemDisabled },
+                        {
+                          'outline outline-ultra-marine-blue': checked && !itemDisabled,
+                        }
+                      )}
+                      aria-label={`Product colour ${item}`}
+                    />
+                  )}
+                </HeadlessRadioSelect.Option>
               );
             }
           })}

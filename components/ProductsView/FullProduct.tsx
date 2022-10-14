@@ -7,6 +7,7 @@ import RadioSelect from '../UI/RadioSelect';
 import useHasHydrated from '../UseHasHydrated';
 import Button from '../UI/Buttons';
 import useBasket from '../../store/basket';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 interface Props {
   product: Product;
@@ -19,9 +20,17 @@ const FullProduct = ({ product, sku }: Props) => {
   const [selectedColour, setSelectedColour] = useState<Sku | undefined>(undefined);
   const [selectedSize, setSelectedSize] = useState<Sku | undefined>(undefined);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
+  const [skuOptions, setSkuOptions] = useState<Sku[]>(sku);
+  const [selectedSku, setselectedSku] = useState<Sku[]>();
   const hasHydrated = useHasHydrated();
   const { addToBasket } = useBasket();
 
+  const handleAddToBasket = () => {
+    addToBasket({
+      ...product,
+      quantity: selectedQuantity,
+    });
+  };
   return (
     <section className="wrapper mt-32">
       <article className="w-1/2 px-4">
@@ -48,11 +57,12 @@ const FullProduct = ({ product, sku }: Props) => {
             id={'colour'}
             name={'colour'}
             value={selectedColour}
-            options={sku}
+            options={skuOptions}
             type={'colour'}
             onChange={option => {
               setSelectedColour(option);
               setProductPrice(option.price);
+              setSkuOptions(skuOptions.filter(sku => sku.colour === option.colour));
             }}
           />
         </div>
@@ -64,11 +74,16 @@ const FullProduct = ({ product, sku }: Props) => {
             id={'size'}
             name={'Size'}
             value={selectedSize}
-            options={sku}
+            options={skuOptions}
             type={'size'}
             onChange={option => {
               setSelectedSize(option);
               setProductPrice(option.price);
+              setselectedSku(
+                skuOptions.filter(
+                  sku => sku.size === option.size && sku.colour === selectedColour?.colour
+                )
+              );
             }}
           />
         </div>
@@ -98,13 +113,7 @@ const FullProduct = ({ product, sku }: Props) => {
           </div>
           <Button
             type="primary"
-            onClick={() =>
-              hasHydrated &&
-              addToBasket({
-                ...product,
-                quantity: selectedQuantity,
-              })
-            }
+            onClick={() => hasHydrated && handleAddToBasket()}
             disabled={!selectedSize}
           >
             Add to cart
@@ -112,7 +121,7 @@ const FullProduct = ({ product, sku }: Props) => {
         </div>
         <div className="text-granite-gray mt-10">
           <p className="text-primary font-semibold text-lg">Product Info</p>
-          {/* {documentToReactComponents(description.json)} */}
+          {documentToReactComponents(description.json)}
         </div>
       </article>
     </section>

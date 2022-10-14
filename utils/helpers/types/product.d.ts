@@ -13,6 +13,9 @@ export interface Product extends IProductFields {
     }[];
   };
   sku: Sku[];
+  description: {
+    json: any;
+  };
 }
 
 export interface BasketProduct extends Product {

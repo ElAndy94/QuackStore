@@ -140,13 +140,22 @@ const Header = () => {
                     {basketProducts.map((item, index) => {
                       return [
                         <li className="flex flex-col gap-2" key={`basketItem${index}`}>
-                          <SmallCard
-                            image={item.imagesCollection.items[0].url}
-                            title={item.name}
-                            description={item.style}
-                            price={item.price}
-                            quantity={item.quantity}
-                          />
+                          <Link
+                            href={`/${item.department ? item.department : 'products'}${
+                              item.slug
+                            }`}
+                            passHref
+                          >
+                            <a href="replace">
+                              <SmallCard
+                                image={item.imagesCollection.items[0].url}
+                                title={item.name}
+                                description={item.style}
+                                price={item.price.toString()}
+                                quantity={item.quantity}
+                              />
+                            </a>
+                          </Link>
                         </li>,
                       ];
                     })}
