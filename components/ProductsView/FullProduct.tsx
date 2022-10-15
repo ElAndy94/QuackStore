@@ -10,25 +10,30 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 interface Props {
   product: Product;
-  sku: Sku[];
+  skus: Sku[];
 }
 
-const FullProduct = ({ product, sku }: Props) => {
+const FullProduct = ({ product, skus }: Props) => {
   const { name, description, price, rating, imagesCollection, department } = product;
   const [productPrice, setProductPrice] = useState<number>(price);
   const [selectedColour, setSelectedColour] = useState<Sku | undefined>(undefined);
   const [selectedSize, setSelectedSize] = useState<Sku | undefined>(undefined);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
-  const [skuOptions, setSkuOptions] = useState<Sku[]>(sku);
+  const [skuOptions, setSkuOptions] = useState<Sku[]>(skus);
   const [selectedSku, setSelectedSku] = useState<Sku>();
   const hasHydrated = useHasHydrated();
   const { addToBasket } = useBasket();
 
   const handleAddToBasket = () => {
-    addToBasket({
-      ...product,
-      quantity: selectedQuantity,
-    });
+    if (selectedSku) {
+      addToBasket({
+        ...product,
+        quantity: selectedQuantity,
+        sku: selectedSku,
+      });
+    } else {
+      return 'Please select a size and colour';
+    }
   };
 
   return (
@@ -57,14 +62,19 @@ const FullProduct = ({ product, sku }: Props) => {
             id={'colour'}
             name={'colour'}
             value={selectedColour}
-            options={sku}
+            options={skus}
             filteredOptions={skuOptions}
             type={'colour'}
             onChange={option => {
               setSelectedColour(option);
               setProductPrice(option.price);
-              setSkuOptions(sku.filter(sku => sku.colour === option.colour));
-              setSelectedSku(sku.find(sku => sku.size === option.size && sku.colour === selectedColour?.colour));
+              setSkuOptions(skus.filter(skus => skus.colour === option.colour));
+              setSelectedSku(
+                skus.find(
+                  skus =>
+                    skus.size === option.size && skus.colour === selectedColour?.colour
+                )
+              );
             }}
           />
         </div>
@@ -76,13 +86,18 @@ const FullProduct = ({ product, sku }: Props) => {
             id={'size'}
             name={'Size'}
             value={selectedSize}
-            options={sku}
+            options={skus}
             filteredOptions={skuOptions}
             type={'size'}
             onChange={option => {
               setSelectedSize(option);
               setProductPrice(option.price);
-              setSelectedSku(sku.find(sku => sku.size === option.size && sku.colour === selectedColour?.colour));
+              setSelectedSku(
+                skus.find(
+                  skus =>
+                    skus.size === option.size && skus.colour === selectedColour?.colour
+                )
+              );
             }}
           />
         </div>

@@ -26,8 +26,9 @@ const RadioSelect = ({
   const [setOfOptions, setSetOfOptions] = useState<string[]>(() => {
     if (type === 'size') {
       return options.map(option => option.size);
+    } else {
+      return Array.from(new Set(options?.map(option => option.colour)));
     }
-    return options.map(option => option.colour);
   });
   const [range] = useState<string[]>(() => {
     if (type === 'size') {
@@ -52,14 +53,14 @@ const RadioSelect = ({
     return ['Black', 'White', 'Blue', 'Green', 'Orange', 'Purple', 'Pink', 'Red'];
   });
   const cssColours = [
-    'bg-black',
-    'bg-white',
-    'bg-blue',
-    'bg-green',
-    'bg-orange',
-    'bg-purple',
-    'bg-pink',
-    'bg-red',
+    'bg-[#242424]',
+    'bg-[##FFFDF3]',
+    'bg-[#2980B9]',
+    'bg-[#45B39D]',
+    'bg-[#F39C12]',
+    'bg-[#A569BD]',
+    'bg-[#F1948A]',
+    'bg-[#E74C3C]',
   ];
 
   useEffect(() => {
@@ -123,9 +124,10 @@ const RadioSelect = ({
                         'rounded-full h-5 w-5 border-[2px] ',
                         `${cssColours[index]}`,
                         { 'cursor-pointer': !itemDisabled },
-                        { 'opacity-20': itemDisabled },
+                        { 'opacity-40': itemDisabled },
                         {
-                          'outline outline-ultra-marine-blue': checked && !itemDisabled,
+                          'outline outline-ultra-marine-blue border-white':
+                            checked && !itemDisabled,
                         }
                       )}
                       aria-label={`Product colour ${item}`}

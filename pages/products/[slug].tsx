@@ -50,7 +50,7 @@ const Page = ({ product, sku }: { product: Product; sku: Sku[] }) => {
         image: product.imagesCollection.items[0].url,
       }}
     >
-      <FullProduct product={product} sku={sku} />
+      <FullProduct product={product} skus={sku} />
     </Layout>
   );
 };

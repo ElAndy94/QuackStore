@@ -18,11 +18,11 @@ const useBasket = create<Basket>()(
       basketProducts: [],
       addToBasket: (product: BasketProduct) => {
         set((prev: { totalPrice: number; basketProducts: BasketProduct[] }) => {
-          if (prev.basketProducts.find(item => product.sys.id === item.sys.id)) {
+          if (prev.basketProducts.find(item => product.sku.sys.id === item.sku.sys.id)) {
             let newTotalPrice = prev.totalPrice;
             const currentBasket = prev.basketProducts.map(item => {
-              if (product.sys.id === item.sys.id) {
-                newTotalPrice += product.price * product.quantity;
+              if (product.sku.sys.id === item.sku.sys.id) {
+                newTotalPrice += product.sku.price * product.quantity;
                 return {
                   ...product,
                   quantity: item.quantity + product.quantity,
@@ -48,12 +48,12 @@ const useBasket = create<Basket>()(
           let newTotalPrice = prev.totalPrice;
           let newQuantity = product.quantity;
           const currentBasket = prev.basketProducts.map(item => {
-            if (product.sys.id === item.sys.id) {
+            if (product.sku.sys.id === item.sku.sys.id) {
               if (operator === '+') {
-                newTotalPrice += item.price;
+                newTotalPrice += item.sku.price;
                 newQuantity += 1;
               } else {
-                newTotalPrice -= item.price;
+                newTotalPrice -= item.sku.price;
                 newQuantity -= 1;
               }
               return {
@@ -72,9 +72,9 @@ const useBasket = create<Basket>()(
       },
       removeFromBasket: (product: BasketProduct) =>
         set((state: { totalPrice: number; basketProducts: BasketProduct[] }) => ({
-          totalPrice: state.totalPrice - product.price * product.quantity,
+          totalPrice: state.totalPrice - product.sku.price * product.quantity,
           basketProducts: state.basketProducts.filter(
-            (item: BasketProduct) => item.sys.id !== product.sys.id
+            (item: BasketProduct) => item.sku.sys.id !== product.sku.sys.id
           ),
         })),
       clearBasket: () => set({ totalPrice: 0, basketProducts: [] }),

@@ -25,11 +25,14 @@ const LargeCard = ({ product, onRemove, onIncrease, onDecrease }: Props) => {
         <div className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
             <h5 className="text-lg font-semibold">{product.name}</h5>
-            <p className="text-primary font-medium text-lg">£{100}</p>
+            <p className="text-primary font-medium text-lg">£{product.sku.price}</p>
           </div>
           <p className="text-granite-gray">{product.style}</p>
           <p className="text-granite-gray">
-            Size: <span className="text-primary font-medium">{product.size}</span>
+            Size: <span className="text-primary font-medium">{product.sku.size}</span>
+          </p>
+          <p className="text-granite-gray">
+            colour: <span className="text-primary font-medium">{product.sku.colour}</span>
           </p>
           <p className="text-granite-gray">
             Estimated delivery date:
