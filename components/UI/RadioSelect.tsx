@@ -27,7 +27,7 @@ const RadioSelect = ({
     if (type === 'size') {
       return options.map(option => option.size);
     } else {
-      return Array.from(new Set(options?.map(option => option.colour)));
+      return options.map(option => option.colour);
     }
   });
   const [range] = useState<string[]>(() => {

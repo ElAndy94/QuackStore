@@ -1,4 +1,3 @@
-import React from 'react';
 import Layout from '../../components/Layout';
 import Image from 'next/image';
 import Button from '../../components/UI/Buttons';
