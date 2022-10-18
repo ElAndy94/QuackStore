@@ -1,20 +1,21 @@
 import clsx from 'clsx';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import useScrollDirection from '../utils/helpers/UseScrollDirection';
 import Icon from './UI/Icon';
 import Popover from './UI/Popover';
 import SmallCard from './ProductsView/SmallCard';
-import { useGoogleLogin } from '@react-oauth/google';
+import { auth } from '../utils/firebase';
+import Login from './Login/Login';
 
 const Header = () => {
   const scrollDirection = useScrollDirection();
   const router = useRouter();
 
-  const login = useGoogleLogin({
-    onSuccess: tokenResponse => console.log(tokenResponse),
-    onError: error => console.log(error),
-  });
+  //TODO - add load states
+  const [user, loading] = useAuthState(auth);
 
   return (
     <header
@@ -120,13 +121,33 @@ const Header = () => {
                 className="rounded-md font-light w-auto border p-2 bg-white right-0"
               >
                 <div className="flex flex-col">
-                  <div className="rounded-md hover:bg-grey-100 px-4 py-2 flex gap-2">
-                    <button
-                      onClick={() => login()}
-                      className="flex flex-row justify-between w-20"
-                    >
-                      Sign in <Icon name="user" />
-                    </button>
+                  <div className="rounded-md px-2 py-2">
+                    {user ? (
+                      <button
+                        onClick={() => auth.signOut()}
+                        className="w-20 hover:bg-grey-100"
+                      >
+                        {user.photoURL ? (
+                          <div className="flex flex-col gap-2">
+                            <figure>
+                              <Image
+                                src={user.photoURL}
+                                alt="avatar"
+                                className="rounded-full"
+                                width={42}
+                                height={42}
+                                objectFit="cover"
+                              />
+                            </figure>
+                            <p>Sign out</p>
+                          </div>
+                        ) : (
+                          <h3>{user.displayName}</h3>
+                        )}
+                      </button>
+                    ) : (
+                      <Login />
+                    )}
                   </div>
                 </div>
               </Popover>

@@ -5,7 +5,6 @@ import React, { useEffect } from 'react';
 import { appWithTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import i18n from '../i18n';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 
 // Determines if we are running on server or in client.
 const isServerSideRendered = () => {
@@ -32,9 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [router.locale]);
   return (
-    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
       <Component {...pageProps} />
-    </GoogleOAuthProvider>
   );
 }
 
