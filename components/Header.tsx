@@ -5,10 +5,17 @@ import useScrollDirection from '../utils/helpers/UseScrollDirection';
 import Icon from './UI/Icon';
 import Popover from './UI/Popover';
 import SmallCard from './ProductsView/SmallCard';
+import { useGoogleLogin } from '@react-oauth/google';
 
 const Header = () => {
   const scrollDirection = useScrollDirection();
   const router = useRouter();
+
+  const login = useGoogleLogin({
+    onSuccess: tokenResponse => console.log(tokenResponse),
+    onError: error => console.log(error),
+  });
+
   return (
     <header
       className={clsx(
@@ -110,17 +117,17 @@ const Header = () => {
             <li>
               <Popover
                 buttonTitle={<Icon name="user" />}
-                className="rounded-md font-light w-32 border p-2 bg-white"
+                className="rounded-md font-light w-auto border p-2 bg-white right-0"
               >
                 <div className="flex flex-col">
-                  <Link href="/">
-                    <a
-                      href="replace"
-                      className="rounded-md hover:bg-grey-100 px-4 py-2 flex gap-2"
+                  <div className="rounded-md hover:bg-grey-100 px-4 py-2 flex gap-2">
+                    <button
+                      onClick={() => login()}
+                      className="flex flex-row justify-between w-20"
                     >
-                      <Icon name="user" /> Sign in
-                    </a>
-                  </Link>
+                      Sign in <Icon name="user" />
+                    </button>
+                  </div>
                 </div>
               </Popover>
             </li>

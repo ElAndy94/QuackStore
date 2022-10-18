@@ -3,7 +3,7 @@ import { FC } from 'react';
 import Icon from '../UI/Icon';
 import Image from 'next/image';
 import Rating from '../UI/Rating';
-import { Product } from '../../utils/helpers/types/product';
+import { Product } from '../../types/product';
 import clsx from 'clsx';
 interface Props {
   title: string;

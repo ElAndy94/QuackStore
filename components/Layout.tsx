@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Script from 'next/script';
 import meta from './../meta.config';
 import Footer from './Footer';
 import Header from './Header';
@@ -11,11 +12,16 @@ interface Props {
     canonicalUrl?: string;
     image?: string;
   };
+  scripts?: string[];
 }
 
-export default function Layout({ children, seo }: Props): JSX.Element {
+export default function Layout({ children, seo, scripts }: Props): JSX.Element {
   return (
     <>
+      {scripts &&
+        scripts.map((script, index) => {
+          return <Script src={script} key={index} async defer></Script>;
+        })}
       {seo && (
         <Head>
           <meta name="robots" content="follow, index" />

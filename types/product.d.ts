@@ -1,4 +1,4 @@
-import { IProductFields } from '../../../@types/generated/contentful';
+import { IProductFields } from '../@types/generated/contentful';
 
 export interface Product extends IProductFields {
   sys: {
