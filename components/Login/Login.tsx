@@ -39,10 +39,10 @@ const Login = () => {
 
   return (
       <div className='flex flex-row gap-4'>
-        <button onClick={googleLogin}>
+        <button onClick={googleLogin} className='hover:bg-grey-100'>
           <FcGoogle className="text-2xl" />
         </button>
-        <button onClick={facebookLogin}>
+        <button onClick={facebookLogin} className='hover:bg-grey-100'>
           <AiFillFacebook className="text-2xl text-ultra-marine-blue" />
         </button>
       </div>

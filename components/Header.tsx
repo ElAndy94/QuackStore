@@ -121,11 +121,11 @@ const Header = () => {
                 className="rounded-md font-light w-auto border p-2 bg-white right-0"
               >
                 <div className="flex flex-col">
-                  <div className="rounded-md px-2 py-2">
+                  <div className="rounded-md">
                     {user ? (
                       <button
                         onClick={() => auth.signOut()}
-                        className="w-20 hover:bg-grey-100"
+                        className="w-24 hover:bg-grey-100"
                       >
                         {user.photoURL ? (
                           <div className="flex flex-col gap-2">
@@ -193,21 +193,21 @@ export default Header;
 
 const basket = [
   {
-    image: '/assets/shoes.jpeg',
+    image: '/assets/images/shoes.jpeg',
     title: 'Men Running',
     description: 'Nike Competition Shoes',
     price: '300',
     quantity: '5',
   },
   {
-    image: '/assets/shoes.jpeg',
+    image: '/assets/images/shoes.jpeg',
     title: 'Men Running',
     description: 'Nike Competition Shoes',
     price: '300',
     quantity: '5',
   },
   {
-    image: '/assets/shoes.jpeg',
+    image: '/assets/images/shoes.jpeg',
     title: 'Men Running',
     description: 'Nike Competition Shoes',
     price: '300',
