@@ -3,13 +3,13 @@ import clsx from 'clsx';
 import { GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import React, { useState } from 'react';
-import Layout from '../../components/Layout';
 import Button from '../../components/UI/Buttons';
 import RadioSelect from '../../components/UI/RadioSelect';
 import Rating from '../../components/UI/Rating';
 import ContentfulApi from '../../utils/ContentfulApi';
-import { Product } from '../../utils/helpers/types/product';
+import { Product } from '../../types/product';
 import Image from 'next/image';
+import Layout from '../../components/Layout';
 interface IParams extends ParsedUrlQuery {
   slug: string;
 }

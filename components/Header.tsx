@@ -1,14 +1,22 @@
 import clsx from 'clsx';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import useScrollDirection from '../utils/helpers/UseScrollDirection';
 import Icon from './UI/Icon';
 import Popover from './UI/Popover';
 import SmallCard from './ProductsView/SmallCard';
+import { auth } from '../utils/firebase';
+import Login from './Login/Login';
 
 const Header = () => {
   const scrollDirection = useScrollDirection();
   const router = useRouter();
+
+  //TODO - add load states
+  const [user, loading] = useAuthState(auth);
+
   return (
     <header
       className={clsx(
@@ -110,17 +118,37 @@ const Header = () => {
             <li>
               <Popover
                 buttonTitle={<Icon name="user" />}
-                className="rounded-md font-light w-32 border p-2 bg-white"
+                className="rounded-md font-light w-auto border p-2 bg-white right-0"
               >
                 <div className="flex flex-col">
-                  <Link href="/">
-                    <a
-                      href="replace"
-                      className="rounded-md hover:bg-grey-100 px-4 py-2 flex gap-2"
-                    >
-                      <Icon name="user" /> Sign in
-                    </a>
-                  </Link>
+                  <div className="rounded-md">
+                    {user ? (
+                      <button
+                        onClick={() => auth.signOut()}
+                        className="w-24 hover:bg-grey-100"
+                      >
+                        {user.photoURL ? (
+                          <div className="flex flex-col gap-2">
+                            <figure>
+                              <Image
+                                src={user.photoURL}
+                                alt="avatar"
+                                className="rounded-full"
+                                width={42}
+                                height={42}
+                                objectFit="cover"
+                              />
+                            </figure>
+                            <p>Sign out</p>
+                          </div>
+                        ) : (
+                          <h3>{user.displayName}</h3>
+                        )}
+                      </button>
+                    ) : (
+                      <Login />
+                    )}
+                  </div>
                 </div>
               </Popover>
             </li>
@@ -165,21 +193,21 @@ export default Header;
 
 const basket = [
   {
-    image: '/assets/shoes.jpeg',
+    image: '/assets/images/shoes.jpeg',
     title: 'Men Running',
     description: 'Nike Competition Shoes',
     price: '300',
     quantity: '5',
   },
   {
-    image: '/assets/shoes.jpeg',
+    image: '/assets/images/shoes.jpeg',
     title: 'Men Running',
     description: 'Nike Competition Shoes',
     price: '300',
     quantity: '5',
   },
   {
-    image: '/assets/shoes.jpeg',
+    image: '/assets/images/shoes.jpeg',
     title: 'Men Running',
     description: 'Nike Competition Shoes',
     price: '300',

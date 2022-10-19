@@ -30,7 +30,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       i18n.changeLanguage(router.locale);
     }
   }, [router.locale]);
-  return <Component {...pageProps} />;
+  return (
+      <Component {...pageProps} />
+  );
 }
 
 export default appWithTranslation(MyApp);

@@ -13,7 +13,7 @@ const Popover = ({ buttonTitle, children, className }: PopoverProps) => {
   return (
     <HeadlessPopover className="relative">
       <HeadlessPopover.Button
-        className="group outline-none w-full text-left"
+        className="outline-none w-full text-left"
         aria-label="popover-button"
       >
         {buttonTitle}

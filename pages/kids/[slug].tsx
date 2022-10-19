@@ -8,7 +8,7 @@ import Button from '../../components/UI/Buttons';
 import RadioSelect from '../../components/UI/RadioSelect';
 import Rating from '../../components/UI/Rating';
 import ContentfulApi from '../../utils/ContentfulApi';
-import { Product } from '../../utils/helpers/types/product';
+import { Product } from '../../types/product';
 import Image from 'next/image';
 interface IParams extends ParsedUrlQuery {
   slug: string;

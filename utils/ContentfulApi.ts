@@ -1,6 +1,6 @@
 import { gql, GraphQLClient } from 'graphql-request';
 import compress from 'graphql-query-compress';
-import { Product } from './helpers/types/product';
+import { Product } from '../types/product';
 
 export default class ContentfulApi {
   static async callContentful(query: string, variables = {}, preview = false) {
