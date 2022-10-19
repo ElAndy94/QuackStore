@@ -176,7 +176,7 @@ const Header = () => {
                                 image={item.imagesCollection.items[0].url}
                                 title={item.name}
                                 description={item.style}
-                                price={item.price.toString()}
+                                price={item.sku.price}
                                 quantity={item.quantity}
                               />
                             </a>

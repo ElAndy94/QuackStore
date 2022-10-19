@@ -41,7 +41,7 @@ const Basket = () => {
     const item = promoCodes.find(promo => promo.code === code);
     if (item) {
       setAppliedPromo(totalPrice * (item.discount / 100));
-      setTotal(totalPrice * (item.discount / 100) - totalPrice);
+      setTotal(totalPrice - appliedPromo);
     }
   };
 
@@ -127,10 +127,6 @@ const Basket = () => {
             )}
           </article>
           <article className="flex flex-col mt-14 gap-5 p-6 text-primary">
-            <div className="flex justify-between">
-              <p>Shipment</p>
-              <p>£{25}</p>
-            </div>
             <div className="flex justify-between">
               <p>Applied promo code</p>
               <p className={clsx('text-magenta')}>-£{appliedPromo}</p>

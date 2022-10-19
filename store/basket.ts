@@ -37,7 +37,7 @@ const useBasket = create<Basket>()(
             };
           } else {
             return {
-              totalPrice: prev.totalPrice + product.price,
+              totalPrice: prev.totalPrice + product.sku.price,
               basketProducts: [...prev.basketProducts, product],
             };
           }

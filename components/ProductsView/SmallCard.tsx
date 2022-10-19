@@ -5,7 +5,7 @@ interface Props {
   image: string;
   title: string;
   description: string;
-  price: string;
+  price: number;
   quantity: number;
 }
 
