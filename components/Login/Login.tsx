@@ -23,13 +23,14 @@ const Login = () => {
   const facebookProvider = new FacebookAuthProvider();
   const facebookLogin = async () => {
     try {
-      const result = await signInWithPopup(auth, facebookProvider); 
+      const result = await signInWithPopup(auth, facebookProvider);
       const credential = FacebookAuthProvider.credentialFromResult(result);
-      let photoUrl = result.user.photoURL + '?height=500&access_token=' + credential?.accessToken;
+      let photoUrl =
+        result.user.photoURL + '?height=500&access_token=' + credential?.accessToken;
       if (auth.currentUser) {
-          await updateProfile(auth.currentUser, {
-            photoURL: photoUrl,
-          });
+        await updateProfile(auth.currentUser, {
+          photoURL: photoUrl,
+        });
       }
       console.log(result);
     } catch (error) {
@@ -38,14 +39,14 @@ const Login = () => {
   };
 
   return (
-      <div className='flex flex-row gap-4'>
-        <button onClick={googleLogin} className='hover:bg-grey-100'>
-          <FcGoogle className="text-2xl" />
-        </button>
-        <button onClick={facebookLogin} className='hover:bg-grey-100'>
-          <AiFillFacebook className="text-2xl text-ultra-marine-blue" />
-        </button>
-      </div>
+    <div className="flex flex-row gap-4">
+      <button onClick={googleLogin} className="hover:bg-grey-100">
+        <FcGoogle className="text-2xl" />
+      </button>
+      <button onClick={facebookLogin} className="hover:bg-grey-100">
+        <AiFillFacebook className="text-2xl text-ultra-marine-blue" />
+      </button>
+    </div>
   );
 };
 
