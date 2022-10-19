@@ -1,17 +1,8 @@
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import clsx from 'clsx';
 import { GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import React, { useState } from 'react';
 import Layout from '../../components/Layout';
-import Button from '../../components/UI/Buttons';
-import RadioSelect from '../../components/UI/RadioSelect';
-import Rating from '../../components/UI/Rating';
 import ContentfulApi from '../../utils/ContentfulApi';
-import { Product, Sku } from '../../utils/helpers/types/product';
-import Image from 'next/image';
-import useBasket from '../../store/basket';
-import useHasHydrated from '../../components/UseHasHydrated';
+import { Product, Sku } from '../../types/product';
 import FullProduct from '../../components/ProductsView/FullProduct';
 
 interface IParams extends ParsedUrlQuery {

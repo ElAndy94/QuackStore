@@ -11,7 +11,7 @@ const nextConfig = {
   },
   images: {
     minimumCacheTTL: 3600,
-    domains: ['images.ctfassets.net'],
+    domains: ['images.ctfassets.net', 'lh3.googleusercontent.com', 'graph.facebook.com'],
   },
   i18n,
 };
