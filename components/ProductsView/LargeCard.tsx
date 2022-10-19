@@ -12,7 +12,7 @@ const LargeCard = ({ product, onRemove, onIncrease, onDecrease }: Props) => {
   const [selectedQuantity, setSelectedQuantity] = useState<number>(product.quantity);
 
   return (
-    <article className="flex w-full">
+    <article className="flex w-full mt-6">
       <figure className="w-1/2 h-full">
         <Image
           src={product.imagesCollection.items[0].url}

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Rating from '../UI/Rating';
 import RadioSelect from '../UI/RadioSelect';
-import useHasHydrated from '../UseHasHydrated';
 import Button from '../UI/Buttons';
 import useBasket from '../../store/basket';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
@@ -21,11 +20,9 @@ const FullProduct = ({ product, skus }: Props) => {
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
   const [skuOptions, setSkuOptions] = useState<Sku[]>(skus);
   const [selectedSku, setSelectedSku] = useState<Sku>();
-  const hasHydrated = useHasHydrated();
   const { addToBasket } = useBasket();
 
   const handleAddToBasket = () => {
-    console.log(selectedSku);
     if (selectedSku) {
       addToBasket({
         ...product,
@@ -126,7 +123,7 @@ const FullProduct = ({ product, skus }: Props) => {
           </div>
           <Button
             type="primary"
-            onClick={() => hasHydrated && handleAddToBasket()}
+            onClick={() => handleAddToBasket()}
             disabled={!selectedSize}
           >
             Add to cart

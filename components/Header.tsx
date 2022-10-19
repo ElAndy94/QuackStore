@@ -7,7 +7,6 @@ import useScrollDirection from '../utils/helpers/UseScrollDirection';
 import Icon from './UI/Icon';
 import Popover from './UI/Popover';
 import SmallCard from './ProductsView/SmallCard';
-import useHasHydrated from './UseHasHydrated';
 import useBasket from '../store/basket';
 import { auth } from '../utils/firebase';
 import Login from './Login/Login';
@@ -15,7 +14,6 @@ import Login from './Login/Login';
 const Header = () => {
   const scrollDirection = useScrollDirection();
   const router = useRouter();
-  const hasHydrated = useHasHydrated();
 
   const { basketProducts } = useBasket();
 
@@ -123,7 +121,7 @@ const Header = () => {
             <li>
               <Popover
                 buttonTitle={<Icon name="user" />}
-                className="rounded-md font-light w-auto border p-2 bg-white right-0"
+                className="rounded-md font-light w-auto border p-2 bg-white text-primary right-0"
               >
                 <div className="flex flex-col">
                   <div className="rounded-md">
@@ -229,27 +227,3 @@ const Header = () => {
 };
 
 export default Header;
-
-const basket = [
-  {
-    image: '/assets/images/shoes.jpeg',
-    title: 'Men Running',
-    description: 'Nike Competition Shoes',
-    price: '300',
-    quantity: '5',
-  },
-  {
-    image: '/assets/images/shoes.jpeg',
-    title: 'Men Running',
-    description: 'Nike Competition Shoes',
-    price: '300',
-    quantity: '5',
-  },
-  {
-    image: '/assets/images/shoes.jpeg',
-    title: 'Men Running',
-    description: 'Nike Competition Shoes',
-    price: '300',
-    quantity: '5',
-  },
-];

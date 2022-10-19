@@ -1,8 +1,6 @@
 import { FC } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
-import useBasket from '../../store/basket';
-import useHasHydrated from '../UseHasHydrated';
 
 type Product = {
   id: number;

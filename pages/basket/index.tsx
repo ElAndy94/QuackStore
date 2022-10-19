@@ -4,7 +4,6 @@ import Layout from '../../components/Layout';
 import Button from '../../components/UI/Buttons';
 import useBasket from '../../store/basket';
 import LargeCard from '../../components/ProductsView/LargeCard';
-import useHasHydrated from '../../components/UseHasHydrated';
 import Dialog from '../../components/Dialog/Dialog';
 import Checkout from '../../components/Checkout/Checkout';
 import clsx from 'clsx';
@@ -14,30 +13,29 @@ type PromoCode = {
   discount: number;
 };
 
-const promoCodes: PromoCode[] = [
-  {
-    code: 'QUACK10',
-    discount: 10,
-  },
-  {
-    code: 'QUACK20',
-    discount: 20,
-  },
-  {
-    code: 'QUACK30',
-    discount: 30,
-  },
-];
-
 const Basket = () => {
   const { basketProducts, totalPrice, removeFromBasket, updateProductQuantity } =
     useBasket();
-  const hasHydrated = useHasHydrated();
   const [open, setOpen] = useState(false);
   const [total, setTotal] = useState(totalPrice);
   const [appliedPromo, setAppliedPromo] = useState<number>(0);
   const [promo, setPromo] = useState<string>('');
   const shippingCost = 5;
+
+  const promoCodes: PromoCode[] = [
+    {
+      code: 'QUACK10',
+      discount: 10,
+    },
+    {
+      code: 'QUACK20',
+      discount: 20,
+    },
+    {
+      code: 'QUACK30',
+      discount: 30,
+    },
+  ];
 
   const handleDiscount = (code: string) => {
     const item = promoCodes.find(promo => promo.code === code);
@@ -46,7 +44,7 @@ const Basket = () => {
       setTotal(totalPrice * (item.discount / 100) - totalPrice);
     }
   };
-  console.log(basketProducts)
+
   return (
     <Layout
       seo={{
@@ -55,7 +53,7 @@ const Basket = () => {
         canonicalUrl: 'https://quackstore.com/Basket',
       }}
     >
-      <div className="wrapper mt-20 ">
+      <div className="wrapper mt-20">
         <section className="w-4/5">
           <div>
             <h1 className="font-bold text-primary tracking-tight">Shopping cart</h1>
@@ -65,20 +63,21 @@ const Basket = () => {
               items
             </p>
           </div>
-          {hasHydrated && basketProducts.length > 0 ? (
-            <ul className="mt-10">
-              {basketProducts.map(product => {
-                  return (
-                    <li key={product.sku.sys.id}>
-                      <LargeCard
-                        product={product}
-                        onRemove={() => removeFromBasket(product)}
-                        onIncrease={() => updateProductQuantity(product, '+')}
-                        onDecrease={() => updateProductQuantity(product, '-')}
-                      />
-                    </li>
-                  );
-                })}
+          {basketProducts.length > 0 ? (
+            <ul className="flex flex-col gap-8 mt-10">
+              {basketProducts.map((product, index) => {
+                return (
+                  <li key={product.sku.sys.id}>
+                    {index !== 0 && <hr />}
+                    <LargeCard
+                      product={product}
+                      onRemove={() => removeFromBasket(product)}
+                      onIncrease={() => updateProductQuantity(product, '+')}
+                      onDecrease={() => updateProductQuantity(product, '-')}
+                    />
+                  </li>
+                );
+              })}
             </ul>
           ) : (
             <figure className="opacity-40">
