@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { BasketProduct } from '../../utils/helpers/types/product';
+import { useState } from 'react';
 import Image from 'next/image';
+import { BasketProduct } from '../../types/product';
 interface Props {
   product: BasketProduct;
   onRemove: () => void;

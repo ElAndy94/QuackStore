@@ -1,6 +1,6 @@
 import create from 'zustand';
-import { BasketProduct } from '../utils/helpers/types/product';
 import { persist } from 'zustand/middleware';
+import { BasketProduct } from '../types/product';
 
 type Basket = {
   totalPrice: number;

@@ -24,12 +24,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }: { params: IParams }) => {
   const product = await ContentfulApi.getProductBySlug(`/${params.slug}`);
-  const sku = await ContentfulApi.getProductSkus(product.sys.id);
   if (!product) {
     return {
       notFound: true,
     };
   }
+  const sku = await ContentfulApi.getProductSkus(product.sys.id);
   return {
     props: {
       product,

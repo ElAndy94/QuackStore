@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Product, Sku } from '../../utils/helpers/types/product';
 import Rating from '../UI/Rating';
 import RadioSelect from '../UI/RadioSelect';
 import useHasHydrated from '../UseHasHydrated';
 import Button from '../UI/Buttons';
 import useBasket from '../../store/basket';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { Product, Sku } from '../../types/product';
 
 interface Props {
   product: Product;
@@ -25,14 +25,13 @@ const FullProduct = ({ product, skus }: Props) => {
   const { addToBasket } = useBasket();
 
   const handleAddToBasket = () => {
+    console.log(selectedSku);
     if (selectedSku) {
       addToBasket({
         ...product,
         quantity: selectedQuantity,
         sku: selectedSku,
       });
-    } else {
-      return 'Please select a size and colour';
     }
   };
 

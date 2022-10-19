@@ -3,8 +3,8 @@ import { ParsedUrlQuery } from 'querystring';
 import React from 'react';
 import Layout from '../../components/Layout';
 import ContentfulApi from '../../utils/ContentfulApi';
-import { Product, Sku } from '../../utils/helpers/types/product';
 import FullProduct from '../../components/ProductsView/FullProduct';
+import { Product, Sku } from '../../types/product';
 interface IParams extends ParsedUrlQuery {
   slug: string;
 }
@@ -24,12 +24,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }: { params: IParams }) => {
   const product = await ContentfulApi.getProductBySlug(`/${params.slug}`);
-  const sku = await ContentfulApi.getProductSkus(product.sys.id);
   if (!product) {
     return {
       notFound: true,
     };
   }
+  const sku = await ContentfulApi.getProductSkus(product.sys.id);
   return {
     props: {
       product,

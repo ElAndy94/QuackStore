@@ -1,7 +1,7 @@
 import { RadioGroup as HeadlessRadioSelect } from '@headlessui/react';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
-import { Sku } from '../../utils/helpers/types/product';
+import { Sku } from '../../types/product';
 
 export type RadioSelectProps = {
   id: string;

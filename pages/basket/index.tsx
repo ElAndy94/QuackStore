@@ -46,7 +46,7 @@ const Basket = () => {
       setTotal(totalPrice * (item.discount / 100) - totalPrice);
     }
   };
-
+  console.log(basketProducts)
   return (
     <Layout
       seo={{
@@ -65,12 +65,11 @@ const Basket = () => {
               items
             </p>
           </div>
-          {basketProducts.length > 0 ? (
+          {hasHydrated && basketProducts.length > 0 ? (
             <ul className="mt-10">
-              {hasHydrated &&
-                basketProducts.map(product => {
+              {basketProducts.map(product => {
                   return (
-                    <li key={product.sys.id}>
+                    <li key={product.sku.sys.id}>
                       <LargeCard
                         product={product}
                         onRemove={() => removeFromBasket(product)}
