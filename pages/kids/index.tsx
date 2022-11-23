@@ -51,8 +51,8 @@ const Kids = ({ products }: any) => {
           <Image
             src="/assets/images/kidsHeroImages.webp"
             alt="shoe banner"
-            width="1000px"
-            height="660px"
+            width={1000}
+            height={660}
           />
         </figure>
       </section>

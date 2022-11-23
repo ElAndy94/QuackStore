@@ -14,49 +14,49 @@ const Footer = () => {
         <article className="flex flex-col gap-2 w-full text-granite-gray">
           <h5 className="text-primary font-semibold">Home</h5>
           <Link href="/" passHref>
-            <a href="replace">Support Center</a>
+            Support Center
           </Link>
           <Link href="/" passHref>
-            <a href="replace">Customer Support</a>
+            Customer Support
           </Link>
           <Link href="/" passHref>
-            <a href="replace">Copyright</a>
+            Copyright
           </Link>
           <Link href="/" passHref>
-            <a href="replace">Popular Campaign</a>
+            Popular Campaign
           </Link>
         </article>
         <article className="w-full flex flex-col gap-2 text-granite-gray">
           <h5 className="text-primary font-semibold">Our Information</h5>
           <Link href="/" passHref>
-            <a href="replace">Return Policy</a>
+            Return Policy
           </Link>
           <Link href="/" passHref>
-            <a href="replace">Privacy Policy</a>
+            Privacy Policy
           </Link>
           <Link href="/" passHref>
-            <a href="replace">Terms and Conditions</a>
+            Terms and Conditions
           </Link>
           <Link href="/" passHref>
-            <a href="replace">Site Map</a>
+            Site Map
           </Link>
           <Link href="/" passHref>
-            <a href="replace">Store Hours</a>
+            Store Hours
           </Link>
         </article>
         <article className="w-full flex flex-col gap-2 text-granite-gray">
           <h5 className="text-primary font-semibold">My Account</h5>
           <Link href="/" passHref>
-            <a href="replace">Press Inquiries</a>
+            Press Inquiries
           </Link>
           <Link href="/" passHref>
-            <a href="replace">Social Media Directories</a>
+            Social Media Directories
           </Link>
           <Link href="/" passHref>
-            <a href="replace">Permission</a>
+            Permission
           </Link>
           <Link href="/" passHref>
-            <a href="replace">Requests</a>
+            Requests
           </Link>
         </article>
       </div>

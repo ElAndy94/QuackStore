@@ -39,8 +39,8 @@ const FullProduct = ({ product, skus }: Props) => {
           <Image
             src={imagesCollection.items[0].url}
             layout="responsive"
-            width={imagesCollection.items[0].width}
-            height={imagesCollection.items[0].height}
+            width={500}
+            height={400}
             alt={imagesCollection.items[0].title}
             priority
           />

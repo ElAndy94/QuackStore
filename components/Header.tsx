@@ -36,69 +36,69 @@ const Header = () => {
       <div className="wrapper flex-row justify-between items-center w-full my-0 mx-auto px-4 lg:px-0">
         <nav className="w-full flex justify-between items-center">
           <Link href="/" passHref>
-            <a href="replace" className="md:text-lg font-bold p-2">
+            <p  className="md:text-lg font-bold p-2">
               QuackStore
-            </a>
+            </p>
           </Link>
           <ul className="flex flex-row gap-4 font-semibold transition-all duration-75">
             <li>
               <Link href="/men" passHref>
-                <a
-                  href="replace"
+                <p
+                  
                   className={clsx('p-2', router.pathname === '/men' && 'text-primary')}
                 >
                   Men
-                </a>
+                </p>
               </Link>
             </li>
             <li>
               <Link href="/women" passHref>
-                <a
-                  href="replace"
+                <p
+                  
                   className={clsx('p-2', router.pathname === '/women' && 'text-primary')}
                 >
                   Women
-                </a>
+                </p>
               </Link>
             </li>
             <li>
               <Link href="/kids" passHref>
-                <a
-                  href="replace"
+                <p
+                  
                   className={clsx('p-2', router.pathname === '/kids' && 'text-primary')}
                 >
                   Kids
-                </a>
+                </p>
               </Link>
             </li>
             <li>
               <Link href="/products" passHref>
-                <a
-                  href="replace"
+                <p
+                  
                   className={clsx(
                     'p-2',
                     router.pathname === '/products' && 'text-magenta'
                   )}
                 >
                   Products
-                </a>
+                </p>
               </Link>
             </li>
 
             <li>
               <Link href="/sale" passHref>
-                <a
-                  href="replace"
+                <p
+                  
                   className={clsx('p-2', router.pathname === '/sale' && 'text-magenta')}
                 >
                   Sale
-                </a>
+                </p>
               </Link>
             </li>
             <li>
               <Link href="/about-us" passHref>
-                <a
-                  href="replace"
+                <p
+                  
                   aria-label="about us"
                   className={clsx(
                     'p-2',
@@ -106,16 +106,16 @@ const Header = () => {
                   )}
                 >
                   About us
-                </a>
+                </p>
               </Link>
             </li>
           </ul>
           <ul className="flex flex-row gap-6">
             <li>
               <Link href="/search" passHref>
-                <a href="replace" aria-label="search">
+                <p  aria-label="search">
                   <Icon name="search" />
-                </a>
+                </p>
               </Link>
             </li>
             <li>
@@ -171,7 +171,7 @@ const Header = () => {
                             }`}
                             passHref
                           >
-                            <a href="replace">
+                            <p >
                               <SmallCard
                                 image={item.imagesCollection.items[0].url}
                                 title={item.name}
@@ -179,19 +179,19 @@ const Header = () => {
                                 price={item.sku.price}
                                 quantity={item.quantity}
                               />
-                            </a>
+                            </p>
                           </Link>
                         </li>,
                       ];
                     })}
                     <li className=" bg-ultra-marine-blue text-white rounded-md w-full mt-4">
                       <Link href="/basket" passHref>
-                        <a
-                          href="replace"
+                        <p
+                          
                           className="px-4 py-2 flex justify-center items-center w-full"
                         >
                           View basket
-                        </a>
+                        </p>
                       </Link>
                     </li>
                   </ul>
@@ -201,18 +201,18 @@ const Header = () => {
                       <Image
                         src="/assets/images/empty-cart.png"
                         alt="empty cart"
-                        width="400"
-                        height="300"
+                        width={400}
+                        height={300}
                       />
                     </figure>
                     <div className=" bg-ultra-marine-blue text-white rounded-md w-full mt-4">
                       <Link href="/basket" passHref>
-                        <a
-                          href="replace"
+                        <p
+                          
                           className="px-4 py-2 flex justify-center items-center w-full"
                         >
                           View basket
-                        </a>
+                        </p>
                       </Link>
                     </div>
                   </div>

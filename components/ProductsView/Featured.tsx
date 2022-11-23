@@ -19,9 +19,9 @@ const Featured: FC<Props> = ({ products, title, department }) => {
           {title}
         </h2>
         <Link href="/products">
-          <a href="replace" className="flex items-center gap-2 text-magenta">
+          <p className="flex items-center gap-2 text-magenta">
             view all <Icon name="chevron-magenta" width="6px" height="12px" />
-          </a>
+          </p>
         </Link>
       </article>
       <ul
@@ -40,8 +40,8 @@ const Featured: FC<Props> = ({ products, title, department }) => {
                         product.imagesCollection.items &&
                         product.imagesCollection.items[0].url
                       }
-                      width="290px"
-                      height="210px"
+                      width={290}
+                      height={210}
                       alt="shoe1"
                     />
                   </figure>

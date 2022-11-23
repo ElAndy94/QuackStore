@@ -17,8 +17,8 @@ const LargeCard = ({ product, onRemove, onIncrease, onDecrease }: Props) => {
         <Image
           src={product.imagesCollection.items[0].url}
           alt={product.imagesCollection.items[0].title}
-          width={product.imagesCollection.items[0].width}
-          height={product.imagesCollection.items[0].height}
+          width={500}
+          height={400}
         />
       </figure>
       <div className="px-10 w-full flex flex-col justify-between">

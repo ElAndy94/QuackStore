@@ -52,8 +52,8 @@ const Men = ({ products }: any) => {
           <Image
             src="/assets/images/shoe3.svg"
             alt="shoe banner"
-            width="930px"
-            height="575px"
+            width={930}
+            height={575}
           />
         </figure>
       </section>

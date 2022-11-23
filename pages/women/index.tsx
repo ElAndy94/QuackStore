@@ -53,8 +53,8 @@ const Women = ({ products }: any) => {
           <Image
             src="/assets/images/womenHeroImage.webp"
             alt="shoe banner"
-            width="1000px"
-            height="660px"
+            width={1000}
+            height={660}
           />
         </figure>
       </section>

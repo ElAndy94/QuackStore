@@ -38,8 +38,8 @@ const ProductBox: FC<Props> = ({ product }) => {
           <Image
             src={product.image}
             alt={product.description}
-            width="250px"
-            height="160px"
+            width={250}
+            height={160}
           />
         </div>
         <div className="flex items-center gap-2">

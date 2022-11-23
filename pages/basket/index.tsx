@@ -84,8 +84,8 @@ const Basket = () => {
               <Image
                 src="/assets/images/empty-cart.png"
                 alt="empty cart"
-                width="800"
-                height="600"
+                width={800}
+                height={600}
               />
             </figure>
           )}
