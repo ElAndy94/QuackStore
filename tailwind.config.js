@@ -13,6 +13,13 @@ module.exports = {
       black: '#000000',
       orange: '#FE7831',
       magenta: '#FF3C78',
+      blue: '#1E90FF',
+      green: '#00FF00',
+      red: '#FF0000',
+      yellow: '#FFFF00',
+      pink: '#FFC0CB',
+      purple: '#800080',
+      black: '#000000',
       grey: {
         500: '#888787',
         400: '#A4A4A3',

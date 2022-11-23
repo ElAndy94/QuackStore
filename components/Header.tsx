@@ -7,12 +7,15 @@ import useScrollDirection from '../utils/helpers/UseScrollDirection';
 import Icon from './UI/Icon';
 import Popover from './UI/Popover';
 import SmallCard from './ProductsView/SmallCard';
+import useBasket from '../store/basket';
 import { auth } from '../utils/firebase';
 import Login from './Login/Login';
 
 const Header = () => {
   const scrollDirection = useScrollDirection();
   const router = useRouter();
+
+  const { basketProducts } = useBasket();
 
   //TODO - add load states
   const [user, loading] = useAuthState(auth);
@@ -118,7 +121,7 @@ const Header = () => {
             <li>
               <Popover
                 buttonTitle={<Icon name="user" />}
-                className="rounded-md font-light w-auto border p-2 bg-white right-0"
+                className="rounded-md font-light w-auto border p-2 bg-white text-primary right-0"
               >
                 <div className="flex flex-col">
                   <div className="rounded-md">
@@ -157,29 +160,63 @@ const Header = () => {
                 buttonTitle={<Icon name="shopping-bag" />}
                 className="rounded-md font-light w-[400px] border p-2 right-0 flex flex-col gap-1 bg-white"
               >
-                <ul>
-                  {basket.map((item, index) => {
-                    return [
-                      <li className="flex flex-col gap-2" key={`basketItem${index}`}>
-                        <SmallCard
-                          image={item.image}
-                          title={item.title}
-                          description={item.description}
-                          price={item.price}
-                          quantity={item.quantity}
-                        />
-                      </li>,
-                    ];
-                  })}
-                  <li>
-                    <button
-                      type="button"
-                      className="px-4 py-2 bg-ultra-marine-blue text-white rounded-md w-full mt-4"
-                    >
-                      View basket
-                    </button>
-                  </li>
-                </ul>
+                {basketProducts.length > 0 ? (
+                  <ul>
+                    {basketProducts.map((item, index) => {
+                      return [
+                        <li className="flex flex-col gap-2" key={`basketItem${index}`}>
+                          <Link
+                            href={`/${item.department ? item.department : 'products'}${
+                              item.slug
+                            }`}
+                            passHref
+                          >
+                            <a href="replace">
+                              <SmallCard
+                                image={item.imagesCollection.items[0].url}
+                                title={item.name}
+                                description={item.style}
+                                price={item.sku.price}
+                                quantity={item.quantity}
+                              />
+                            </a>
+                          </Link>
+                        </li>,
+                      ];
+                    })}
+                    <li className=" bg-ultra-marine-blue text-white rounded-md w-full mt-4">
+                      <Link href="/basket" passHref>
+                        <a
+                          href="replace"
+                          className="px-4 py-2 flex justify-center items-center w-full"
+                        >
+                          View basket
+                        </a>
+                      </Link>
+                    </li>
+                  </ul>
+                ) : (
+                  <div>
+                    <figure className="opacity-40">
+                      <Image
+                        src="/assets/images/empty-cart.png"
+                        alt="empty cart"
+                        width="400"
+                        height="300"
+                      />
+                    </figure>
+                    <div className=" bg-ultra-marine-blue text-white rounded-md w-full mt-4">
+                      <Link href="/basket" passHref>
+                        <a
+                          href="replace"
+                          className="px-4 py-2 flex justify-center items-center w-full"
+                        >
+                          View basket
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                )}
               </Popover>
             </li>
           </ul>
@@ -190,27 +227,3 @@ const Header = () => {
 };
 
 export default Header;
-
-const basket = [
-  {
-    image: '/assets/images/shoes.jpeg',
-    title: 'Men Running',
-    description: 'Nike Competition Shoes',
-    price: '300',
-    quantity: '5',
-  },
-  {
-    image: '/assets/images/shoes.jpeg',
-    title: 'Men Running',
-    description: 'Nike Competition Shoes',
-    price: '300',
-    quantity: '5',
-  },
-  {
-    image: '/assets/images/shoes.jpeg',
-    title: 'Men Running',
-    description: 'Nike Competition Shoes',
-    price: '300',
-    quantity: '5',
-  },
-];

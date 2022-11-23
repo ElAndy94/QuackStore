@@ -13,7 +13,8 @@ type Props = {
     | 'green'
     | 'text'
     | 'remove'
-    | 'transparent';
+    | 'transparent'
+    | 'dark';
   size?: 'normal' | 'small' | 'full';
   disabled?: boolean;
   loading?: boolean;
@@ -65,6 +66,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
           type === 'remove' && 'text-primary font-semibold hover:shadow-none',
           type === 'transparent' &&
             'text-primary bg-none rounded-md hover:bg-grey-100 hover:shadow-none px-6 py-3 text-left',
+          type === 'dark' && 'text-white bg-primary rounded-none text-center ',
           (disabled || loading) &&
             'text-primary opacity-25 hover:brightness-100 hover:shadow-none',
           className

@@ -1,6 +1,6 @@
 import { gql, GraphQLClient } from 'graphql-request';
 import compress from 'graphql-query-compress';
-import { Product } from '../types/product';
+import { Product, Sku } from '../types/product';
 
 export default class ContentfulApi {
   static async callContentful(query: string, variables = {}, preview = false) {
@@ -42,10 +42,8 @@ export default class ContentfulApi {
             style
             price
             inStock
-            size
             numberOfSales
             activity
-            colors
             slug
             imagesCollection {
               items {
@@ -64,7 +62,7 @@ export default class ContentfulApi {
 
     return productCollection.items;
   }
-
+  // "/Air-Force-1"
   static async getProductBySlug(slug: string) {
     const query = gql`
       query getProductBySlug($slug: String) {
@@ -84,10 +82,7 @@ export default class ContentfulApi {
             style
             price
             inStock
-            size
-            numberOfSales
             activity
-            colors
             slug
             imagesCollection {
               items {
@@ -127,10 +122,8 @@ export default class ContentfulApi {
             style
             price
             inStock
-            size
             numberOfSales
             activity
-            colors
             slug
             imagesCollection {
               items {
@@ -150,5 +143,32 @@ export default class ContentfulApi {
     });
 
     return productCollection.items as Product[];
+  }
+
+  static async getProductSkus(productId: string) {
+    const query = gql`
+      query getProductSkus($productId: String) {
+        productCollection(where: { sys: { id: $productId } }, preview: false) {
+          items {
+            skuCollection {
+              items {
+                sys {
+                  id
+                }
+                colour
+                size
+                price
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const { productCollection } = await this.callContentful(query, {
+      productId,
+    });
+    
+    return productCollection.items[0].skuCollection.items as Sku[];
   }
 }
